@@ -1,0 +1,126 @@
+---
+import { Image } from 'astro:assets';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { event } from '../data/event';
+
+const nav = [
+  ['О лаборатории', '#laboratory'],
+  ['Программа', '#program'],
+  ['Ведущие', '#hosts'],
+  ['Стоимость', '#price'],
+] as const;
+---
+
+<BaseLayout title={`${event.title} — Perfeed`} description={event.description}>
+  <header class="site-header">
+    <a class="brand" href="#top" aria-label="Perfeed — к началу страницы">PERFEED</a>
+    <nav aria-label="Основная навигация">
+      {nav.map(([label, href]) => <a href={href}>{label}</a>)}
+    </nav>
+    <a class="header-cta" href={event.links.laboratory}>Подать заявку</a>
+  </header>
+
+  <main id="content">
+    <section class="hero" id="top" aria-labelledby="hero-title">
+      <Image class="hero-image" src={event.images.hero} alt="Две танцовщицы держатся за руки на зелёном поле" widths={[640, 960, 1440, 1920]} sizes="100vw" priority />
+      <div class="hero-shade"></div>
+      <div class="hero-content reveal hero-reveal">
+        <p class="eyebrow">Месячная лаборатория современного танца <span>·</span> {event.age}</p>
+        <h1 id="hero-title">{event.title}</h1>
+        <p class="hero-lead">Тело, движение и внимание — инструменты, чтобы обнаружить ценность в привычном.</p>
+        <div class="hero-facts">
+          <span>{event.dates}</span><span>{event.city} · площадка уточняется</span>
+        </div>
+        <a class="button button-gold" href={event.links.laboratory}>Подать заявку <span aria-hidden="true">↗</span></a>
+        <p class="button-note">Переход к заявке на лабораторию</p>
+      </div>
+      <p class="hero-scroll" aria-hidden="true">Листайте вниз <span>↓</span></p>
+    </section>
+
+    <section class="question section-wide" aria-labelledby="question-title">
+      <div class="question-copy reveal">
+        <p class="section-label">В поле зрения</p>
+        <h2 id="question-title">Что мы считаем ценным?<br />Как это решение возникает?<br /><em>И сколько золота остаётся незамеченным?</em></h2>
+      </div>
+    </section>
+
+    <section class="laboratory section" id="laboratory" aria-labelledby="laboratory-title">
+      <div class="split-intro">
+        <p class="section-label reveal">О лаборатории</p>
+        <div class="prose reveal">
+          <h2 id="laboratory-title">Танец как способ смотреть дольше</h2>
+          <p>«Золото, а не танец» — месячная лаборатория на пересечении танца, перформативных практик и исследования восприятия.</p>
+          <p>Через движение, импровизацию, наблюдение и работу с пространством будем исследовать, как внимание меняет опыт — в других людях, в собственном теле и в том, что обычно остаётся незамеченным.</p>
+          <p>Это пространство не только для индивидуального поиска, но и для встречи: чтобы быть вместе, слушать, двигаться и замечать больше.</p>
+          <a class="text-link" href={event.links.laboratory}>Подать заявку на лабораторию <span aria-hidden="true">→</span></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="process section-wide" aria-labelledby="process-title">
+      <div class="section-heading reveal"><p class="section-label">Один проект · три этапа</p><h2 id="process-title">От первой встречи<br />к общему показу</h2></div>
+      <ol class="process-list">
+        {event.process.map((item, index) => (
+          <li class="reveal">
+            <span class="process-index">0{index + 1}</span>
+            <p class="process-date">{item.date}</p>
+            <h3>{item.title}</h3>
+            <p>{item.text}</p>
+          </li>
+        ))}
+      </ol>
+    </section>
+
+    <section class="audience section">
+      <div class="audience-image reveal"><Image src={event.images.movementPortrait} alt="Танцовщицы в совместной пластической позе" widths={[480, 720, 960]} sizes="(max-width: 720px) 100vw, 42vw" /></div>
+      <div class="audience-copy reveal"><p class="section-label">Для кого</p><h2>Для тех, кто хочет замедлиться и посмотреть внимательнее</h2><p>Мы рады людям с опытом в танце, перформансе и искусстве — и тем, кто только начинает знакомство с этими практиками.</p><p class="highlight">Предыдущий опыт в танце или перформансе не обязателен.</p></div>
+    </section>
+
+    <section class="outcomes section" aria-labelledby="outcomes-title">
+      <div class="section-heading reveal"><p class="section-label">После лаборатории</p><h2 id="outcomes-title">Останется больше, чем движение</h2></div>
+      <ul class="outcome-list">{event.outcomes.map((outcome, index) => <li class="reveal"><span>0{index + 1}</span>{outcome}</li>)}</ul>
+    </section>
+
+    <section class="jam section-wide" id="program" aria-labelledby="jam-title">
+      <div class="jam-image"><Image src={event.images.foilWide} alt="Танцовщицы с золотой и серебряной фольгой" widths={[640, 960, 1440, 1920]} sizes="100vw" /></div>
+      <div class="jam-content reveal"><p class="section-label">15 августа · вход свободный</p><h2 id="jam-title">Челлендж-джем<br />«Гнозис Текстур»</h2><p class="jam-intro">Умопомрачительная практика танца, перформанса и импровизации. Исследуем восприятие во всех его проявлениях.</p><p class="jam-time">2 сета <span>×</span> 40 минут</p></div>
+      <div class="jam-roles">{event.jamRoles.map(([title, text]) => <article class="reveal"><h3>{title}</h3><p>{text}</p></article>)}</div>
+      <a class="button button-outline reveal" href={event.links.challengeJam}>Зарегистрироваться на челлендж-джем <span aria-hidden="true">↗</span></a>
+      <p class="jam-note">Отдельная регистрация, не является заявкой на лабораторию.</p>
+    </section>
+
+    <section class="format section" aria-labelledby="format-title">
+      <div class="format-image reveal"><Image src={event.images.connection} alt="Танцовщицы соединены движением на зелёном поле" widths={[640, 960, 1440]} sizes="(max-width: 720px) 100vw, 55vw" /></div>
+      <div class="format-copy reveal"><p class="section-label">Лаборатория</p><h2 id="format-title">Четыре недели<br />общего исследования</h2><dl><div><dt>5 сентября — 3 октября</dt><dd>период лаборатории</dd></div><div><dt>8 встреч · 24 часа</dt><dd>совместной работы</dd></div><div><dt>≈ 2 раза в неделю</dt><dd>возможны самостоятельные задания</dd></div></dl><p>Внимание и восприятие, тело и движение, импровизация и наблюдение, пространство и взаимодействие, композиция и создание материала — темы складываются в один длительный процесс.</p></div>
+    </section>
+
+    <section class="showcase section-wide" aria-labelledby="showcase-title">
+      <div class="showcase-copy reveal"><p class="section-label">3 октября</p><h2 id="showcase-title">Открытый показ<br />процесса исследования</h2><p>Не готовый спектакль, а встреча со зрителями и материалом, который возникнет за время работы. Формат создаётся вместе с участниками.</p></div>
+      <Image class="showcase-image reveal" src={event.images.foilPortrait} alt="Две танцовщицы среди золотой и серебряной фольги" widths={[480, 720, 960]} sizes="(max-width: 720px) 100vw, 45vw" />
+    </section>
+
+    <section class="hosts section" id="hosts" aria-labelledby="hosts-title">
+      <div class="section-heading reveal"><p class="section-label">Ведущие</p><h2 id="hosts-title">Вместе ведём<br />вопрос дальше</h2></div>
+      <div class="hosts-list">{event.hosts.map((host) => <article class="reveal"><h3>{host}</h3><p>Сведения о практике и роли в лаборатории будут опубликованы перед стартом регистрации.</p></article>)}</div>
+    </section>
+
+    <section class="price section-wide" id="price" aria-labelledby="price-title">
+      <div class="section-heading reveal"><p class="section-label">Участие</p><h2 id="price-title">Стоимость<br />лаборатории</h2></div>
+      <div class="price-list">{event.prices.map(([name, period, cost, note]) => <article class="reveal"><p>{name}</p><span>{period}</span><strong>{cost}</strong><small>{note}</small></article>)}</div>
+      <a class="button button-gold reveal" href={event.links.laboratory}>Подать заявку на лабораторию <span aria-hidden="true">↗</span></a>
+    </section>
+
+    <section class="final-cta section-wide" aria-labelledby="final-title">
+      <p class="section-label reveal">15 августа — 3 октября · Калуга · 18+</p><h2 id="final-title" class="reveal">Увидимся<br /><em>в поле зрения.</em></h2><a class="button button-dark reveal" href={event.links.laboratory}>Подать заявку <span aria-hidden="true">↗</span></a>
+    </section>
+  </main>
+
+  <footer><a class="brand" href="#top">PERFEED</a><p>Информационные партнёры и контакты будут объявлены дополнительно.</p><span>{event.age}</span></footer>
+
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => entry.isIntersecting && entry.target.classList.add('is-visible'));
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach((element) => observer.observe(element));
+  </script>
+</BaseLayout>
