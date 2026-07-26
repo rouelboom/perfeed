@@ -97,7 +97,7 @@ img { display: block; max-width: 100%; }
 
 .jam { background: var(--rose); overflow: hidden; position: relative; }
 .jam-image { height: min(63vw, 48rem); margin: calc(clamp(4.5rem, 8vw, 9rem) * -1) calc(clamp(1.25rem, 5vw, 5.5rem) * -1) 0; overflow: hidden; }
-.jam-image img { filter: grayscale(1) contrast(1.15); height: 100%; object-fit: cover; width: 100%; }
+.jam-image img { height: 100%; object-fit: cover; width: 100%; }
 .jam-content { margin-top: clamp(-7rem, -9vw, -3.5rem); max-width: 62rem; position: relative; }
 .jam-content .section-label { color: var(--ink); }
 .jam h2 { font-size: clamp(3.4rem, 8vw, 8.5rem); font-weight: 900; letter-spacing: -.09em; line-height: .75; margin: 0; text-transform: uppercase; }

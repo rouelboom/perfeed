@@ -1,6 +1,6 @@
 import connection from '../assets/images/connection.jpg';
 import foilPortrait from '../assets/images/foil-portrait.jpg';
-import foilWide from '../assets/images/foil-wide.jpg';
+import foilWide from '../assets/images/foil-wide-selective-color.png';
 import hero from '../assets/images/hero.jpg';
 import movementPortrait from '../assets/images/movement-portrait.jpg';
 
