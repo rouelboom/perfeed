@@ -170,6 +170,10 @@ img { display: block; max-width: 100%; }
 .price-list span { color: var(--muted); font-size: .65rem; font-weight: 800; margin-top: .5rem; text-transform: uppercase; }
 .price-list strong { font-size: clamp(2rem, 4vw, 4rem); font-weight: 900; letter-spacing: -.09em; line-height: .8; margin: auto 0 1rem; }
 .price-list small { font-size: .66rem; line-height: 1.25; text-transform: uppercase; }
+.price-details { display: grid; gap: 2.2rem; grid-template-columns: repeat(2, 1fr); margin: 0 0 2.2rem; }
+.price-detail { border-top: 1px solid var(--ink); padding-top: 1.1rem; }
+.price-detail h3 { font-size: 1rem; font-weight: 900; margin: 0 0 1.5rem; text-transform: uppercase; }
+.price-detail p { font-size: .88rem; line-height: 1.5; margin: 0 0 1rem; max-width: 38rem; }
 
 .final-cta { background: var(--periwinkle); min-height: 70vh; padding-top: clamp(6rem, 15vw, 15rem); }
 .final-cta .section-label { color: var(--ink); }
@@ -226,6 +230,7 @@ footer span { color: var(--signal); font-size: .8rem; font-weight: 900; }
   .host-copy h3 { margin-bottom: 1.8rem; }
   .price-list article + article { border-left: 0; border-top: 1px solid var(--ink); }
   .price-list article { min-height: 13rem; }
+  .price-details { grid-template-columns: 1fr; }
   .final-cta { min-height: 52vh; }
   .partners .section-heading h2 { font-size: clamp(2rem, 9vw, 4.3rem); }
   .partners-list { grid-template-columns: 1fr 1fr; }
