@@ -115,6 +115,17 @@ img { display: block; max-width: 100%; }
 .jam-roles article:last-child { border-right: 0; }
 .jam-roles h3 { font-size: 1rem; margin: 0 0 .8rem; text-transform: uppercase; }
 .jam-roles p { font-size: .86rem; line-height: 1.4; margin: 0; max-width: 20rem; }
+.jam-collaboration { border-top: 1px solid var(--ink); font-size: clamp(1.1rem, 2vw, 1.7rem); font-weight: 900; letter-spacing: -.045em; line-height: 1; margin: 3rem 0 0; max-width: 24ch; padding-top: 1rem; text-transform: uppercase; }
+.jam-collaboration span { display: block; }
+.jam-collaboration span:last-child { white-space: nowrap; }
+.jam-artist { align-items: start; border-top: 1px solid var(--ink); display: grid; gap: clamp(2rem, 5vw, 5rem); grid-template-columns: minmax(16rem, 30rem) minmax(22rem, 42rem); margin: 2rem 0 3rem; padding-top: 2rem; }
+.jam-artist-image { aspect-ratio: 4 / 5; overflow: hidden; }
+.jam-artist-image img { filter: grayscale(1) contrast(1.08); height: 100%; object-fit: cover; transition: transform .7s cubic-bezier(.2,.7,.2,1); width: 100%; }
+.jam-artist-image:hover img { transform: scale(1.045); }
+.jam-artist-copy { align-self: center; border-left: 1px solid var(--ink); padding: 0 0 0 clamp(2rem, 5vw, 5rem); }
+.jam-artist-copy .section-label { color: var(--ink); }
+.jam-artist-copy p:not(.section-label) { font-size: clamp(1rem, 1.35vw, 1.2rem); line-height: 1.45; margin: 0; max-width: 42rem; white-space: pre-line; }
+.jam-artist-copy p + p { border-top: 1px solid var(--ink); margin-top: 2rem; padding-top: 2rem; }
 
 .format { align-items: stretch; display: grid; gap: 0; grid-template-columns: 1.05fr .95fr; max-width: none; padding: 0; }
 .format-image img { height: 100%; min-height: 45rem; object-fit: cover; width: 100%; }
@@ -196,8 +207,13 @@ footer span { color: var(--signal); font-size: .8rem; font-weight: 900; }
   .audience-copy { padding-bottom: 4rem; padding-top: 4rem; }
   .jam-image { height: 66vw; }
   .jam-content { margin-top: -2.5rem; }
-  .jam-roles, .price-list { grid-template-columns: 1fr; }
+  .jam-roles, .jam-artist, .price-list { grid-template-columns: 1fr; }
   .jam-roles article, .jam-roles article + article { border-bottom: 1px solid var(--ink); border-right: 0; padding: 1rem 0; }
+  .jam-collaboration { margin-top: 2.5rem; }
+  .jam-collaboration span:last-child { white-space: normal; }
+  .jam-artist { margin-bottom: 2.5rem; margin-top: 1.5rem; padding-top: 1.5rem; }
+  .jam-artist-image { aspect-ratio: 4 / 5; max-width: 30rem; }
+  .jam-artist-copy { border-left: 0; border-top: 1px solid var(--ink); padding: 2.5rem 0 0; }
   .format-image img { min-height: 27rem; }
   .showcase-image { min-height: 27rem; }
   .schedule-table, .schedule-table tbody { display: block; }

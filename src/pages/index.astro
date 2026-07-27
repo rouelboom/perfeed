@@ -86,6 +86,15 @@ const nav = [
       <div class="jam-content reveal"><p class="section-label">15 августа · вход - свободный донейшн</p><h2 id="jam-title">Челлендж-джем<br />«Гнозис Текстур»</h2><p class="jam-intro">Умопомрачительная практика танца, перформанса и импровизации. Исследуем восприятие во всех его проявлениях.</p><p class="jam-time">2 сета <span>×</span> 40 минут</p></div>
       <p class="jam-roles-intro">В рамках джема вы можете быть в любой из ролей:</p>
       <div class="jam-roles">{event.jamRoles.map(([title, text]) => <article class="reveal"><h3>{title}</h3><p>{text}</p></article>)}</div>
+      <p class="jam-collaboration reveal"><span>джем пройдет в</span><span>коллаборации с</span><span>музыкантом dub a yaga</span></p>
+      <div class="jam-artist" aria-label="Музыкальная программа">
+        <div class="jam-artist-image reveal"><Image src={event.images.actor3} alt="dub a yaga" widths={[640, 960, 1440]} sizes="(max-width: 720px) 100vw, 45vw" /></div>
+        <div class="jam-artist-copy reveal">
+          <p class="section-label">Аля · dj 'dub a yaga'</p>
+          <p>{event.jamArtist[0]}</p>
+          <p>{event.jamArtist[1]}</p>
+        </div>
+      </div>
       <a class="button button-outline reveal" href={event.links.challengeJam}>Зарегистрироваться на челлендж-джем <span aria-hidden="true">↗</span></a>
       <p class="jam-note">Отдельная регистрация, не является заявкой на лабораторию.</p>
     </section>

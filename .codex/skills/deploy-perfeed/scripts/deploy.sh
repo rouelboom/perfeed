@@ -11,6 +11,7 @@ PORT="${PERFEED_PORT:-18081}"
 SERVER_NAME="${PERFEED_SERVER_NAME:-138.16.161.115}"
 SITE_URL="${PERFEED_SITE_URL:-http://138.16.161.115:18081}"
 REQUIRE_HTTPS="${PERFEED_REQUIRE_HTTPS:-0}"
+REPLACE_NGINX_CONFIG="${PERFEED_REPLACE_NGINX_CONFIG:-0}"
 REMOTE="${SERVER_USER}@${SERVER_HOST}"
 
 info() { printf '\033[1;34m==>\033[0m %s\n' "$*"; }
@@ -29,6 +30,7 @@ usage() {
   PERFEED_SERVER_NAME       server_name nginx
   PERFEED_SITE_URL          URL для проверки
   PERFEED_REQUIRE_HTTPS=1  потребовать успешный HTTPS-ответ
+  PERFEED_REPLACE_NGINX_CONFIG=1  перезаписать существующую nginx-конфигурацию
   PERFEED_SERVER_HOST      по умолчанию 138.16.161.115
   PERFEED_SERVER_USER      по умолчанию root
   PERFEED_REMOTE_DIR       по умолчанию /var/www/perfeed
@@ -46,6 +48,7 @@ validate_settings() {
   [[ "$BACKUP_DIR" =~ ^/var/www/[A-Za-z0-9-]+$ ]] || fail 'PERFEED_BACKUP_DIR должен быть каталогом в /var/www/.'
   [[ "$NGINX_SITE" =~ ^[A-Za-z0-9-]+$ ]] || fail 'PERFEED_NGINX_SITE содержит недопустимые символы.'
   [[ "$REQUIRE_HTTPS" == '0' || "$REQUIRE_HTTPS" == '1' ]] || fail 'PERFEED_REQUIRE_HTTPS должен быть 0 или 1.'
+  [[ "$REPLACE_NGINX_CONFIG" == '0' || "$REPLACE_NGINX_CONFIG" == '1' ]] || fail 'PERFEED_REPLACE_NGINX_CONFIG должен быть 0 или 1.'
   if [[ "$REQUIRE_HTTPS" == '1' ]]; then
     [[ "$SITE_URL" == https://* ]] || fail 'При PERFEED_REQUIRE_HTTPS=1 URL должен начинаться с https://.'
   fi
@@ -87,15 +90,21 @@ upload_dist() {
 
 configure_nginx() {
   info 'Настраиваю отдельный nginx-сайт Perfeed'
-  ssh "$REMOTE" bash -s -- "$REMOTE_DIR" "$NGINX_SITE" "$SERVER_NAME" "$PORT" <<'REMOTE_SCRIPT'
+  ssh "$REMOTE" bash -s -- "$REMOTE_DIR" "$NGINX_SITE" "$SERVER_NAME" "$PORT" "$REPLACE_NGINX_CONFIG" <<'REMOTE_SCRIPT'
 set -euo pipefail
 remote_dir="$1"
 nginx_site="$2"
 server_name="$3"
 port="$4"
+replace_nginx_config="$5"
 config="/etc/nginx/sites-available/${nginx_site}"
 temporary="${config}.new"
 backup="${config}.backup-$(date +%Y%m%d%H%M%S)"
+
+if [ -e "$config" ] && [ "$replace_nginx_config" != '1' ]; then
+    nginx -t
+    exit 0
+fi
 
 cat > "$temporary" <<NGINX
 server {
