@@ -1,0 +1,4 @@
+interface:
+  display_name: "Деплой Perfeed"
+  short_description: "Безопасная публикация Perfeed на nginx"
+  default_prompt: "Используй $deploy-perfeed, чтобы безопасно опубликовать текущую версию Perfeed."
