@@ -1,13 +1,13 @@
 import actor1 from '../../content/photos/actor1.jpg';
 import actor2 from '../../content/photos/actor2.jpg';
 import actor3 from '../../content/photos/actor3.jpg';
+import movementPortrait from '../../content/photos/photo_2026-07-27 22.52.39.jpeg';
 import mayakLogo from '../../content/photos/2026-07-27 22.57.56.png';
 import proctorLogo from '../../content/photos/Лого_полный_черный.png';
 import connection from '../assets/images/connection.jpg';
 import foilPortrait from '../assets/images/showcase-selective-color.png';
 import foilWide from '../assets/images/foil-wide-selective-color.png';
 import hero from '../assets/images/hero.jpg';
-import movementPortrait from '../assets/images/movement-portrait.jpg';
 
 export const event = {
   title: 'Золото, а не танец',

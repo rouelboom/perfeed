@@ -44,6 +44,7 @@ img { display: block; max-width: 100%; }
 .hero-facts { display: flex; flex-wrap: wrap; font-size: .7rem; font-weight: 800; gap: .4rem 1.25rem; letter-spacing: .025em; margin: 0 0 1.6rem; text-transform: uppercase; }
 .hero-facts span + span::before { color: var(--signal); content: '///'; margin-right: 1.25rem; }
 .button { align-items: center; border: 1px solid currentColor; display: inline-flex; font-size: .7rem; font-weight: 900; gap: 2.4rem; justify-content: space-between; letter-spacing: .03em; min-height: 3.4rem; padding: .9rem 1rem; text-transform: uppercase; transition: background .2s ease, color .2s ease, transform .2s ease; }
+.button-arrow { fill: none; flex: 0 0 1em; height: 1em; stroke: currentColor; stroke-linecap: square; stroke-linejoin: miter; stroke-width: 2; width: 1em; }
 .button:hover { background: var(--ink); color: var(--signal); transform: translate(4px, -4px); }
 .button-gold { background: var(--signal); border-color: var(--signal); color: var(--ink); }
 .button-outline { border-color: var(--ink); }
