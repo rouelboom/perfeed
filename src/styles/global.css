@@ -48,6 +48,9 @@ img { display: block; max-width: 100%; }
 .button-gold { background: var(--signal); border-color: var(--signal); color: var(--ink); }
 .button-outline { border-color: var(--ink); }
 .button-dark { background: var(--ink); color: var(--paper); }
+.hero-actions { display: flex; flex-wrap: wrap; gap: .75rem; }
+.hero-jam-button { background: var(--ink); color: var(--signal); }
+.hero-jam-button:hover { box-shadow: inset 0 0 0 3px var(--signal); }
 .button-note, .jam-note { color: inherit; font-size: .63rem; margin: .65rem 0 0; opacity: .72; text-transform: uppercase; }
 .hero-scroll { bottom: 2.4rem; font-size: .63rem; font-weight: 800; letter-spacing: .04em; margin: 0; position: absolute; right: clamp(1.4rem, 3.2vw, 3.5rem); text-transform: uppercase; writing-mode: vertical-rl; z-index: 1; }
 .hero-scroll span { color: var(--signal); font-size: 1.2rem; margin-top: .5rem; }
@@ -208,6 +211,8 @@ footer span { color: var(--signal); font-size: .8rem; font-weight: 900; }
   .hero-content { bottom: 2.2rem; left: 1.25rem; right: 1.25rem; }
   .hero h1 { font-size: clamp(4.1rem, 19vw, 6.5rem); }
   .hero-facts span + span::before { display: none; }
+  .hero-actions { align-items: stretch; flex-direction: column; }
+  .hero-actions .button { width: 100%; }
   .hero-scroll { display: none; }
   .question { min-height: 50vh; }
   .question::after { font-size: .5rem; left: 1.25rem; right: auto; top: 1.25rem; }
