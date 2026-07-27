@@ -162,7 +162,13 @@ const nav = [
 
     <section class="partners section-wide" aria-labelledby="partners-title">
       <div class="section-heading reveal"><p class="section-label">Поддержка проекта</p><h2 id="partners-title">Информационные партнеры</h2></div>
-      <ul class="partners-list">{event.partners.map((partner) => <li class="reveal">{partner}</li>)}</ul>
+      <ul class="partners-list">
+        {event.partners.map((partner) => (
+          <li class="reveal">
+            {'logo' in partner ? <Image class={`partner-logo ${partner.className ?? ''}`} src={partner.logo} alt={partner.alt} widths={[320, 480, 640]} sizes="(max-width: 720px) 50vw, 25vw" /> : partner.name}
+          </li>
+        ))}
+      </ul>
     </section>
   </main>
 

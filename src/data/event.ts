@@ -1,6 +1,8 @@
 import actor1 from '../../content/photos/actor1.jpg';
 import actor2 from '../../content/photos/actor2.jpg';
 import actor3 from '../../content/photos/actor3.jpg';
+import mayakLogo from '../../content/photos/2026-07-27 22.57.56.png';
+import proctorLogo from '../../content/photos/Лого_полный_черный.png';
 import connection from '../assets/images/connection.jpg';
 import foilPortrait from '../assets/images/showcase-selective-color.png';
 import foilWide from '../assets/images/foil-wide-selective-color.png';
@@ -122,5 +124,10 @@ export const event = {
     ['Стандартная регистрация', 'после 1 сентября', '15 000 ₽', 'Рассрочка: 7 500 + 7 500 ₽'],
     ['Студенческий тариф', 'при предъявлении билета', '10 000 ₽', 'Для студентов'],
   ],
-  partners: ['Партнёр 01 — скоро', 'Партнёр 02 — скоро', 'Партнёр 03 — скоро', 'Партнёр 04 — скоро'],
+  partners: [
+    { logo: mayakLogo, alt: 'Школа «Маяк» — Калуга и рисунок', className: 'partner-logo--mayak' },
+    { logo: proctorLogo, alt: '«Простор» — гильдия искусств', className: '' },
+    { name: 'Партнёр 03 — скоро' },
+    { name: 'Партнёр 04 — скоро' },
+  ],
 } as const;
