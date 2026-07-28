@@ -2,8 +2,9 @@ import actor1 from '../../content/photos/actor1.jpg';
 import actor2 from '../../content/photos/actor2.jpg';
 import actor3 from '../../content/photos/actor3.jpg';
 import movementPortrait from '../../content/photos/photo_2026-07-27 22.52.39.jpeg';
-import mayakLogo from '../../content/photos/2026-07-27 22.57.56.png';
-import proctorLogo from '../../content/photos/Лого_полный_черный.png';
+import fieldLogo from '../../content/photos/friend1-field.png';
+import beaconLogo from '../../content/photos/friend2-beacon.png';
+import wwLogo from '../../content/photos/friend3-ww.png';
 import connection from '../assets/images/connection.jpg';
 import foilPortrait from '../assets/images/showcase-selective-color.png';
 import foilWide from '../assets/images/foil-wide-selective-color.png';
@@ -125,9 +126,9 @@ export const event = {
     ['Студенческий тариф', 'при предъявлении билета', '10 000 ₽', 'Для студентов'],
   ],
   partners: [
-    { logo: mayakLogo, alt: 'Школа «Маяк» — Калуга и рисунок', className: 'partner-logo--mayak' },
-    { logo: proctorLogo, alt: '«Простор» — гильдия искусств', className: '' },
-    { name: 'Партнёр 03 — скоро' },
+    { logo: beaconLogo, alt: 'Школа «Маяк» — Калуга и рисунок', className: 'partner-logo--mayak' },
+    { logo: fieldLogo, alt: '«Простор» — гильдия искусств', className: '' },
+    { logo: wwLogo, alt: 'Логотип WW', className: '' },
     { name: 'Партнёр 04 — скоро' },
   ],
 } as const;
