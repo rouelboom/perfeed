@@ -109,7 +109,8 @@ img { display: block; max-width: 100%; }
 .jam-content { margin-top: clamp(-7rem, -9vw, -3.5rem); max-width: 62rem; position: relative; }
 .jam-content .section-label { color: var(--rose); }
 .jam h2 { font-size: clamp(3.4rem, 8vw, 8.5rem); font-weight: 900; letter-spacing: -.09em; line-height: .75; margin: 0; text-transform: uppercase; }
-.jam-intro { font-size: 1.05rem; line-height: 1.4; max-width: 30rem; }
+.jam-opening { font-size: clamp(1.15rem, 1.6vw, 1.5rem); font-weight: 800; letter-spacing: -.025em; line-height: 1.15; margin: 1.6rem 0 .7rem; max-width: 30rem; }
+.jam-intro { font-size: 1.05rem; line-height: 1.4; margin: 0; max-width: 30rem; }
 .jam-time { font-size: clamp(2rem, 5vw, 5rem); font-weight: 900; letter-spacing: -.07em; margin: 1.4rem 0 0; text-transform: uppercase; }
 .jam-time span { color: var(--paper); }
 .jam-roles-intro { font-size: 1rem; font-weight: 800; margin: 4rem 0 1rem; }
