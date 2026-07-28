@@ -9,8 +9,8 @@ BACKUP_DIR="${PERFEED_BACKUP_DIR:-/var/www/perfeed-backups}"
 NGINX_SITE="${PERFEED_NGINX_SITE:-perfeed}"
 PORT="${PERFEED_PORT:-18081}"
 SERVER_NAME="${PERFEED_SERVER_NAME:-138.16.161.115}"
-SITE_URL="${PERFEED_SITE_URL:-http://138.16.161.115:18081}"
-REQUIRE_HTTPS="${PERFEED_REQUIRE_HTTPS:-0}"
+SITE_URL="${PERFEED_SITE_URL:-https://perf-kaluga.site}"
+REQUIRE_HTTPS="${PERFEED_REQUIRE_HTTPS:-1}"
 REPLACE_NGINX_CONFIG="${PERFEED_REPLACE_NGINX_CONFIG:-0}"
 REMOTE="${SERVER_USER}@${SERVER_HOST}"
 
@@ -29,7 +29,7 @@ usage() {
   PERFEED_PORT=18081        порт nginx и публичного URL
   PERFEED_SERVER_NAME       server_name nginx
   PERFEED_SITE_URL          URL для проверки
-  PERFEED_REQUIRE_HTTPS=1  потребовать успешный HTTPS-ответ
+  PERFEED_REQUIRE_HTTPS=1  потребовать успешный HTTPS-ответ (по умолчанию)
   PERFEED_REPLACE_NGINX_CONFIG=1  перезаписать существующую nginx-конфигурацию
   PERFEED_SERVER_HOST      по умолчанию 138.16.161.115
   PERFEED_SERVER_USER      по умолчанию root
@@ -142,13 +142,15 @@ REMOTE_SCRIPT
   ok 'nginx проверен и перезагружен'
 }
 
-open_firewall() {
+check_firewall() {
   info 'Проверяю firewall'
   if remote_run "command -v ufw >/dev/null 2>&1 && ufw status | grep -q '^Status: active'"; then
-    remote_run "ufw allow ${PORT}/tcp >/dev/null"
-    ok "ufw разрешает ${PORT}/tcp"
+    if remote_run "ufw status | grep -Eq '^${PORT}/tcp([[:space:]]| \\(v6\\)).*ALLOW'"; then
+      fail "Порт ${PORT}/tcp не должен быть публично открыт в ufw."
+    fi
+    ok "ufw не открывает служебный порт ${PORT}/tcp"
   else
-    info 'ufw не установлен или не активен, настройка не требуется'
+    info 'ufw не установлен или не активен; сценарий не открывает служебный порт'
   fi
 }
 
@@ -164,7 +166,7 @@ main() {
   if [[ "${1:-}" == '-h' || "${1:-}" == '--help' ]]; then usage; exit 0; fi
   need_command npm; need_command ssh; need_command rsync; need_command curl
   validate_settings; check_project; build_project; prepare_server; backup_current_release
-  upload_dist; configure_nginx; open_firewall; verify_site
+  upload_dist; configure_nginx; check_firewall; verify_site
   printf '\nГотово. Perfeed опубликован: %s\n' "$SITE_URL"
 }
 
