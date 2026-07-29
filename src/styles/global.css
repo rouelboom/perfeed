@@ -184,11 +184,13 @@ img { display: block; max-width: 100%; }
 .final-cta .section-label { color: var(--ink); }
 .final-cta h2 { font-size: clamp(4.2rem, 12vw, 13rem); font-weight: 900; letter-spacing: -.11em; line-height: .72; margin: 0 0 3.2rem; max-width: 7.5ch; text-transform: uppercase; }
 .partners { background: var(--paper); }
+.partners-credit { font-size: 1.1rem; font-weight: 800; margin: 0 0 clamp(2.75rem, 6vw, 6rem); text-transform: uppercase; }
 .partners-list { border-bottom: 1px solid var(--ink); display: grid; grid-template-columns: repeat(4, 1fr); list-style: none; margin: 4rem 0 0; padding: 0; }
 .partners-list li { border-top: 1px solid var(--ink); border-right: 1px solid var(--ink); font-size: .7rem; font-weight: 900; min-height: 8rem; padding: 1rem; text-transform: uppercase; }
 .partners-list li:last-child { border-right: 0; }
 .partner-logo { display: block; height: 100%; max-height: 6rem; object-fit: contain; width: 100%; }
 .partner-logo--mayak { transform: scale(1.12); }
+.partner-logo--chestnok { transform: scale(1.25); }
 .contacts { background: var(--periwinkle); padding-bottom: clamp(2.75rem, 5vw, 4.5rem); padding-top: clamp(2.75rem, 5vw, 4.5rem); }
 .contacts .section-heading h2 { font-size: clamp(2.7rem, 4.5vw, 5rem); }
 .contacts-list { border-bottom: 1px solid var(--ink); display: grid; grid-template-columns: repeat(2, 1fr); margin-top: clamp(1.75rem, 3vw, 2.75rem); }

@@ -5,6 +5,8 @@ import movementPortrait from '../../content/photos/photo_2026-07-27 22.52.39.jpe
 import fieldLogo from '../../content/photos/friend1-field.png';
 import beaconLogo from '../../content/photos/friend2-beacon.png';
 import wwLogo from '../../content/photos/friend3-ww.png';
+import redstarLogo from '../../content/photos/friend4-redstar.png';
+import chestnokLogo from '../../content/photos/friend5-chestnok.png';
 import connection from '../assets/images/connection.jpg';
 import foilPortrait from '../assets/images/showcase-selective-color.png';
 import foilWide from '../assets/images/foil-wide-selective-color.png';
@@ -129,6 +131,10 @@ export const event = {
     { logo: beaconLogo, alt: 'Школа «Маяк» — Калуга и рисунок', className: 'partner-logo--mayak' },
     { logo: fieldLogo, alt: '«Простор» — гильдия искусств', className: '' },
     { logo: wwLogo, alt: 'Логотип WW', className: '' },
-    { name: 'Партнёр 04 — скоро' },
+    { logo: redstarLogo, alt: 'Красная Звезда', className: '' },
+    { logo: chestnokLogo, alt: 'Чеснок', className: 'partner-logo--chestnok' },
+    { name: 'Партнёр 06 — скоро' },
+    { name: 'Партнёр 07 — скоро' },
+    { name: 'Партнёр 08 — скоро' },
   ],
 } as const;
