@@ -7,6 +7,8 @@ import beaconLogo from '../../content/photos/friend2-beacon.png';
 import wwLogo from '../../content/photos/friend3-ww.png';
 import redstarLogo from '../../content/photos/friend4-redstar.png';
 import chestnokLogo from '../../content/photos/friend5-chestnok.png';
+import pnwLogo from '../../content/photos/friend6-pnw.png';
+import sphereLogo from '../../content/photos/friend7-sphere.png';
 import connection from '../assets/images/connection.jpg';
 import foilPortrait from '../assets/images/showcase-selective-color.png';
 import foilWide from '../assets/images/foil-wide-selective-color.png';
@@ -136,8 +138,8 @@ export const event = {
     { logo: wwLogo, alt: 'Логотип WW', className: '' },
     { logo: redstarLogo, alt: 'Красная Звезда', className: '' },
     { logo: chestnokLogo, alt: 'Чеснок', className: 'partner-logo--chestnok' },
-    { name: 'Партнёр 06 — скоро' },
-    { name: 'Партнёр 07 — скоро' },
+    { logo: pnwLogo, alt: 'PNW', className: '' },
+    { logo: sphereLogo, alt: 'Сфера Практик', className: '' },
     { name: 'Партнёр 08 — скоро' },
   ],
 } as const;
