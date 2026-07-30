@@ -39,7 +39,7 @@ img { display: block; max-width: 100%; }
 .mobile-menu-close { background: transparent; border: 0; cursor: pointer; font-size: 2.25rem; font-weight: 300; line-height: 1; padding: .35rem 0 .55rem .75rem; }
 .mobile-menu nav { display: flex; flex-direction: column; padding-top: clamp(2.5rem, 8vh, 5rem); }
 .mobile-menu nav a { align-items: center; border-bottom: 1px solid rgb(243 241 232 / .35); display: flex; font-size: clamp(2rem, 9.5vw, 3.5rem); font-weight: 900; justify-content: space-between; letter-spacing: -.07em; line-height: .9; padding: .7rem 0 .85rem; text-transform: uppercase; }
-.mobile-menu nav a span { color: var(--signal); font-size: .58em; letter-spacing: 0; }
+.mobile-menu-arrow { color: var(--signal); flex-basis: .58em; height: .58em; width: .58em; }
 
 .hero { background: var(--ink); color: var(--paper); height: 100svh; min-height: 41rem; overflow: hidden; position: relative; }
 .hero-image, .hero-image img { height: 100%; object-fit: cover; width: 100%; }
@@ -198,7 +198,7 @@ img { display: block; max-width: 100%; }
 .partners-credit { font-size: 1.1rem; font-weight: 800; margin: 0 0 clamp(2.75rem, 6vw, 6rem); text-transform: uppercase; }
 .partners-list { border-bottom: 1px solid var(--ink); display: grid; grid-template-columns: repeat(4, 1fr); list-style: none; margin: 4rem 0 0; padding: 0; }
 .partners-list li { border-top: 1px solid var(--ink); border-right: 1px solid var(--ink); font-size: .7rem; font-weight: 900; min-height: 8rem; padding: 1rem; text-transform: uppercase; }
-.partners-list li:last-child { border-right: 0; }
+.partners-list li:nth-child(4n) { border-right: 0; }
 .partner-logo { display: block; height: 100%; max-height: 6rem; object-fit: contain; width: 100%; }
 .partner-logo--mayak { transform: scale(1.12); }
 .partner-logo--chestnok { transform: scale(1.25); }
@@ -267,7 +267,7 @@ footer span { color: var(--signal); font-size: .8rem; font-weight: 900; }
   .final-cta { min-height: 52vh; }
   .partners .section-heading h2 { font-size: clamp(2rem, 9vw, 4.3rem); }
   .partners-list { grid-template-columns: 1fr 1fr; }
-  .partners-list li:nth-child(2) { border-right: 0; }
+  .partners-list li:nth-child(2n) { border-right: 0; }
   .partners-list li { min-height: 6rem; }
   .contacts-list { grid-template-columns: 1fr; }
   .contacts-list article, .contacts-list article + article { border-left: 0; padding: 1rem 0 1.5rem; }
