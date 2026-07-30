@@ -9,16 +9,35 @@ const nav = [
   ['Ведущие', '#hosts'],
   ['Стоимость', '#price'],
 ] as const;
+
+const mobileNav = [
+  ['О лаборатории', '#laboratory'],
+  ['Программа', '#schedule'],
+  ['Челлендж-джем', '#jam'],
+  ['Ведущие', '#hosts'],
+  ['Стоимость', '#price'],
+] as const;
 ---
 
 <BaseLayout title={`${event.title} — Perfeed`} description={event.description}>
   <header class="site-header">
     <a class="brand" href="#top" aria-label="Perfeed — к началу страницы">PERFEED</a>
+    <button class="mobile-menu-toggle" type="button" aria-controls="mobile-menu" aria-expanded="false">МЕНЮ <span aria-hidden="true">≡</span></button>
     <nav aria-label="Основная навигация">
       {nav.map(([label, href]) => <a href={href}>{label}</a>)}
     </nav>
     <a class="header-cta" href={event.links.laboratory}>Подать заявку</a>
   </header>
+
+  <dialog class="mobile-menu" id="mobile-menu" aria-label="Навигация">
+    <div class="mobile-menu-header">
+      <p>НАВИГАЦИЯ</p>
+      <button class="mobile-menu-close" type="button" aria-label="Закрыть меню">×</button>
+    </div>
+    <nav aria-label="Мобильная навигация">
+      {mobileNav.map(([label, href]) => <a href={href}>{label}<span aria-hidden="true">↘</span></a>)}
+    </nav>
+  </dialog>
 
   <main id="content">
     <section class="hero" id="top" aria-labelledby="hero-title">
@@ -83,7 +102,7 @@ const nav = [
       <ul class="outcome-list">{event.outcomes.map((outcome, index) => <li class="reveal"><span>0{index + 1}</span>{outcome}</li>)}</ul>
     </section>
 
-    <section class="jam section-wide" aria-labelledby="jam-title">
+    <section class="jam section-wide" id="jam" aria-labelledby="jam-title">
       <div class="jam-image"><Image src={event.images.foilWide} alt="Танцовщицы с золотой и серебряной фольгой" widths={[640, 960, 1440, 1920]} sizes="100vw" /></div>
       <div class="jam-content reveal"><p class="section-label">15 августа · билибина 33 · 5 этаж / вход - свободный донейшн</p><h2 id="jam-title">Челлендж-джем<br />«Гнозис Текстур»</h2><p class="jam-opening">Это первое открывающее событие лаборатории</p><p class="jam-intro">Умопомрачительная практика танца, перформанса и импровизации. Исследуем восприятие во всех его проявлениях.</p><p class="jam-time">2 сета <span>×</span> 40 минут</p></div>
       <p class="jam-roles-intro">В рамках джема вы можете быть в любой из ролей:</p>
@@ -198,5 +217,21 @@ const nav = [
       entries.forEach((entry) => entry.isIntersecting && entry.target.classList.add('is-visible'));
     }, { threshold: 0.12 });
     document.querySelectorAll('.reveal').forEach((element) => observer.observe(element));
+
+    const menu = document.querySelector<HTMLDialogElement>('#mobile-menu');
+    const menuToggle = document.querySelector<HTMLButtonElement>('.mobile-menu-toggle');
+    const menuClose = document.querySelector<HTMLButtonElement>('.mobile-menu-close');
+
+    const closeMenu = () => {
+      menu?.close();
+      menuToggle?.setAttribute('aria-expanded', 'false');
+    };
+
+    menuToggle?.addEventListener('click', () => {
+      menu?.showModal();
+      menuToggle.setAttribute('aria-expanded', 'true');
+    });
+    menuClose?.addEventListener('click', closeMenu);
+    menu?.querySelectorAll('a').forEach((link) => link.addEventListener('click', closeMenu));
   </script>
 </BaseLayout>
