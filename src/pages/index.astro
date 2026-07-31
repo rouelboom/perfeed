@@ -16,6 +16,7 @@ const mobileNav = [
   ['Челлендж-джем', '#jam'],
   ['Ведущие', '#hosts'],
   ['Стоимость', '#price'],
+  ['Наши друзья', '#partners'],
 ] as const;
 ---
 
@@ -181,7 +182,7 @@ const mobileNav = [
       <p class="section-label reveal">5 сентября</p><h2 id="final-title" class="reveal">Увидимся<br /><em>в поле зрения.</em></h2><a class="button button-dark reveal" href={event.links.laboratory}>Подать заявку <svg class="button-arrow" aria-hidden="true" viewBox="0 0 16 16"><path d="M3 13 13 3M6 3h7v7" /></svg></a>
     </section>
 
-    <section class="partners section-wide" aria-labelledby="partners-title">
+    <section class="partners section-wide" id="partners" aria-labelledby="partners-title">
       <p class="partners-credit">Благодарим Алексея Климова за фотографии, использованные в оформлении проекта</p>
       <div class="section-heading reveal"><p class="section-label">Поддержка проекта</p><h2 id="partners-title">Информационные друзья</h2></div>
       <ul class="partners-list">
