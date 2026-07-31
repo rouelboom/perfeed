@@ -9,6 +9,8 @@ import redstarLogo from '../../content/photos/friend4-redstar.png';
 import chestnokLogo from '../../content/photos/friend5-chestnok.png';
 import pnwLogo from '../../content/photos/friend6-pnw.png';
 import sphereLogo from '../../content/photos/friend7-sphere.png';
+import fruitsLogo from '../../content/photos/friend8-fruits.png';
+import freyLogo from '../../content/photos/friend9-frey.png';
 import connection from '../assets/images/connection.jpg';
 import foilPortrait from '../assets/images/showcase-selective-color.png';
 import foilWide from '../assets/images/foil-wide-selective-color.png';
@@ -140,6 +142,10 @@ export const event = {
     { logo: chestnokLogo, alt: 'Чеснок', className: 'partner-logo--chestnok' },
     { logo: pnwLogo, alt: 'PNW', className: '' },
     { logo: sphereLogo, alt: 'Сфера Практик', className: '' },
-    { name: 'Партнёр 08 — скоро' },
+    { logo: fruitsLogo, alt: 'Станция Фруктовая', className: '' },
+    { logo: freyLogo, alt: 'Из Калуги с любовью', className: '' },
+    { name: 'Партнёр 10 — скоро' },
+    { name: 'Партнёр 11 — скоро' },
+    { name: 'Партнёр 12 — скоро' },
   ],
 } as const;
