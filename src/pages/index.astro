@@ -211,7 +211,31 @@ const mobileNav = [
     </section>
   </main>
 
-  <footer><a class="brand" href="#top">PERFEED</a><p>Лаборатория современного танца и перформанса</p><span>{event.age}</span></footer>
+  <footer class="site-footer">
+    <div class="footer-heading">
+      <a class="brand" href="#top">PERFEED</a>
+      <p>Лаборатория современного танца и перформанса</p>
+      <span>{event.age}</span>
+    </div>
+    <nav class="footer-socials" aria-label="Социальные сети">
+      <a href="https://www.instagram.com/zoloto.dance.lab/" target="_blank" rel="noopener noreferrer">
+        <span>Instagram*</span>
+        <strong>@zoloto.dance.lab</strong>
+        <svg class="button-arrow" aria-hidden="true" viewBox="0 0 16 16"><path d="M3 13 13 3M6 3h7v7" /></svg>
+      </a>
+      <a href="https://t.me/zoloto_dance_lab" target="_blank" rel="noopener noreferrer">
+        <span>Telegram</span>
+        <strong>[золото, а не танец]</strong>
+        <svg class="button-arrow" aria-hidden="true" viewBox="0 0 16 16"><path d="M3 13 13 3M6 3h7v7" /></svg>
+      </a>
+      <a href="https://vk.ru/zoloto_dance_lab" target="_blank" rel="noopener noreferrer">
+        <span>ВКонтакте</span>
+        <strong>zoloto_dance_lab</strong>
+        <svg class="button-arrow" aria-hidden="true" viewBox="0 0 16 16"><path d="M3 13 13 3M6 3h7v7" /></svg>
+      </a>
+    </nav>
+    <p class="footer-disclaimer">* Instagram принадлежит компании Meta, деятельность которой признана экстремистской и запрещена на территории РФ.</p>
+  </footer>
 
   <script>
     const observer = new IntersectionObserver((entries) => {
