@@ -1,6 +1,5 @@
 import actor1 from '../../content/photos/actor1.jpg';
 import actor2 from '../../content/photos/actor2.jpg';
-import actor3 from '../../content/photos/actor3.jpg';
 import movementPortrait from '../../content/photos/photo_2026-07-27 22.52.39.jpeg';
 import fieldLogo from '../../content/photos/friend1-field.png';
 import beaconLogo from '../../content/photos/friend2-beacon.png';
@@ -15,8 +14,10 @@ import kitaikaLogo from '../../content/photos/friend10-kitaika.png';
 import plamenLogo from '../../content/photos/friend11-plamen.png';
 import connection from '../assets/images/connection.jpg';
 import foilPortrait from '../assets/images/showcase-selective-color.png';
-import foilWide from '../assets/images/foil-wide-selective-color.png';
 import hero from '../assets/images/hero.jpg';
+import { archivedEvents } from './archived-events';
+
+const challengeJam = archivedEvents[0];
 
 export const event = {
   title: 'Золото, а не танец',
@@ -28,7 +29,7 @@ export const event = {
     laboratory: 'https://forms.yandex.ru/u/6a67a703d04688e69181f6f3',
     challengeJam: 'https://forms.yandex.ru/u/6a678f5c02848fe4fc22f4a7',
   },
-  images: { hero, connection, foilWide, foilPortrait, movementPortrait, actor3 },
+  images: { hero, connection, foilPortrait, movementPortrait, foilWide: challengeJam.images.hero, actor3: challengeJam.images.artist },
   about: [
     '[золото, а не танец] — это лаборатория на пересечении танца, перформативных практик и исследования восприятия, которая длится один месяц. Нас интересует внимание как способ обнаружения ценности: в пространстве, в движении, в других людях и в собственном опыте.',
     'Что становится видимым, если смотреть дольше? Может ли танец быть не только формой искусства, но и способом наблюдения, исследования и встречи с миром? Как движение меняет восприятие пространства, времени и самого себя?',
@@ -56,6 +57,8 @@ export const event = {
       text: 'Возможность разделить со зрителями путь, пройденный участниками за время лаборатории.',
     },
   ],
+  jamRoles: challengeJam.announcement.roles,
+  jamArtist: challengeJam.announcement.artist.bio,
   outcomes: [
     'расширит понимание собственного тела, его возможностей, привычек и способов взаимодействия с окружающим миром.',
     'познакомится с практиками современного танца, импровизации, композиции и перформанса в доступном и исследовательском формате.',
@@ -67,15 +70,6 @@ export const event = {
     'получит опыт коллективного творчества и обратной связи.',
     'примет участие в создании итогового показа.',
     'обретёт новые профессиональные и личные связи внутри локального сообщества.',
-  ],
-  jamRoles: [
-    ['Исполнитель', 'Ты танцуешь. Для того, чтобы было любопытнее - тебе дадут задачи для импровизации и только ты решаешь, когда во время твоей практики их активировать.'],
-    ['Наблюдатель', 'Твоя позиция наблюдения активная. Ты поддерживаешь вниманием то, что происходит в пространстве. После смены сета роли Исполнителя и Наблюдателя меняются.'],
-    ['Зритель', 'Ты поддерживаешь участников эмоциями и присутствием, наслаждаешься процессом. Возможно, в другой раз ты будешь готов поделиться своим танцем.'],
-  ],
-  jamArtist: [
-    '"dub a yaga" - Это классическая рейв-история о танцоре, ставшем диджеем. История погружения в атмосферу андеграундных вечеринок и постепенного перехода от танцпола к пульту. История, где человек, знающий толк в "качающем" звуке и ритме изнутри, начинает сам создавать эту магию для других.',
-    'В этот вечер "dub a yaga" порадует нас двумя контрастными сетами — каждый со своей особой атмосферой.\nПервый сет — энергичная смесь современного техно и винтажных ритмов отечественной и зарубежной эстрады. Этот микс непременно зарядит энергией и заставит активно двигаться на танцполе.\nВторой сет в стиле псай‑чилл, напротив, создаст атмосферу спокойствия, умиротворения и ритуальной таинственности— в нём можно расслабиться и насладиться танцем.',
   ],
   format: [
     ['5 сентября — 3 октября', 'период лаборатории'],
