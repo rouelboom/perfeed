@@ -66,9 +66,16 @@ const mobileNav = [
       </div>
     </section>
 
-    <section class="audience section">
+    <section class="audience section" aria-labelledby="audience-title">
       <div class="audience-image reveal"><Image src={event.images.movementPortrait} alt="Танцовщицы в совместной пластической позе" widths={[480, 720, 960]} sizes="(max-width: 720px) 100vw, 42vw" /></div>
-      <div class="audience-copy reveal"><p class="section-label">Для кого</p><h2>Для тех, кто хочет посмотреть внимательнее</h2>{event.audience.map((paragraph) => <p>{paragraph}</p>)}<p class="highlight">Предыдущий опыт в танце или перформансе не является обязательным.</p></div>
+      <div class="audience-copy reveal">
+        <h2 id="audience-title">Для кого лаборатория?</h2>
+        {event.audience.map((paragraph) => <p>{paragraph}</p>)}
+        <h3>Что даст лаборатория?</h3>
+        <ul class="audience-benefits">
+          {event.audienceBenefits.map(([title, text]) => <li><strong>{title}</strong><span>{text}</span></li>)}
+        </ul>
+      </div>
     </section>
 
     <section class="laboratory section" id="laboratory" aria-labelledby="laboratory-title">

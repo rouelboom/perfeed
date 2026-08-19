@@ -101,9 +101,14 @@ img { display: block; max-width: 100%; }
 .audience-image img { height: 100%; object-fit: cover; transition: transform .7s cubic-bezier(.2,.7,.2,1); width: 100%; }
 .audience-image:hover img { transform: scale(1.045); }
 .audience-copy { align-self: center; background: var(--periwinkle); min-height: 43rem; padding: clamp(3rem, 8vw, 8rem) clamp(1.25rem, 6vw, 7rem); }
-.audience-copy .section-label { color: var(--ink); font-size: clamp(3rem, 6vw, 6.5rem); font-weight: 900; letter-spacing: -.08em; line-height: .8; margin-bottom: 2rem; text-transform: uppercase; }
-.audience-copy h2 { font-size: clamp(2rem, 3.5vw, 3.7rem); max-width: 14ch; }
-.highlight { border-top: 2px solid var(--ink); font-size: .77rem !important; font-weight: 900; letter-spacing: .02em; margin-top: 2.5rem; padding-top: .85rem; text-transform: uppercase; }
+.audience-copy h2 { font-size: clamp(2.5rem, 4.2vw, 4.7rem); max-width: 10ch; }
+.audience-copy h3 { border-top: 2px solid var(--ink); font-size: clamp(1.4rem, 2.2vw, 2rem); letter-spacing: -.04em; margin: 2.75rem 0 0; padding-top: 1rem; text-transform: uppercase; }
+.audience-benefits { border-bottom: 1px solid var(--ink); display: grid; grid-template-columns: repeat(2, 1fr); list-style: none; margin: 1rem 0 0; padding: 0; }
+.audience-benefits li { border-top: 1px solid var(--ink); padding: 1rem 1.25rem 1rem 0; }
+.audience-benefits li:nth-child(even) { padding-left: 1.25rem; }
+.audience-benefits strong, .audience-benefits span { display: block; }
+.audience-benefits strong { font-size: .85rem; letter-spacing: -.025em; text-transform: uppercase; }
+.audience-benefits span { font-size: .8rem; line-height: 1.35; margin-top: .45rem; }
 
 .outcomes { border-bottom: 1px solid var(--ink); }
 .outcomes .section-heading h2 { font-size: clamp(2rem, 4vw, 4.5rem); font-weight: 900; letter-spacing: -.06em; line-height: .95; }
@@ -272,6 +277,8 @@ img { display: block; max-width: 100%; }
   .audience-image, .audience-copy { min-height: auto; }
   .audience-image { height: 32rem; }
   .audience-copy { padding-bottom: 4rem; padding-top: 4rem; }
+  .audience-benefits { grid-template-columns: 1fr; }
+  .audience-benefits li, .audience-benefits li:nth-child(even) { padding: 1rem 0; }
   .price-list { grid-template-columns: 1fr; }
   .format-image img { min-height: 27rem; }
   .showcase-image { min-height: 27rem; }
