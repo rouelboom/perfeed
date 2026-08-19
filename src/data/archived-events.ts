@@ -29,7 +29,7 @@ export interface ArchivedEvent {
   gallery?: readonly { image: ImageMetadata; alt: string }[];
 }
 
-export const archivedEvents = [
+export const archivedEvents: readonly ArchivedEvent[] = [
   {
     slug: 'challenge-jam-2026-08-15',
     title: 'Челлендж-джем «Гнозис Текстур»',
@@ -58,4 +58,4 @@ export const archivedEvents = [
     },
     images: { hero: foilWide, artist: actor3 },
   },
-] as const satisfies readonly ArchivedEvent[];
+];
