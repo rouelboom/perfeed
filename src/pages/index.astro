@@ -64,6 +64,11 @@ const mobileNav = [
       </div>
     </section>
 
+    <section class="audience section">
+      <div class="audience-image reveal"><Image src={event.images.movementPortrait} alt="Танцовщицы в совместной пластической позе" widths={[480, 720, 960]} sizes="(max-width: 720px) 100vw, 42vw" /></div>
+      <div class="audience-copy reveal"><p class="section-label">Для кого</p><h2>Для тех, кто хочет посмотреть внимательнее</h2>{event.audience.map((paragraph) => <p>{paragraph}</p>)}<p class="highlight">Предыдущий опыт в танце или перформансе не является обязательным.</p></div>
+    </section>
+
     <section class="laboratory section" id="laboratory" aria-labelledby="laboratory-title">
       <div class="split-intro">
         <p class="section-label reveal">О лаборатории</p>
@@ -89,11 +94,6 @@ const mobileNav = [
           </li>
         ))}
       </ol>
-    </section>
-
-    <section class="audience section">
-      <div class="audience-image reveal"><Image src={event.images.movementPortrait} alt="Танцовщицы в совместной пластической позе" widths={[480, 720, 960]} sizes="(max-width: 720px) 100vw, 42vw" /></div>
-      <div class="audience-copy reveal"><p class="section-label">Для кого</p><h2>Для тех, кто хочет посмотреть внимательнее</h2>{event.audience.map((paragraph) => <p>{paragraph}</p>)}<p class="highlight">Предыдущий опыт в танце или перформансе не является обязательным.</p></div>
     </section>
 
     <section class="outcomes section" aria-labelledby="outcomes-title">
