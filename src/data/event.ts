@@ -15,9 +15,6 @@ import plamenLogo from '../../content/photos/friend11-plamen.png';
 import connection from '../assets/images/connection.jpg';
 import foilPortrait from '../assets/images/showcase-selective-color.png';
 import hero from '../assets/images/hero.jpg';
-import { archivedEvents } from './archived-events';
-
-const challengeJam = archivedEvents[0];
 
 export const event = {
   title: 'Золото, а не танец',
@@ -27,9 +24,8 @@ export const event = {
   age: '18+',
   links: {
     laboratory: 'https://forms.yandex.ru/u/6a67a703d04688e69181f6f3',
-    challengeJam: 'https://forms.yandex.ru/u/6a678f5c02848fe4fc22f4a7',
   },
-  images: { hero, connection, foilPortrait, movementPortrait, foilWide: challengeJam.images.hero, actor3: challengeJam.images.artist },
+  images: { hero, connection, foilPortrait, movementPortrait },
   about: [
     '[золото, а не танец] — это лаборатория на пересечении танца, перформативных практик и исследования восприятия, которая длится один месяц. Нас интересует внимание как способ обнаружения ценности: в пространстве, в движении, в других людях и в собственном опыте.',
     'Что становится видимым, если смотреть дольше? Может ли танец быть не только формой искусства, но и способом наблюдения, исследования и встречи с миром? Как движение меняет восприятие пространства, времени и самого себя?',
@@ -42,11 +38,6 @@ export const event = {
   ],
   process: [
     {
-      date: '15 августа',
-      title: 'Челлендж-джем',
-      text: 'Открытая танцевальная встреча-знакомство с ведущими, атмосферой проекта и совместной практикой движения.',
-    },
-    {
       date: '5 сентября — 3 октября',
       title: 'Лаборатория',
       text: 'Двенадцать встреч, в которых внимание, движение, композиция и взаимодействие становятся единым исследованием.',
@@ -57,8 +48,6 @@ export const event = {
       text: 'Возможность разделить со зрителями путь, пройденный участниками за время лаборатории.',
     },
   ],
-  jamRoles: challengeJam.announcement.roles,
-  jamArtist: challengeJam.announcement.artist.bio,
   outcomes: [
     'расширит понимание собственного тела, его возможностей, привычек и способов взаимодействия с окружающим миром.',
     'познакомится с практиками современного танца, импровизации, композиции и перформанса в доступном и исследовательском формате.',
@@ -83,7 +72,6 @@ export const event = {
     'Сборка и перформанс',
   ],
   schedule: [
-    ['15 августа (сб)', 'Открытый танцевальный челлендж-джем «Гнозис Текстур»', 'Саяна + Настя'],
     ['5 сентября (сб)', 'Открытие лаборатории. Пробуждение движения и активация тела через игровые задачи.', 'Настя'],
     ['6 сентября (вс)', 'Работа с восприятием: тело, танец, искусство', 'Саяна'],
     ['9 сентября (ср)', 'Техника современного танца: внимание, опора и качество движения', 'Настя'],
