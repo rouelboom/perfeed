@@ -8,15 +8,16 @@ const nav = [
   ['Программа', '#schedule'],
   ['Ведущие', '#hosts'],
   ['Стоимость', '#price'],
+  ['Архив мероприятий', '/events/'],
 ] as const;
 
 const mobileNav = [
   ['О лаборатории', '#laboratory'],
   ['Программа', '#schedule'],
-  ['Челлендж-джем', '#jam'],
   ['Ведущие', '#hosts'],
   ['Стоимость', '#price'],
   ['Наши друзья', '#partners'],
+  ['Архив мероприятий', '/events/'],
 ] as const;
 ---
 
@@ -53,7 +54,6 @@ const mobileNav = [
         </div>
         <div class="hero-actions">
           <a class="button button-gold" href={event.links.laboratory}>Подать заявку на лабораторию <svg class="button-arrow" aria-hidden="true" viewBox="0 0 16 16"><path d="M3 13 13 3M6 3h7v7" /></svg></a>
-          <a class="button button-outline hero-jam-button" href={event.links.challengeJam}>Подать заявку на челендж-джем <svg class="button-arrow" aria-hidden="true" viewBox="0 0 16 16"><path d="M3 13 13 3M6 3h7v7" /></svg></a>
         </div>
       </div>
       <p class="hero-scroll" aria-hidden="true">Листайте вниз <span>↓</span></p>
@@ -63,6 +63,18 @@ const mobileNav = [
       <div class="question-copy reveal">
         <p class="section-label">В поле зрения</p>
         <h2 id="question-title">Что мы считаем ценным?<br />Как это решение возникает?<br /><em>И сколько золота остаётся незамеченным каждый день?</em></h2>
+      </div>
+    </section>
+
+    <section class="audience section" aria-labelledby="audience-title">
+      <div class="audience-image reveal"><Image src={event.images.movementPortrait} alt="Танцовщицы в совместной пластической позе" widths={[480, 720, 960]} sizes="(max-width: 720px) 100vw, 42vw" /></div>
+      <div class="audience-copy reveal">
+        <h2 id="audience-title">Для кого лаборатория?</h2>
+        {event.audience.map((paragraph) => <p>{paragraph}</p>)}
+        <h3>Что даст лаборатория?</h3>
+        <ul class="audience-benefits">
+          {event.audienceBenefits.map(([title, text]) => <li><strong>{title}</strong><span>{text}</span></li>)}
+        </ul>
       </div>
     </section>
 
@@ -93,32 +105,9 @@ const mobileNav = [
       </ol>
     </section>
 
-    <section class="audience section">
-      <div class="audience-image reveal"><Image src={event.images.movementPortrait} alt="Танцовщицы в совместной пластической позе" widths={[480, 720, 960]} sizes="(max-width: 720px) 100vw, 42vw" /></div>
-      <div class="audience-copy reveal"><p class="section-label">Для кого</p><h2>Для тех, кто хочет посмотреть внимательнее</h2>{event.audience.map((paragraph) => <p>{paragraph}</p>)}<p class="highlight">Предыдущий опыт в танце или перформансе не является обязательным.</p></div>
-    </section>
-
     <section class="outcomes section" aria-labelledby="outcomes-title">
       <div class="section-heading reveal"><h2 id="outcomes-title">В процессе лаборатории участник:</h2></div>
       <ul class="outcome-list">{event.outcomes.map((outcome, index) => <li class="reveal"><span>0{index + 1}</span>{outcome}</li>)}</ul>
-    </section>
-
-    <section class="jam section-wide" id="jam" aria-labelledby="jam-title">
-      <div class="jam-image"><Image src={event.images.foilWide} alt="Танцовщицы с золотой и серебряной фольгой" widths={[640, 960, 1440, 1920]} sizes="100vw" /></div>
-      <div class="jam-content reveal"><p class="section-label">15 августа · билибина 33 · 5 этаж / вход - свободный донейшн</p><h2 id="jam-title">Челлендж-джем<br />«Гнозис Текстур»</h2><p class="jam-opening">Это первое открывающее событие лаборатории</p><p class="jam-intro">Умопомрачительная практика танца, перформанса и импровизации. Исследуем восприятие во всех его проявлениях.</p><p class="jam-time">2 сета <span>×</span> 40 минут</p></div>
-      <p class="jam-roles-intro">В рамках джема вы можете быть в любой из ролей:</p>
-      <div class="jam-roles">{event.jamRoles.map(([title, text]) => <article class="reveal"><h3>{title}</h3><p>{text}</p></article>)}</div>
-      <p class="jam-collaboration reveal"><span>джем пройдет в</span><span>коллаборации с</span><span>музыкантом dub a yaga</span></p>
-      <div class="jam-artist" aria-label="Музыкальная программа">
-        <div class="jam-artist-image reveal"><Image src={event.images.actor3} alt="dub a yaga" widths={[640, 960, 1440]} sizes="(max-width: 720px) 100vw, 45vw" /></div>
-        <div class="jam-artist-copy reveal">
-          <p class="section-label">Аля · dj 'dub a yaga'</p>
-          <p>{event.jamArtist[0]}</p>
-          <p>{event.jamArtist[1]}</p>
-        </div>
-      </div>
-      <a class="button button-outline reveal" href={event.links.challengeJam}>Зарегистрироваться на челлендж-джем <svg class="button-arrow" aria-hidden="true" viewBox="0 0 16 16"><path d="M3 13 13 3M6 3h7v7" /></svg></a>
-      <p class="jam-note">Отдельная регистрация, не является заявкой на лабораторию.</p>
     </section>
 
     <section class="format section" aria-labelledby="format-title">
@@ -217,6 +206,7 @@ const mobileNav = [
       <p>Лаборатория современного танца и перформанса</p>
       <span>{event.age}</span>
     </div>
+    <a class="footer-archive-link" href="/events/">Архив мероприятий <svg class="button-arrow" aria-hidden="true" viewBox="0 0 16 16"><path d="M3 13 13 3M6 3h7v7" /></svg></a>
     <nav class="footer-socials" aria-label="Социальные сети">
       <a href="https://www.instagram.com/zoloto.dance.lab/" target="_blank" rel="noopener noreferrer">
         <span>Instagram*</span>
