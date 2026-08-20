@@ -12,6 +12,8 @@ import fruitsLogo from '../../content/photos/friend8-fruits.png';
 import freyLogo from '../../content/photos/friend9-frey.png';
 import kitaikaLogo from '../../content/photos/friend10-kitaika.png';
 import plamenLogo from '../../content/photos/friend11-plamen.png';
+import festLogo from '../../content/photos/friend12-fest.png';
+import friend13Logo from '../../content/photos/friend13-1554.png';
 import connection from '../assets/images/connection.jpg';
 import foilPortrait from '../assets/images/showcase-selective-color.png';
 import hero from '../assets/images/hero.jpg';
@@ -137,6 +139,10 @@ export const event = {
     { logo: freyLogo, alt: 'Из Калуги с любовью', className: '' },
     { logo: kitaikaLogo, alt: 'Китайка', className: '' },
     { logo: plamenLogo, alt: 'Plamen', className: 'partner-logo--plamen' },
-    { name: 'Партнёр 12 — скоро' },
+    { logo: festLogo, alt: 'Fest Kaluga', className: '' },
+    { logo: friend13Logo, alt: '1554', className: '' },
+    { name: 'Партнёр 14 — скоро' },
+    { name: 'Партнёр 15 — скоро' },
+    { name: 'Партнёр 16 — скоро' },
   ],
 } as const;
