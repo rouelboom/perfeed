@@ -123,12 +123,11 @@ const mobileNav = [
     <section class="schedule section-wide" id="schedule" aria-labelledby="schedule-title">
       <div class="section-heading reveal"><p class="section-label">Программа лаборатории</p><h2 id="schedule-title">Расписание</h2></div>
       <table class="schedule-table reveal">
-        <thead><tr><th>Дата</th><th>Тема</th><th>Ведущая</th></tr></thead>
+        <thead><tr><th>Дата</th><th>Время</th><th>Место</th><th>Тема</th><th>Ведущая</th></tr></thead>
         <tbody>
-          {event.schedule.map(([date, topic, host]) => <tr><td data-label="Дата">{date}</td><td data-label="Тема">{topic}</td><td data-label="Ведущая">{host}</td></tr>)}
+          {event.schedule.map(([date, time, place, topic, host]) => <tr><td data-label="Дата">{date}</td><td data-label="Время">{time}</td><td data-label="Место">{place}</td><td data-label="Тема">{topic}</td><td data-label="Ведущая">{host}</td></tr>)}
         </tbody>
       </table>
-      <p class="schedule-note">Точное время и место на уточнении, информация скоро.</p>
     </section>
 
     <section class="showcase section-wide" aria-labelledby="showcase-title">
