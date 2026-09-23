@@ -7,7 +7,6 @@ const nav = [
   ['О лаборатории', '#laboratory'],
   ['Программа', '#schedule'],
   ['Ведущие', '#hosts'],
-  ['Стоимость', '#price'],
   ['Архив мероприятий', '/events/'],
 ] as const;
 
@@ -15,7 +14,6 @@ const mobileNav = [
   ['О лаборатории', '#laboratory'],
   ['Программа', '#schedule'],
   ['Ведущие', '#hosts'],
-  ['Стоимость', '#price'],
   ['Наши друзья', '#partners'],
   ['Архив мероприятий', '/events/'],
 ] as const;
@@ -145,25 +143,6 @@ const mobileNav = [
           </article>
         ))}
       </div>
-    </section>
-
-    <section class="price section-wide" id="price" aria-labelledby="price-title">
-      <div class="section-heading reveal"><p class="section-label">Участие</p><h2 id="price-title">Стоимость<br />лаборатории</h2></div>
-      <div class="price-list">{event.prices.map(([name, period, cost, note]) => <article class="reveal"><p>{name}</p><span>{period}</span><strong>{cost}</strong><small>{note}</small></article>)}</div>
-      <div class="price-details">
-        <article class="price-detail reveal">
-          <h3>Рассрочка</h3>
-          <p>Мы понимаем, что оплатить всю сумму сразу не всегда удобно.</p>
-          <p>Поэтому вы можете воспользоваться беспроцентной рассрочкой:</p>
-          <p>Если вам нужен сплит (рассрочка) на 2-4 платежа - сообщите об этом в форме регистрации. Мы свяжемся с вами и постараемся подобрать удобный для вас формат оплаты;<br /></p>
-        </article>
-        <article class="price-detail reveal">
-          <h3>Способ оплаты</h3>
-          <p><strong>Оплата происходит после подтверждения участия. Мы свяжемся с вами после регистрации и согласуем удобное время и способ оплаты.</strong></p>
-          <p><strong>Мы предпочитаем оплату наличными. Если этот вариант вам не подходит, пожалуйста, напишите нам — мы постараемся найти удобное решение.</strong></p>
-        </article>
-      </div>
-      <a class="button button-gold reveal" href={event.links.laboratory}>Подать заявку на лабораторию <svg class="button-arrow" aria-hidden="true" viewBox="0 0 16 16"><path d="M3 13 13 3M6 3h7v7" /></svg></a>
     </section>
 
     <section class="final-cta section-wide" aria-labelledby="final-title">
