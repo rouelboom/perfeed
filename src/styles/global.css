@@ -28,8 +28,6 @@ img { display: block; max-width: 100%; }
 .site-header nav { display: flex; gap: clamp(.9rem, 2.3vw, 2.5rem); font-size: .64rem; font-weight: 800; letter-spacing: .04em; text-transform: uppercase; }
 .site-header nav a { transition: color .18s ease; }
 .site-header nav a:hover { color: var(--signal); }
-.header-cta { font-size: .66rem; font-weight: 900; justify-self: end; letter-spacing: .04em; text-transform: uppercase; }
-.header-cta::after { background: var(--signal); content: ''; display: inline-block; height: .6em; margin-left: .45rem; transform: skewX(-18deg); width: .6em; }
 .mobile-menu-toggle { background: transparent; border: 0; cursor: pointer; display: none; font-size: .86rem; font-weight: 900; letter-spacing: .025em; padding: .75rem 0; text-transform: uppercase; }
 .mobile-menu-toggle span { display: inline-block; font-size: 1.2rem; line-height: 0; margin-left: .25rem; transform: translateY(.06em); }
 .mobile-menu { background: var(--ink); border: 0; color: var(--paper); height: 100dvh; margin: 0; max-height: none; max-width: none; padding: .75rem 1.25rem 1.25rem; width: 100vw; }
@@ -60,7 +58,6 @@ img { display: block; max-width: 100%; }
 .button-gold { background: var(--signal); border-color: var(--signal); color: var(--ink); }
 .button-outline { border-color: var(--ink); }
 .button-dark { background: var(--ink); color: var(--paper); }
-.hero-actions { display: flex; flex-wrap: wrap; gap: .75rem; }
 .hero-scroll { bottom: 2.4rem; font-size: .63rem; font-weight: 800; letter-spacing: .04em; margin: 0; position: absolute; right: clamp(1.4rem, 3.2vw, 3.5rem); text-transform: uppercase; writing-mode: vertical-rl; z-index: 1; }
 .hero-scroll span { color: var(--signal); font-size: 1.2rem; margin-top: .5rem; }
 
@@ -72,7 +69,7 @@ img { display: block; max-width: 100%; }
 .question::after { border: 1px solid var(--ink); content: 'PERFEED · KALUGA · 2026'; font-size: .6rem; font-weight: 800; letter-spacing: .04em; padding: .6rem; position: absolute; right: clamp(1.25rem, 5vw, 5.5rem); top: clamp(1.25rem, 3vw, 2.4rem); }
 .question-copy { max-width: 83rem; padding-top: clamp(2rem, 8vw, 7rem); }
 .question h2 { font-size: clamp(2.8rem, 6.5vw, 7.5rem); font-weight: 900; letter-spacing: -.085em; line-height: .84; margin: 0; max-width: 14ch; text-transform: uppercase; }
-.question em, .final-cta em { font-style: normal; -webkit-text-stroke: 1.5px var(--ink); color: transparent; }
+.question em { font-style: normal; -webkit-text-stroke: 1.5px var(--ink); color: transparent; }
 
 .laboratory { border-bottom: 1px solid var(--ink); padding-bottom: clamp(4rem, 8vw, 8rem); }
 .split-intro { display: grid; gap: 2rem; grid-template-columns: .55fr 1.55fr .9fr; }
@@ -152,9 +149,6 @@ img { display: block; max-width: 100%; }
 .host-copy p { font-size: .88rem; line-height: 1.5; margin: 0 0 1rem; max-width: 48rem; }
 .hosts-title { font-size: clamp(2.7rem, 5.7vw, 6.2rem); font-weight: 900; letter-spacing: -.085em; line-height: .83; margin: 0 0 4rem; text-transform: uppercase; }
 
-.final-cta { background: var(--periwinkle); min-height: 70vh; padding-top: clamp(6rem, 15vw, 15rem); }
-.final-cta .section-label { color: var(--ink); }
-.final-cta h2 { font-size: clamp(4.2rem, 12vw, 13rem); font-weight: 900; letter-spacing: -.11em; line-height: .72; margin: 0 0 3.2rem; max-width: 7.5ch; text-transform: uppercase; }
 .partners { background: var(--paper); }
 .partners-credit { font-size: 1.1rem; font-weight: 800; margin: 0 0 clamp(2.75rem, 6vw, 6rem); text-transform: uppercase; }
 .partners-list { border-bottom: 1px solid var(--ink); display: grid; grid-template-columns: repeat(4, 1fr); list-style: none; margin: 4rem 0 0; padding: 0; }
@@ -251,8 +245,6 @@ img { display: block; max-width: 100%; }
   .hero-content { bottom: 2.2rem; left: 1.25rem; right: 1.25rem; }
   .hero h1 { font-size: clamp(4.1rem, 19vw, 6.5rem); }
   .hero-facts span + span::before { display: none; }
-  .hero-actions { align-items: stretch; flex-direction: column; }
-  .hero-actions .button { width: 100%; }
   .hero-scroll { display: none; }
   .question { min-height: 50vh; }
   .question::after { font-size: .5rem; left: 1.25rem; right: auto; top: 1.25rem; }
@@ -278,7 +270,6 @@ img { display: block; max-width: 100%; }
   .hosts-list article { gap: 2rem; grid-template-columns: 1fr; padding: 1.5rem 0 3rem; }
   .host-image { height: auto; }
   .host-copy h3 { margin-bottom: 1.8rem; }
-  .final-cta { min-height: 52vh; }
   .partners .section-heading h2 { font-size: clamp(2rem, 9vw, 4.3rem); }
   .partners-list { grid-template-columns: 1fr 1fr; }
   .partners-list li:nth-child(2n) { border-right: 0; }
