@@ -1,13 +1,20 @@
 ---
+import Audience from '../components/home/Audience.astro';
+import Hero from '../components/home/Hero.astro';
+import Practice from '../components/home/Practice.astro';
+import Program from '../components/home/Program.astro';
+import Regular from '../components/home/Regular.astro';
+import Statement from '../components/home/Statement.astro';
+import Work from '../components/home/Work.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { site } from '../config/site';
 ---
 
-<!-- Временная главная до шагов 6–7 плана: страница perfeed переехала на /events/zoloto-not-dance-2026/. -->
 <BaseLayout>
-  <section class="wrap" style="padding-block: 4rem 8rem">
-    <h1>{site.name}</h1>
-    <p>практика современного танца · {site.city}</p>
-    <p><a class="arrow-link" href="/events/zoloto-not-dance-2026/">[золото, а не танец] — прошедшее событие <span aria-hidden="true">→</span></a></p>
-  </section>
+  <Hero />
+  <Statement />
+  <Program />
+  <Practice />
+  <Work />
+  <Audience />
+  <Regular />
 </BaseLayout>

@@ -217,7 +217,7 @@ const zolotoLaboratoryContent = {
   ],
 } as const;
 
-const regularGroupLocation = 'Калуга, Болдина, 87';
+const regularGroupLocation = 'калуга, болдина, 87';
 
 export const events: readonly SiteEvent[] = [
   {
@@ -242,7 +242,7 @@ export const events: readonly SiteEvent[] = [
       { date: '2026-11-24' },
       { date: '2026-11-28', time: '17:00–19:00', note: 'последняя встреча' },
     ],
-    description: 'Последовательная практика: четыре недели одним составом, вторник и суббота.',
+    description: 'последовательная практика: четыре недели одним составом.',
     registrationUrl: 'https://forms.yandex.ru/u/6ad9d6d44a052ddb4dc23271/',
   },
   {
@@ -254,7 +254,7 @@ export const events: readonly SiteEvent[] = [
     dateLabel: '01.11',
     time: '16:00–18:00',
     price: { base: 1500 },
-    description: 'Возможность познакомиться с Анастасией и попробовать практику до начала регулярной группы.',
+    description: 'возможность познакомиться с анастасией и попробовать практику до начала регулярной группы.',
   },
   {
     slug: 'open-class-2026-11-22',
@@ -265,14 +265,14 @@ export const events: readonly SiteEvent[] = [
     dateLabel: '22.11',
     time: '16:00–18:00',
     price: { base: 1500 },
-    description: 'Отдельная встреча для тех, кто не может включиться в регулярную группу.',
+    description: 'отдельная встреча для тех, кто не может включиться в регулярную группу.',
   },
   {
     slug: 'screenings',
     title: 'просмотры и разговоры',
     type: 'screening',
     status: 'upcoming',
-    description: 'Смотрим танцевальные спектакли и перформансы, затем обсуждаем их. Даты появятся здесь.',
+    description: 'смотрим танцевальные спектакли и перформансы, затем обсуждаем их. даты появятся здесь.',
   },
   {
     slug: 'zoloto-not-dance-2026',

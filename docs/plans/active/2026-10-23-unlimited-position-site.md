@@ -5,7 +5,7 @@
 - Repo: /Users/pavel/Dev/pets/perfeed
 - Branches: feature/unlimited-position, main
 - Created: 2026-10-23 20:30
-- Updated: 2026-10-23 22:25
+- Updated: 2026-10-23 22:45
 - Owner: Claude
 - Icon: layout-dashboard
 
@@ -107,7 +107,7 @@ Slug лаборатории: `zoloto-not-dance-2026` (подтверждён п�
 - [x] 3. Модель данных: `src/data/events.ts` (типы, статусы, хелперы `currentEvents()` / `pastEvents()` / `schedule()`), `src/config/site.ts` (базовый URL, название, соцсети, контакты). В `astro.config.mjs` `site` берётся из той же конфигурации. Перенести джем и лабораторию perfeed, удалить `event.ts` и `archived-events.ts`.
 - [x] 4. Архив: перенести текущую главную perfeed на `/events/zoloto-not-dance-2026/` по выбранному варианту (A) с изоляцией стилей. Сверить тексты, фото, участников, партнёров, расписание и отчёт с текущим `dist/` — без потерь.
 - [x] 5. Каркас Unlimited Position: новый `BaseLayout` (meta, canonical, OG по странице, без хардкода домена), общая шапка (`практика / программа / об авторе / контакты`, фиксированная или появляется при scroll-up, минимальное mobile-меню) и footer со ссылкой на прошедшие события. Глобальные токены и стили не протекают в архивные страницы.
-- [ ] 6. Главная, первая половина: hero, statement, сейчас / now (из `events.ts`), practice с вынесенными statements, what we do (autoplay muted loop video с poster и fallback на фото), для кого, regular practice.
+- [x] 6. Главная, первая половина: hero, statement, сейчас / now (из `events.ts`), practice с вынесенными statements, what we do (autoplay muted loop video с poster и fallback на фото), для кого, regular practice.
 - [ ] 7. Главная, вторая половина: anastasia senokosova, context / around dance, editorial-расписание, стоимость, FAQ (`<details>`, 6–8 вопросов), запись (CTA «присоединиться к группе» / «записаться на open class»), финальный экран. Спокойная ссылка на прошедшее событие perfeed на переходный период.
 - [ ] 8. Страница актуального события `/events/[slug]` (шаблон Unlimited Position), CTA записи из `registrationUrl`. Переверстать `/events/` в стиле Unlimited Position: «сейчас» и «прошедшие события» (`#past`).
 - [ ] 9. Старые якоря: inline-скрипт на `/` с белым списком → `location.replace` на страницу perfeed. Проверить все якоря вручную.
@@ -152,6 +152,8 @@ Slug лаборатории: `zoloto-not-dance-2026` (подтверждён п�
 - 2026-10-23 20:50 Шаг 1 в работе: опубликован прототип https://claude.ai/artifact/DJPb8iAb6HWzC8Ygay2TEK — главная в трёх направлениях (a editorial grid / b floor-blue / c shifting position), три hero, архив perfeed A (исходная сборка `dist/` в общей шапке) и B (шаблон Unlimited Position). Исходники прототипа во временном каталоге сессии, в репозиторий не входят. Ждём выбора пользователя.
 - 2026-10-23 21:05 Пользователь выбрал a-1 с голубым блоком «сейчас» из b, только русский язык и архив A. Прототип обновлён до версии 2 (переключатели вариантов убраны, тексты переведены). Шаг 1 завершён.
 - 2026-10-23 21:30 Создана ветка `feature/unlimited-position`. Шаг 2: написан `docs/design/unlimited-position.md` (принципы, цвет с контрастами, типографическая шкала, сетка 6/12, фото и их места, ссылки, шапка, анимация, wireframe 15 блоков desktop/mobile, анатомия блока события, архивные страницы, доступность).
+- 2026-10-23 22:45 Шаг 6: тексты главной в `src/data/home.ts`, 8 фото в `src/assets/unlimited-position/`, компоненты `src/components/home/` (Hero, Statement, Program, Practice, Work, Audience, Regular) и `src/components/EventRow.astro`; программа строится из `currentEvents()`. Описания ноябрьских событий и адрес — строчными. При вёрстке выяснилось, что в прототипе фото 15 и 16 были перепутаны с 16 и 17: на месте «у стены» и «пара на полу» теперь правильные кадры.
+- 2026-10-23 22:30 Ревью шага 5 в Codex (1 раунд, `.../step-5/`): замечаний нет.
 - 2026-10-23 22:25 Шаг 5: `BaseLayout.astro` для страниц Unlimited Position (title/description из `site.ts`, canonical и OG через `Astro.site`, OG 1200×630 `public/og/unlimited-position.jpg` из кадра 18, preload кириллицы, «к содержанию», общие шапка и footer), `src/styles/site.css` (токены, сетка, разделы, голубое поле). Временная `/` переведена на него.
 - 2026-10-23 22:15 Ревью шага 4 в Codex (2 раунда, `~/.claude/workflows/codex-review/unlimited-position-site/step-4/`): R1 «К содержанию» оказывалась под общей шапкой — поднят `z-index` в `PerfeedLayout`; R2 сброс отступов в footer перебивал отступ строки копирайта — сброс заменён точечными правилами. Коммит `1c9f9c2`. Раунд 2: замечаний нет.
 - 2026-10-23 22:05 Ревью шага 3 в Codex (сессия `01a169e9-2149-7fb0-adea-280256809f64`, 2 раунда, артефакты `~/.claude/workflows/codex-review/unlimited-position-site/step-3/`): R1 заголовок лаборатории в списке → «[золото, а не танец]» (исходный заголовок страницы perfeed сохранён в `perfeed.title`); R2 убрано «contemporary dance» из description; R3 статусы строчными; R4 переписано описание просмотров. Все приняты, коммит `ea9678e`. Раунд 2: замечаний нет.
@@ -159,6 +161,7 @@ Slug лаборатории: `zoloto-not-dance-2026` (подтверждён п�
 - 2026-10-23 21:55 Шаг 3: `event.ts` и `archived-events.ts` объединены в `src/data/events.ts` (тексты перенесены скриптом без ручной перепечатки), добавлены ноябрьские события, `src/config/site.ts`, `site` в `astro.config.mjs`, домен убран из `BaseLayout`. Страницы переключены на новые данные без изменения разметки.
 
 ## Validation
+- Шаг 6: `npm run check` — 0 ошибок; `npm run build` — 4 страницы. Скриншоты главной desktop 1440 и mobile 390: блок «сейчас» на голубом поле, строки событий по колонкам, горизонтальной прокрутки нет. Найдена и исправлена ловушка: scoped-селектор `.event > *` в Astro получает атрибут области видимости и перебивает раскладку по классам.
 - Шаг 5: `npm run check` — 0 ошибок; `npm run build` — 4 страницы. В `<head>` главной корректные title, canonical, OG с абсолютными адресами из `site`. Архивные страницы подключают только `PerfeedLayout.css` и `SiteHeader.css`; токены `site.css` в них отсутствуют.
 - Шаг 4: `npm run check` — 0 ошибок; `npm run build` — 4 страницы. HTML документа лаборатории (между общими шапкой и footer, без `data-astro-cid` и скриптов) идентичен старой главной из `main`; страница джема идентична; набор изображений тот же. Скриншоты: desktop 1440 лаборатории, mobile 390 лаборатории и джема (через iframe — headless Chrome не уже 500 px) — горизонтальной прокрутки нет, шапка события стоит под общей.
 - Шаг 3: `npm run check` — 0 ошибок; `npm run build` — 3 страницы. Сравнение HTML с эталоном `main`: главная и страница джема не изменились, файлы изображений те же. В `/events/` добавилась строка лаборатории со ссылкой на `/events/zoloto-not-dance-2026/` (страница появится на шаге 4).
@@ -169,11 +172,12 @@ Slug лаборатории: `zoloto-not-dance-2026` (подтверждён п�
 - `docs/design/unlimited-position.md`
 - `astro.config.mjs`, `src/config/site.ts`, `src/data/events.ts` (удалены `src/data/event.ts`, `src/data/archived-events.ts`)
 - `src/layouts/PerfeedLayout.astro`, `src/styles/perfeed.css`, `src/styles/fonts.css`, `src/components/SiteHeader.astro`, `src/components/SiteFooter.astro`, `public/fonts/*`, `src/pages/events/zoloto-not-dance-2026.astro`
+- `src/data/home.ts`, `src/assets/unlimited-position/*`, `src/components/home/*`, `src/components/EventRow.astro`
 - `src/layouts/BaseLayout.astro`, `src/styles/site.css`, `public/og/unlimited-position.jpg`
 - `src/pages/index.astro`, `src/pages/events/index.astro`, `src/pages/events/challenge-jam-2026-08-15.astro`
 
 ## Next Step
-Шаг 6: тексты главной в `src/data/home.ts`, фото в `src/assets/unlimited-position/`, компоненты `src/components/home/` (Hero, Statement, Program + `EventRow`, Practice, Work, Audience, Regular) и сборка первой половины главной.
+Шаг 7: компоненты Author, Context, Schedule, Prices, Faq, Join (черновики в scratchpad сессии, данные — `home.ts` и `events.ts`), подключить к главной.
 
 ## Resume
 1. Прочитать этот файл целиком.

@@ -1,0 +1,54 @@
+---
+import { Image } from 'astro:assets';
+import floorLaugh from '../../assets/unlimited-position/floor-laugh.jpg';
+import fragments from '../../assets/unlimited-position/fragments.jpg';
+import wall from '../../assets/unlimited-position/wall.jpg';
+import { practice } from '../../data/home';
+---
+
+<section class="section practice" id="practice" aria-labelledby="practice-title">
+  <div class="wrap">
+    <h2 class="section__title" id="practice-title">практика</h2>
+  </div>
+  <div class="wrap grid practice__part">
+    <p class="practice__text">{practice.opening}</p>
+    <Image class="practice__wide" src={floorLaugh} alt="Участница лежит на полу и смеётся, опираясь на руку" widths={[640, 960, 1000]} sizes="(min-width: 900px) 80vw, 100vw" />
+  </div>
+  <p class="wrap practice__quote">{practice.quotes[0]}</p>
+  <div class="wrap grid practice__part">
+    <div class="practice__text practice__text--right">{practice.experience.map((paragraph) => <p>{paragraph}</p>)}</div>
+    <div class="practice__text">{practice.agency.map((paragraph) => <p>{paragraph}</p>)}</div>
+  </div>
+  <div class="wrap grid practice__pair">
+    <Image src={fragments} alt="Руки и ноги двух участников крупным планом" widths={[480, 720, 960]} sizes="(min-width: 900px) 40vw, 66vw" />
+    <Image src={wall} alt="Участница опирается на стену зала" widths={[480, 720, 960]} sizes="(min-width: 900px) 40vw, 66vw" />
+  </div>
+  <div class="wrap grid practice__part">
+    <p class="practice__text practice__text--right">{practice.virtuosity}</p>
+  </div>
+  <p class="wrap practice__quote">{practice.quotes[1]}</p>
+  <div class="wrap grid practice__part">
+    <p class="practice__text">{practice.closing}</p>
+  </div>
+</section>
+
+<style>
+  .practice__part { padding-block: clamp(2.5rem, 7vw, 6rem); row-gap: 2rem; }
+  .practice__text { display: grid; gap: 1rem; }
+  .practice__text--right { grid-column: 2 / -1; }
+  .practice__wide { width: 100%; }
+  .practice__quote { font-size: clamp(2.1rem, 6.4vw, 6rem); font-weight: 500; letter-spacing: -0.04em; line-height: 0.98; max-width: none; padding-block: clamp(3rem, 10vw, 9rem); text-wrap: balance; }
+  .practice__pair { row-gap: var(--gap); }
+  .practice__pair img { width: 100%; }
+  .practice__pair img:first-child { grid-column: 1 / 5; }
+  .practice__pair img:last-child { grid-column: 3 / 7; }
+
+  @media (min-width: 900px) {
+    .practice__text { grid-column: 4 / 10; }
+    .practice__text--right { grid-column: 7 / 13; }
+    .practice__wide { grid-column: 3 / 13; }
+    .practice__quote { padding-left: calc(var(--gutter) + (100% - 2 * var(--gutter) + var(--gap)) / 4); }
+    .practice__pair img:first-child { grid-column: 1 / 6; }
+    .practice__pair img:last-child { grid-column: 8 / 13; margin-top: 8rem; }
+  }
+</style>

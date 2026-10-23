@@ -1,0 +1,28 @@
+---
+import { currentEvents, pastEvents } from '../../data/events';
+import EventRow from '../EventRow.astro';
+
+const events = currentEvents();
+const [latestPast] = pastEvents();
+---
+
+<section class="program band" id="program" aria-labelledby="program-title">
+  <div class="wrap">
+    <h2 class="program__title" id="program-title">сейчас</h2>
+    <ol class="program__list">{events.map((event) => <li><EventRow event={event} /></li>)}</ol>
+    {latestPast && (
+      <p class="program__past small">
+        <span class="muted">прошедшее событие: {latestPast.title}, {latestPast.dateLabel}</span>
+        <a class="arrow-link" href="/events/#past">все прошедшие события <span aria-hidden="true">→</span></a>
+      </p>
+    )}
+  </div>
+</section>
+
+<style>
+  .program { margin-top: var(--section); padding-block: clamp(3rem, 7vw, 6rem); }
+  .program__title { font-size: clamp(2rem, 5.2vw, 4.5rem); letter-spacing: -0.035em; line-height: 0.95; margin-bottom: clamp(2rem, 5vw, 4rem); }
+  .program__list { border-top: 1px solid currentColor; }
+  .program__list > li { border-bottom: 1px solid rgb(255 255 255 / 0.35); }
+  .program__past { display: flex; flex-wrap: wrap; gap: 0.4rem 2rem; justify-content: space-between; margin-top: 2rem; }
+</style>

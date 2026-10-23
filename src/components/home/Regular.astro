@@ -1,0 +1,27 @@
+---
+import { regular } from '../../data/home';
+---
+
+<section class="regular" id="regular" aria-labelledby="regular-title">
+  <div class="wrap">
+    <h2 class="regular__title" id="regular-title">регулярная практика</h2>
+  </div>
+  <div class="wrap grid">
+    <div class="regular__text">{regular.text.map((paragraph) => <p>{paragraph}</p>)}</div>
+    <dl class="regular__facts">{regular.facts.map(([term, value]) => <div><dt>{term}</dt><dd>{value}</dd></div>)}</dl>
+  </div>
+</section>
+
+<style>
+  .regular { background: var(--floor); margin-top: var(--section); padding-block: clamp(3.5rem, 9vw, 8rem); }
+  .regular__title { font-size: clamp(1.75rem, 3.6vw, 3rem); letter-spacing: -0.035em; line-height: 0.95; margin-bottom: clamp(2rem, 5vw, 4rem); }
+  .regular__text { display: grid; font-size: clamp(1.5rem, 3.2vw, 2.75rem); font-weight: 500; gap: 0.6em; letter-spacing: -0.02em; line-height: 1.12; }
+  .regular__text p { max-width: 24ch; }
+  .regular__facts { display: grid; gap: 1rem; margin-top: 2.5rem; }
+  .regular__facts dt { color: #2b3a40; }
+
+  @media (min-width: 900px) {
+    .regular__text { grid-column: 4 / 11; }
+    .regular__facts { grid-column: 4 / 9; margin-top: 3rem; }
+  }
+</style>

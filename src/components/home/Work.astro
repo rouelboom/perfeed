@@ -1,0 +1,35 @@
+---
+import { Image } from 'astro:assets';
+import contact from '../../assets/unlimited-position/contact.jpg';
+import floorDuo from '../../assets/unlimited-position/floor-duo.jpg';
+import hands from '../../assets/unlimited-position/hands.jpg';
+import { work } from '../../data/home';
+
+const photos = [
+  { src: floorDuo, alt: 'Две участницы работают на полу в паре' },
+  { src: contact, alt: 'Участница поднимает руку, опираясь на партнёра' },
+  { src: hands, alt: 'Ладони и стопы участников на голубом полу' },
+];
+---
+
+<section class="section" id="work" aria-labelledby="work-title">
+  <div class="wrap grid">
+    <h2 class="section__title" id="work-title">что происходит в практике</h2>
+    <div class="section__body">{work.map((paragraph) => <p>{paragraph}</p>)}</div>
+  </div>
+  <div class="wrap work__strip">
+    {photos.map(({ src, alt }) => <Image src={src} alt={alt} widths={[480, 720]} sizes="(min-width: 600px) 31vw, 46vw" />)}
+  </div>
+</section>
+
+<style>
+  .work__strip { display: grid; gap: var(--gap); grid-template-columns: repeat(2, minmax(0, 1fr)); margin-top: clamp(2.5rem, 6vw, 4.5rem); }
+  .work__strip img { aspect-ratio: 4 / 5; object-fit: cover; width: 100%; }
+  .work__strip img:nth-child(2) { margin-top: 3rem; }
+  .work__strip img:nth-child(3) { display: none; }
+
+  @media (min-width: 600px) {
+    .work__strip { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .work__strip img:nth-child(3) { display: block; }
+  }
+</style>
