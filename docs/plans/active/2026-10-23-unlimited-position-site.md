@@ -5,7 +5,7 @@
 - Repo: /Users/pavel/Dev/pets/perfeed
 - Branches: feature/unlimited-position, main
 - Created: 2026-10-23 20:30
-- Updated: 2026-10-23 23:50
+- Updated: 2026-10-23 23:55
 - Owner: Claude
 - Icon: layout-dashboard
 
@@ -112,7 +112,7 @@ Slug лаборатории: `zoloto-not-dance-2026` (подтверждён п�
 - [x] 8. Страница актуального события `/events/[slug]` (шаблон Unlimited Position), CTA записи из `registrationUrl`. Переверстать `/events/` в стиле Unlimited Position: «сейчас» и «прошедшие события» (`#past`).
 - [x] 9. Старые якоря: inline-скрипт на `/` с белым списком → `location.replace` на страницу perfeed. Проверить все якоря вручную.
 - [x] 10. SEO: title/description главной из раздела 24, OG-image из фото Unlimited Position (1200×630), собственные title/description/OG у архивных страниц, canonical, `sitemap.xml` (свой endpoint), `robots.txt` со ссылкой на sitemap и без закрытия архива, `theme-color`.
-- [ ] 11. Обновить `AGENTS.md`: сохранить действующие правила и добавить правила Unlimited Position (lowercase-идентичность, tone of voice и запрещённые формулировки, включая «не X, а Y», данные событий только в `events.ts`, изоляция архивных стилей).
+- [x] 11. Обновить `AGENTS.md`: сохранить действующие правила и добавить правила Unlimited Position (lowercase-идентичность, tone of voice и запрещённые формулировки, включая «не X, а Y», данные событий только в `events.ts`, изоляция архивных стилей).
 - [ ] 12. Проверки: `npm run check`, `npm run build`, проверка старых URL и якорей на `astro preview`, Lighthouse (Perf > 90, A11y > 95, BP > 95, SEO > 95), клавиатурная навигация, `prefers-reduced-motion`, скриншоты 375 / 768 / 1440.
 - [ ] 13. Релиз и проверка на проде по разделу «Порядок релиза и отката».
 - [ ] 14. После стабильного релиза завести отдельный план на переименование `PERFEED_*`, каталогов, nginx-сайта и секретов и на переезд на собственный домен с 301.
@@ -152,6 +152,7 @@ Slug лаборатории: `zoloto-not-dance-2026` (подтверждён п�
 - 2026-10-23 20:50 Шаг 1 в работе: опубликован прототип https://claude.ai/artifact/DJPb8iAb6HWzC8Ygay2TEK — главная в трёх направлениях (a editorial grid / b floor-blue / c shifting position), три hero, архив perfeed A (исходная сборка `dist/` в общей шапке) и B (шаблон Unlimited Position). Исходники прототипа во временном каталоге сессии, в репозиторий не входят. Ждём выбора пользователя.
 - 2026-10-23 21:05 Пользователь выбрал a-1 с голубым блоком «сейчас» из b, только русский язык и архив A. Прототип обновлён до версии 2 (переключатели вариантов убраны, тексты переведены). Шаг 1 завершён.
 - 2026-10-23 21:30 Создана ветка `feature/unlimited-position`. Шаг 2: написан `docs/design/unlimited-position.md` (принципы, цвет с контрастами, типографическая шкала, сетка 6/12, фото и их места, ссылки, шапка, анимация, wireframe 15 блоков desktop/mobile, анатомия блока события, архивные страницы, доступность).
+- 2026-10-23 23:55 Шаг 11: `AGENTS.md` дополнен разделом о сайте unlimited position (тексты и tone of voice, где лежат тексты и события, архив perfeed и изоляция стилей, якоря главной, ловушка специфичности scoped-стилей, контраст на голубом поле). Два прежних правила сохранены без изменений в начале файла.
 - 2026-10-23 23:50 Получены контакты и форма записи на открытые классы; добавлены в `site.ts`, `home.ts`, `events.ts`, footer и блок записи. Ответ FAQ «Как записаться?» и текст блока записи на открытый класс обновлены.
 - 2026-10-23 23:45 Ревью шага 10 в Codex (2 раунда, `.../step-10/`): R1 alt OG джема упоминал серебряную фольгу, которой нет на кадре — исправлено, коммит `762f94c`.
 - 2026-10-23 23:40 Шаг 10: `PerfeedLayout` — canonical, `og:url`, OG-изображение через проп (лаборатория — прежний `og-image.png`, джем — `public/og/challenge-jam-2026-08-15.jpg` 1200×630 из его фото). `robots.txt` и `sitemap.xml` — endpoints `src/pages/robots.txt.ts` и `src/pages/sitemap.xml.ts`, адреса берутся из `site`, домен в коде не появляется; `public/robots.txt` удалён. Страницы Unlimited Position получили title, description, canonical и OG ещё на шаге 5.
@@ -193,7 +194,7 @@ Slug лаборатории: `zoloto-not-dance-2026` (подтверждён п�
 - `src/pages/index.astro`, `src/pages/events/index.astro`, `src/pages/events/challenge-jam-2026-08-15.astro`
 
 ## Next Step
-Шаг 11: обновить `AGENTS.md` — сохранить действующие правила и добавить правила Unlimited Position (язык, регистр, tone of voice, где лежат тексты и события, изоляция архивных стилей, якоря главной).
+Шаг 12: полная проверка — `npm run check`, `npm run build`, все старые URL и якоря на `astro preview`, Lighthouse (mobile) для `/`, `/events/`, страницы лаборатории, клавиатурная навигация, `prefers-reduced-motion`, скриншоты 375 / 768 / 1440.
 
 ## Resume
 1. Прочитать этот файл целиком.
