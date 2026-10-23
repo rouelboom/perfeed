@@ -14,7 +14,7 @@ import { practice } from '../../data/home';
     <p class="practice__text">{practice.opening}</p>
     <Image class="practice__wide" src={floorLaugh} alt="Участница лежит на полу и смеётся, опираясь на руку" widths={[640, 960, 1000]} sizes="(min-width: 900px) 80vw, 100vw" />
   </div>
-  <p class="wrap practice__quote">{practice.quotes[0]}</p>
+  <div class="wrap practice__quote"><p>{practice.quotes[0]}</p></div>
   <div class="wrap grid practice__part">
     <div class="practice__text practice__text--right">{practice.experience.map((paragraph) => <p>{paragraph}</p>)}</div>
     <div class="practice__text">{practice.agency.map((paragraph) => <p>{paragraph}</p>)}</div>
@@ -26,7 +26,7 @@ import { practice } from '../../data/home';
   <div class="wrap grid practice__part">
     <p class="practice__text practice__text--right">{practice.virtuosity}</p>
   </div>
-  <p class="wrap practice__quote">{practice.quotes[1]}</p>
+  <div class="wrap practice__quote"><p>{practice.quotes[1]}</p></div>
   <div class="wrap grid practice__part">
     <p class="practice__text">{practice.closing}</p>
   </div>
@@ -36,10 +36,9 @@ import { practice } from '../../data/home';
   .practice__part { padding-block: clamp(2.5rem, 7vw, 6rem); row-gap: 2rem; }
   .practice__text { display: grid; gap: 1rem; }
   .practice__text--right { grid-column: 2 / -1; }
-  .practice__wide { width: 100%; }
-  .practice__quote { font-size: clamp(2.1rem, 6.4vw, 6rem); font-weight: 500; letter-spacing: -0.04em; line-height: 0.98; max-width: none; padding-block: clamp(3rem, 10vw, 9rem); text-wrap: balance; }
+  .practice__quote { font-size: clamp(2.1rem, 6.4vw, 6rem); font-weight: 500; letter-spacing: -0.04em; line-height: 0.98; padding-block: clamp(3rem, 10vw, 9rem); text-wrap: balance; }
+  .practice__quote p { max-width: 16ch; }
   .practice__pair { row-gap: var(--gap); }
-  .practice__pair img { width: 100%; }
   .practice__pair img:first-child { grid-column: 1 / 5; }
   .practice__pair img:last-child { grid-column: 3 / 7; }
 
