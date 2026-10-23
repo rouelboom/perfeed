@@ -14,7 +14,7 @@ import { practice } from '../../data/home';
     <p class="practice__text">{practice.opening}</p>
     <Image class="practice__wide" src={floorLaugh} alt="Участница лежит на полу и смеётся, опираясь на руку" widths={[640, 960, 1000]} sizes="(min-width: 900px) 80vw, 100vw" />
   </div>
-  <div class="wrap practice__quote"><p>{practice.quotes[0]}</p></div>
+  <div class="wrap grid practice__quote"><p>{practice.quotes[0]}</p></div>
   <div class="wrap grid practice__part">
     <div class="practice__text practice__text--right">{practice.experience.map((paragraph) => <p>{paragraph}</p>)}</div>
     <div class="practice__text">{practice.agency.map((paragraph) => <p>{paragraph}</p>)}</div>
@@ -26,7 +26,7 @@ import { practice } from '../../data/home';
   <div class="wrap grid practice__part">
     <p class="practice__text practice__text--right">{practice.virtuosity}</p>
   </div>
-  <div class="wrap practice__quote"><p>{practice.quotes[1]}</p></div>
+  <div class="wrap grid practice__quote"><p>{practice.quotes[1]}</p></div>
   <div class="wrap grid practice__part">
     <p class="practice__text">{practice.closing}</p>
   </div>
@@ -46,7 +46,7 @@ import { practice } from '../../data/home';
     .practice__text { grid-column: 4 / 10; }
     .practice__text--right { grid-column: 7 / 13; }
     .practice__wide { grid-column: 3 / 13; }
-    .practice__quote { padding-left: calc(var(--gutter) + (100% - 2 * var(--gutter) + var(--gap)) / 4); }
+    .practice__quote p { grid-column: 4 / 13; }
     .practice__pair img:first-child { grid-column: 1 / 6; }
     .practice__pair img:last-child { grid-column: 8 / 13; margin-top: 8rem; }
   }
