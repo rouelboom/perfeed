@@ -43,7 +43,7 @@ import { site } from '../config/site';
   .up-header a:hover { color: var(--up-blue); }
   .up-header a:focus-visible, .up-header summary:focus-visible { outline: 2px solid var(--up-blue); outline-offset: 3px; }
   .up-header ul { list-style: none; margin: 0; padding: 0; }
-  .up-header__row { align-items: baseline; display: flex; gap: 1rem; justify-content: space-between; padding: 14px var(--up-gutter); }
+  .up-header__row { align-items: baseline; display: flex; gap: 1rem; justify-content: space-between; padding: 14px max(var(--up-gutter), (100% - 1450px) / 2); }
   .up-header__brand { font-weight: 500; }
   .up-header__brand span { color: var(--up-grey); font-weight: 400; }
   .up-header__nav { display: none; }

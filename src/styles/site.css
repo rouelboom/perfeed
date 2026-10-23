@@ -13,6 +13,8 @@
   --gutter: 16px;
   --gap: 12px;
   --section: clamp(5rem, 14vw, 11rem);
+  /* На очень широких экранах содержимое не растягивается шире этого; фоны блоков остаются во всю ширину. */
+  --max: 1450px;
 
   color-scheme: light;
 }
@@ -38,7 +40,7 @@ p { max-width: 62ch; }
 .skip-link:focus { top: 1rem; }
 
 /* Сетка: 6 колонок на телефоне, 12 от 900px. */
-.wrap { padding-inline: var(--gutter); }
+.wrap { padding-inline: max(var(--gutter), (100% - var(--max)) / 2); }
 .grid { column-gap: var(--gap); display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); }
 .grid > * { grid-column: 1 / -1; min-width: 0; }
 @media (min-width: 900px) { .grid { grid-template-columns: repeat(12, minmax(0, 1fr)); } }

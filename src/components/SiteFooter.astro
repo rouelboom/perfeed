@@ -28,7 +28,7 @@ const contacts = site.contacts;
     color: #f2f4f5;
     font: 400 0.9375rem/1.45 'Golos Text', 'Helvetica Neue', Arial, sans-serif;
     letter-spacing: 0;
-    padding: clamp(4rem, 10vw, 8rem) var(--up-gutter) 2rem;
+    padding: clamp(4rem, 10vw, 8rem) max(var(--up-gutter), (100% - 1450px) / 2) 2rem;
     text-transform: none;
   }
   .up-footer a { color: inherit; text-decoration: underline; text-decoration-color: rgb(255 255 255 / 0.4); text-underline-offset: 0.22em; }
