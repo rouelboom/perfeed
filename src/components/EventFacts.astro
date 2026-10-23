@@ -1,0 +1,31 @@
+---
+import type { SiteEvent } from '../data/events';
+
+interface Props {
+  event: SiteEvent;
+}
+
+const { event } = Astro.props;
+const rub = (amount: number) => `${amount.toLocaleString('ru-RU')} ₽`;
+const weekdays = event.sessions
+  ? [...new Set(event.sessions.map(({ date }) => new Date(date).toLocaleDateString('ru-RU', { weekday: 'long', timeZone: 'UTC' })))].join(' + ')
+  : undefined;
+
+const facts = [
+  ['когда', weekdays],
+  ['время', event.time],
+  ['где', event.location],
+  ['группа', [event.capacity && `до ${event.capacity} человек`, event.age].filter(Boolean).join(' · ') || undefined],
+  ['стоимость', event.price && [rub(event.price.base), event.price.student && `студенты — ${rub(event.price.student)}`].filter(Boolean).join(', ')],
+  ['предоплата', event.price?.deposit && rub(event.price.deposit)],
+].filter((fact): fact is [string, string] => Boolean(fact[1]));
+---
+
+{facts.length > 0 && (
+  <dl class="facts">{facts.map(([term, value]) => <><dt class="muted">{term}</dt><dd>{value}</dd></>)}</dl>
+)}
+
+<style>
+  .facts { display: grid; font-size: 0.9375rem; gap: 0.2rem 1rem; grid-template-columns: max-content 1fr; }
+  .facts dd { font-weight: 500; }
+</style>

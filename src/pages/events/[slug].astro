@@ -1,0 +1,55 @@
+---
+import EventFacts from '../../components/EventFacts.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { eventTypeLabels, events, type SiteEvent } from '../../data/events';
+
+export function getStaticPaths() {
+  // События perfeed со своей вёрсткой лежат отдельными файлами рядом.
+  return events.filter(({ page }) => !page).map((event) => ({ params: { slug: event.slug }, props: { event } }));
+}
+
+interface Props {
+  event: SiteEvent;
+}
+
+const { event } = Astro.props;
+const type = eventTypeLabels[event.type];
+const format = (date: string) => new Date(date).toLocaleDateString('ru-RU', { day: 'numeric', month: 'long', weekday: 'short', timeZone: 'UTC' });
+---
+
+<BaseLayout title={`${event.title} — unlimited position`} description={event.description}>
+  <article class="wrap grid event-page">
+    <p class="event-page__back small"><a href="/events/">← все события</a></p>
+    <p class="event-page__date">{event.dateLabel ?? 'скоро'}</p>
+    <h1 class="event-page__title">{event.title}{type !== event.title && <span>{type}</span>}</h1>
+    <div class="event-page__body">
+      <p>{event.description}</p>
+      <EventFacts event={event} />
+      {event.sessions && (
+        <ol class="event-page__sessions">
+          {event.sessions.map(({ date, time, note }) => (
+            <li><span>{format(date)}</span><span class="muted">{[time ?? 'время уточняется', note].filter(Boolean).join(' · ')}</span></li>
+          ))}
+        </ol>
+      )}
+      {event.status === 'open' && (
+        <p><a class="arrow-link" href={event.registrationUrl ?? '/#join'}>записаться <span aria-hidden="true">→</span></a></p>
+      )}
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .event-page { padding-block: clamp(2rem, 6vw, 4rem) var(--section); row-gap: 1.5rem; }
+  .event-page__date { font-size: clamp(3rem, 9vw, 8rem); font-variant-numeric: tabular-nums; font-weight: 500; letter-spacing: -0.045em; line-height: 0.9; }
+  .event-page__title { font-size: clamp(1.75rem, 3.6vw, 3rem); letter-spacing: -0.035em; line-height: 0.95; }
+  .event-page__title span { color: var(--grey); display: block; font-size: 1.125rem; font-weight: 400; letter-spacing: 0; margin-top: 0.5rem; }
+  .event-page__body { display: grid; gap: 1.75rem; margin-top: 1.5rem; }
+  .event-page__sessions { border-top: 1px solid var(--ink); }
+  .event-page__sessions li { border-bottom: 1px solid var(--rule); display: flex; flex-wrap: wrap; gap: 0.25rem 1.5rem; justify-content: space-between; padding-block: 0.75rem; }
+
+  @media (min-width: 900px) {
+    .event-page__title { grid-column: 1 / 7; }
+    .event-page__body { grid-column: 7 / 12; margin-top: 0; }
+  }
+</style>

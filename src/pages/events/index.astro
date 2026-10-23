@@ -1,45 +1,43 @@
 ---
-import PerfeedLayout from '../../layouts/PerfeedLayout.astro';
-import { eventStatusLabels, pastEvents } from '../../data/events';
+import Program from '../../components/home/Program.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { eventTypeLabels, pastEvents } from '../../data/events';
 
-const events = pastEvents();
+const past = pastEvents();
 ---
 
-<PerfeedLayout title="Архив мероприятий — Perfeed" description="Прошедшие события лаборатории современного танца и перформанса Perfeed.">
-  <header class="archive-header">
-    <a class="brand" href="/" aria-label="Perfeed — на главную страницу">PERFEED</a>
-    <a class="text-link" href="/">На главную <span aria-hidden="true">→</span></a>
-  </header>
+<BaseLayout title="события — unlimited position" description="Программа и прошедшие события практики современного танца unlimited position в Калуге.">
+  <h1 class="wrap events-title">события</h1>
 
-  <main id="content">
-    <section class="archive-intro section-wide" aria-labelledby="archive-title">
-      <p class="section-label">Perfeed · Калуга</p>
-      <h1 id="archive-title">Архив<br />мероприятий</h1>
-      <p>Здесь остаются прошедшие встречи, их анонсы и будущие материалы о том, как всё прошло.</p>
-    </section>
+  <Program />
 
-    <section class="archive-events section" id="past" aria-labelledby="events-title">
-      <h2 id="events-title" class="visually-hidden">Прошедшие мероприятия</h2>
-      <ol class="archive-events-list">
-        {events.map((event) => (
+  <section class="section" id="past" aria-labelledby="past-title">
+    <div class="wrap grid">
+      <h2 class="section__title" id="past-title">прошедшие события</h2>
+      <ol class="section__body past">
+        {past.map((event) => (
           <li>
-            <a href={`/events/${event.slug}/`}>
+            <a class="past__item" href={`/events/${event.slug}/`}>
               <time datetime={event.startDate}>{event.dateLabel}</time>
-              <div>
-                <p>{eventStatusLabels[event.status]}</p>
-                <h3>{event.title}</h3>
-                <span>{event.description}</span>
-              </div>
-              <strong>Подробнее <span aria-hidden="true">↗</span></strong>
+              <span class="past__title">{event.title}</span>
+              <span class="muted">{eventTypeLabels[event.type]}</span>
             </a>
           </li>
         ))}
       </ol>
-    </section>
-  </main>
+    </div>
+  </section>
+</BaseLayout>
 
-  <footer class="archive-footer">
-    <a class="brand" href="/">PERFEED</a>
-    <a href="/">На главную <span aria-hidden="true">↗</span></a>
-  </footer>
-</PerfeedLayout>
+<style>
+  .events-title { font-size: clamp(3rem, 9vw, 8rem); letter-spacing: -0.045em; line-height: 0.9; padding-block: clamp(2rem, 6vw, 4rem); }
+  #past { padding-bottom: var(--section); }
+  .past { border-top: 1px solid var(--ink); gap: 0; }
+  .past li { border-bottom: 1px solid var(--rule); }
+  .past__item { display: grid; gap: 0.25rem 1.5rem; padding-block: 1.1rem; text-decoration: none; }
+  .past__item:hover .past__title { color: var(--blue); }
+  .past__item time { font-variant-numeric: tabular-nums; }
+  .past__title { font-size: 1.375rem; font-weight: 500; line-height: 1.15; }
+
+  @media (min-width: 900px) { .past__item { align-items: baseline; grid-template-columns: 14rem minmax(0, 1fr) auto; } }
+</style>
