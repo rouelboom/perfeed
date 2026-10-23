@@ -1,11 +1,11 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro';
+import PerfeedLayout from '../../layouts/PerfeedLayout.astro';
 import { eventStatusLabels, pastEvents } from '../../data/events';
 
 const events = pastEvents();
 ---
 
-<BaseLayout title="Архив мероприятий — Perfeed" description="Прошедшие события лаборатории современного танца и перформанса Perfeed.">
+<PerfeedLayout title="Архив мероприятий — Perfeed" description="Прошедшие события лаборатории современного танца и перформанса Perfeed.">
   <header class="archive-header">
     <a class="brand" href="/" aria-label="Perfeed — на главную страницу">PERFEED</a>
     <a class="text-link" href="/">На главную <span aria-hidden="true">→</span></a>
@@ -18,7 +18,7 @@ const events = pastEvents();
       <p>Здесь остаются прошедшие встречи, их анонсы и будущие материалы о том, как всё прошло.</p>
     </section>
 
-    <section class="archive-events section" aria-labelledby="events-title">
+    <section class="archive-events section" id="past" aria-labelledby="events-title">
       <h2 id="events-title" class="visually-hidden">Прошедшие мероприятия</h2>
       <ol class="archive-events-list">
         {events.map((event) => (
@@ -42,4 +42,4 @@ const events = pastEvents();
     <a class="brand" href="/">PERFEED</a>
     <a href="/">На главную <span aria-hidden="true">↗</span></a>
   </footer>
-</BaseLayout>
+</PerfeedLayout>

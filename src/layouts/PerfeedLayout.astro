@@ -1,0 +1,68 @@
+---
+import '../styles/perfeed.css';
+import SiteFooter from '../components/SiteFooter.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import type { SiteEvent } from '../data/events';
+
+interface Props {
+  title: string;
+  description: string;
+  /** Прошедшее событие, страница которого показывается как документ в исходном дизайне perfeed. */
+  event?: SiteEvent;
+}
+
+const { title, description, event } = Astro.props;
+const ogImage = new URL('/og-image.png', Astro.site);
+---
+
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#c8ff00" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="550" />
+    <meta property="og:image:height" content="481" />
+    <meta property="og:image:alt" content="[золото, а не танец]" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <title>{title}</title>
+  </head>
+  <body>
+    <a class="skip-link" href="#content">К содержанию</a>
+    <SiteHeader />
+    {event && (
+      <p class="archive-note">
+        <span>прошедшее событие: {event.title}, {event.dateLabel}</span>
+        <a href="/events/#past">все прошедшие события →</a>
+      </p>
+    )}
+    <div class="perfeed-document">
+      <slot />
+    </div>
+    <SiteFooter />
+  </body>
+</html>
+
+<style>
+  .archive-note {
+    background: #8fb2c1;
+    color: #111414;
+    display: flex;
+    flex-wrap: wrap;
+    font: 400 0.8125rem/1.4 'Golos Text', 'Helvetica Neue', Arial, sans-serif;
+    gap: 0.4rem 1.5rem;
+    justify-content: space-between;
+    margin: 0;
+    padding: 0.65rem clamp(16px, 4vw, 48px);
+  }
+  .archive-note a { color: inherit; text-decoration: underline; text-underline-offset: 0.22em; }
+
+  /* Шапка события perfeed позиционирована абсолютно и должна остаться внутри документа события, под общей шапкой. */
+  .perfeed-document { position: relative; }
+</style>

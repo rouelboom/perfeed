@@ -1,14 +1,14 @@
 ---
 import { Image } from 'astro:assets';
 import { eventStatusLabels, getEvent } from '../../data/events';
-import BaseLayout from '../../layouts/BaseLayout.astro';
+import PerfeedLayout from '../../layouts/PerfeedLayout.astro';
 
 const event = getEvent('challenge-jam-2026-08-15', 'perfeed-jam');
 const { announcement, images } = event.perfeed;
 const status = eventStatusLabels[event.status];
 ---
 
-<BaseLayout title={`${event.title} — Perfeed`} description={event.description}>
+<PerfeedLayout title={`${event.title} — Perfeed`} description={event.description} event={event}>
   <header class="archive-header">
     <a class="brand" href="/" aria-label="Perfeed — на главную страницу">PERFEED</a>
     <a class="text-link" href="/events/">К архиву <span aria-hidden="true">→</span></a>
@@ -79,4 +79,4 @@ const status = eventStatusLabels[event.status];
     <a class="brand" href="/">PERFEED</a>
     <a href="/events/">Архив мероприятий <span aria-hidden="true">↗</span></a>
   </footer>
-</BaseLayout>
+</PerfeedLayout>
