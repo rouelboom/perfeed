@@ -17,7 +17,7 @@ const type = eventTypeLabels[event.type];
 const format = (date: string) => new Date(date).toLocaleDateString('ru-RU', { day: 'numeric', month: 'long', weekday: 'short', timeZone: 'UTC' });
 ---
 
-<BaseLayout title={`${event.title} — unlimited position`} description={event.description}>
+<BaseLayout title={`${[event.title, event.dateLabel].filter(Boolean).join(' ')} — unlimited position`} description={event.description}>
   <article class="wrap grid event-page">
     <p class="event-page__back small"><a href="/events/">← все события</a></p>
     <p class="event-page__date">{event.dateLabel ?? 'скоро'}</p>

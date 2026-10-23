@@ -7,9 +7,11 @@ const events = currentEvents();
 const group = events.find(({ type, price }) => type === 'regular_group' && price);
 const openClass = events.find(({ type, price }) => type === 'open_class' && price);
 
+const month = group?.startDate && new Date(group.startDate).toLocaleDateString('ru-RU', { month: 'long', timeZone: 'UTC' });
+
 const rows = [
-  group?.price && ['регулярная группа', `ноябрь, ${group.sessions?.length} встреч`, rub(group.price.base)],
-  group?.price?.student && ['студенты', 'регулярная группа, ноябрь', rub(group.price.student)],
+  group?.price && ['регулярная группа', `${month}, ${group.sessions?.length} встреч`, rub(group.price.base)],
+  group?.price?.student && ['студенты', `регулярная группа, ${month}`, rub(group.price.student)],
   group?.price?.deposit && ['предоплата', 'входит в стоимость', rub(group.price.deposit)],
   openClass?.price && ['открытый класс', 'одна встреча', rub(openClass.price.base)],
 ].filter((row): row is [string, string, string] => Boolean(row));

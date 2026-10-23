@@ -21,7 +21,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     (() => {
       const anchors = ['laboratory', 'schedule', 'hosts', 'partners', 'hero-title', 'question-title', 'audience-title', 'laboratory-title', 'process-title', 'outcomes-title', 'format-title', 'schedule-title', 'showcase-title', 'hosts-title', 'partners-title', 'contacts-title'];
       const anchor = decodeURIComponent(location.hash.slice(1));
-      if (anchors.includes(anchor)) location.replace(`/events/zoloto-not-dance-2026/#${anchor}`);
+      // У старой главной был только заголовок контактов, без id у самого раздела.
+      if (anchor === 'contacts') location.replace('/events/zoloto-not-dance-2026/#contacts-title');
+      else if (anchors.includes(anchor)) location.replace(`/events/zoloto-not-dance-2026/#${anchor}`);
     })();
   </script>
   <Hero />

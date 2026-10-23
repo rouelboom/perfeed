@@ -54,12 +54,13 @@ for (const row of rows) {
   .schedule__day small, .schedule__what small { color: var(--grey); display: block; font-size: 0.75rem; font-weight: 400; letter-spacing: 0.02em; margin-top: 0.25rem; }
   .schedule__what { font-weight: 500; }
   .schedule__what small { font-size: 0.9375rem; letter-spacing: 0; margin-top: 0; }
-  .schedule__where { display: none; }
-  .schedule__time { font-size: 0.9375rem; text-align: right; white-space: nowrap; }
+  .schedule__where { color: var(--grey); font-size: 0.8125rem; grid-column: 2; }
+  .schedule__time { font-size: 0.9375rem; grid-column: 3; grid-row: 1; text-align: right; white-space: nowrap; }
   .schedule__row--accent .schedule__day, .schedule__row--accent .schedule__what { color: var(--blue); }
 
   @media (min-width: 900px) {
     .schedule__row { grid-template-columns: 5rem minmax(0, 1fr) 10rem 12rem; }
-    .schedule__where { color: var(--grey); display: block; font-size: 0.9375rem; }
+    .schedule__where { font-size: 0.9375rem; grid-column: 3; grid-row: 1; }
+    .schedule__time { grid-column: 4; }
   }
 </style>

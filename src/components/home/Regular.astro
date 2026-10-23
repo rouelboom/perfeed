@@ -1,5 +1,13 @@
 ---
+import { currentEvents } from '../../data/events';
 import { regular } from '../../data/home';
+
+const group = currentEvents().find(({ type, startDate, endDate }) => type === 'regular_group' && startDate && endDate);
+const day = (date: string, options: Intl.DateTimeFormatOptions) => new Date(date).toLocaleDateString('ru-RU', { ...options, timeZone: 'UTC' });
+const facts = [
+  ...(group?.startDate && group.endDate ? [['текущая группа', `${day(group.startDate, { day: 'numeric' })}–${day(group.endDate, { day: 'numeric', month: 'long' })}`]] : []),
+  ...regular.facts,
+];
 ---
 
 <section class="regular" id="regular" aria-labelledby="regular-title">
@@ -8,7 +16,7 @@ import { regular } from '../../data/home';
   </div>
   <div class="wrap grid">
     <div class="regular__text">{regular.text.map((paragraph) => <p>{paragraph}</p>)}</div>
-    <dl class="regular__facts">{regular.facts.map(([term, value]) => <div><dt>{term}</dt><dd>{value}</dd></div>)}</dl>
+    <dl class="regular__facts">{facts.map(([term, value]) => <div><dt>{term}</dt><dd>{value}</dd></div>)}</dl>
   </div>
 </section>
 
