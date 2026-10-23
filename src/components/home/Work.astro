@@ -14,8 +14,8 @@ const photos = [
 
 <section class="section" id="work" aria-labelledby="work-title">
   <div class="wrap grid">
-    <h2 class="section__title" id="work-title">что происходит в практике</h2>
-    <div class="section__body">{work.map((paragraph) => <p>{paragraph}</p>)}</div>
+    <h2 class="section__title" id="work-title">{work.title}</h2>
+    <div class="section__body">{work.text.map((paragraph) => <p>{paragraph}</p>)}</div>
   </div>
   <div class="wrap work__strip">
     {photos.map(({ src, alt }) => <Image src={src} alt={alt} widths={[480, 720]} sizes="(min-width: 600px) 31vw, 46vw" />)}

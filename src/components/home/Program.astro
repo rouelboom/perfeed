@@ -1,5 +1,6 @@
 ---
 import { currentEvents, pastEvents } from '../../data/events';
+import { program } from '../../data/home';
 import EventRow from '../EventRow.astro';
 
 const events = currentEvents();
@@ -8,7 +9,7 @@ const [latestPast] = pastEvents();
 
 <section class="program band" id="program" aria-labelledby="program-title">
   <div class="wrap">
-    <h2 class="program__title" id="program-title">сейчас</h2>
+    <h2 class="program__title" id="program-title">{program.title}</h2>
     <ol class="program__list">{events.map((event) => <li><EventRow event={event} /></li>)}</ol>
     {latestPast && (
       <p class="program__past small">

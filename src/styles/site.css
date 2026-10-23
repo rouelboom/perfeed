@@ -58,7 +58,7 @@ p { max-width: 62ch; }
 }
 
 .band { background: var(--blue); color: var(--on-blue); }
-.band .muted { color: var(--on-blue-muted); }
+.band .muted { color: var(--on-blue); }
 .band .arrow-link { text-decoration-color: var(--on-blue); }
 .band .arrow-link:hover { color: var(--on-blue); }
 .band :focus-visible { outline-color: var(--on-blue); }
