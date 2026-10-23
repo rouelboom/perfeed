@@ -1,0 +1,39 @@
+---
+import { currentEvents } from '../../data/events';
+
+const events = currentEvents();
+const group = events.find(({ type, status }) => type === 'regular_group' && status === 'open');
+const openClasses = events.filter(({ type, status }) => type === 'open_class' && status === 'open');
+---
+
+<section class="join wrap grid" id="join" aria-labelledby="join-title">
+  <h2 class="visually-hidden" id="join-title">запись</h2>
+  {group?.registrationUrl && (
+    <div class="join__item">
+      <p class="small muted">{group.title} · {group.dateLabel}</p>
+      <h3>присоединиться к группе</h3>
+      {group.price?.deposit && <p>запись — через короткую форму. предоплата {group.price.deposit.toLocaleString('ru-RU')} ₽ закрепляет место в группе.</p>}
+      <a class="arrow-link" href={group.registrationUrl}>присоединиться к группе <span aria-hidden="true">→</span></a>
+    </div>
+  )}
+  {openClasses.length > 0 && (
+    <div class="join__item">
+      <p class="small muted">открытый класс · {openClasses.map(({ dateLabel }) => dateLabel).join(' и ')}</p>
+      <h3>записаться на открытый класс</h3>
+      <p>напишите в telegram или instagram, какую дату выбираете.</p>
+      <a class="arrow-link" href="#contact">записаться на открытый класс <span aria-hidden="true">→</span></a>
+    </div>
+  )}
+</section>
+
+<style>
+  .join { border-top: 1px solid var(--ink); margin-top: var(--section); padding-block: clamp(3.5rem, 9vw, 7rem); row-gap: 3rem; }
+  .join__item { display: grid; gap: 1rem; justify-items: start; }
+  .join__item h3 { font-size: clamp(1.6rem, 3.4vw, 2.75rem); letter-spacing: -0.03em; line-height: 1; }
+  .join__item .arrow-link { font-size: 1.25rem; margin-top: 0.5rem; }
+
+  @media (min-width: 900px) {
+    .join__item:first-of-type { grid-column: 1 / 6; }
+    .join__item:last-of-type { grid-column: 7 / 12; }
+  }
+</style>

@@ -1,0 +1,30 @@
+---
+import { faq } from '../../data/home';
+---
+
+<section class="section" id="faq" aria-labelledby="faq-title">
+  <div class="wrap grid">
+    <h2 class="section__title" id="faq-title">{faq.title}</h2>
+    <div class="section__body faq">
+      {faq.items.map(([question, answer]) => (
+        <details>
+          <summary>{question}</summary>
+          <div class="faq__answer">{answer.map((paragraph) => <p>{paragraph}</p>)}</div>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .faq { gap: 0; }
+  .faq details { border-bottom: 1px solid var(--rule); }
+  .faq details:first-child { border-top: 1px solid var(--ink); }
+  .faq summary { cursor: pointer; display: grid; font-size: 1.125rem; font-weight: 500; gap: 1rem; grid-template-columns: minmax(0, 1fr) 1.5rem; list-style: none; padding-block: 1.05rem; }
+  .faq summary::-webkit-details-marker { display: none; }
+  .faq summary::after { color: var(--blue); content: '+'; font-size: 1.4rem; font-weight: 400; line-height: 1; text-align: right; }
+  .faq details[open] summary::after { content: '−'; }
+  .faq__answer { color: #2c3133; display: grid; gap: 0.75rem; padding-bottom: 1.4rem; }
+
+  @media (min-width: 900px) { .faq { grid-column: 4 / 11; } }
+</style>

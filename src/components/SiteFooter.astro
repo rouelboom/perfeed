@@ -1,12 +1,13 @@
 ---
 import { site } from '../config/site';
+import { closing } from '../data/home';
 
 const contacts = site.contacts;
 ---
 
 <footer class="up-footer" id="contact">
   <div class="up-footer__inner">
-    <p class="up-footer__closing">мы начинаем с конкретного тела и конкретной ситуации. и смотрим, куда ещё из этой позиции можно двигаться.</p>
+    <p class="up-footer__closing">{closing}</p>
     <div class="up-footer__cols">
       <p><span>unlimited position</span><span class="up-footer__muted">запредельная позиция</span><span class="up-footer__muted">{site.city}</span></p>
       {contacts.length > 0 && <ul>{contacts.map(({ label, href }) => <li><a href={href}>{label}</a></li>)}</ul>}

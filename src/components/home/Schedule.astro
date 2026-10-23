@@ -1,0 +1,65 @@
+---
+import { currentEvents } from '../../data/events';
+import { schedule } from '../../data/home';
+
+const format = (date: string, options: Intl.DateTimeFormatOptions) =>
+  new Date(date).toLocaleDateString('ru-RU', { ...options, timeZone: 'UTC' });
+
+const rows = currentEvents()
+  .flatMap((event) => {
+    if (event.sessions) {
+      return event.sessions.map((session) => ({ ...session, title: event.title, location: event.location, accent: false }));
+    }
+    return event.startDate ? [{ date: event.startDate, time: event.time, note: undefined, title: event.title, location: event.location, accent: true }] : [];
+  })
+  .sort((first, second) => first.date.localeCompare(second.date));
+
+const months: { name: string; rows: typeof rows }[] = [];
+for (const row of rows) {
+  const name = format(row.date, { month: 'long' });
+  if (months.at(-1)?.name !== name) months.push({ name, rows: [] });
+  months.at(-1)?.rows.push(row);
+}
+---
+
+<section class="section" id="schedule" aria-labelledby="schedule-title">
+  <div class="wrap grid">
+    <h2 class="section__title" id="schedule-title">{schedule.title}</h2>
+    <div class="section__body schedule">
+      {months.map(({ name, rows }) => (
+        <div>
+          <h3 class="schedule__month">{name}</h3>
+          <ol>
+            {rows.map((row) => (
+              <li class:list={['schedule__row', { 'schedule__row--accent': row.accent }]}>
+                <span class="schedule__day">{format(row.date, { day: '2-digit' })}<small>{format(row.date, { weekday: 'short' })}</small></span>
+                <span class="schedule__what">{row.title}{row.note && <small>{row.note}</small>}</span>
+                <span class="schedule__where">{row.location}</span>
+                <span class="schedule__time">{row.time ?? 'время уточняется'}</span>
+              </li>
+            ))}
+          </ol>
+        </div>
+      ))}
+      <p class="small muted">{schedule.note}</p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .schedule { gap: 1.25rem; }
+  .schedule__month { border-bottom: 1px solid var(--ink); font-size: clamp(1.6rem, 3.4vw, 2.6rem); letter-spacing: -0.03em; line-height: 1; padding-bottom: 0.75rem; }
+  .schedule__row { align-items: baseline; border-bottom: 1px solid var(--rule); column-gap: 1rem; display: grid; font-variant-numeric: tabular-nums; grid-template-columns: 3.4rem minmax(0, 1fr) auto; padding-block: 0.9rem; }
+  .schedule__day { font-size: 2rem; font-weight: 500; letter-spacing: -0.03em; line-height: 1; }
+  .schedule__day small, .schedule__what small { color: var(--grey); display: block; font-size: 0.75rem; font-weight: 400; letter-spacing: 0.02em; margin-top: 0.25rem; }
+  .schedule__what { font-weight: 500; }
+  .schedule__what small { font-size: 0.9375rem; letter-spacing: 0; margin-top: 0; }
+  .schedule__where { display: none; }
+  .schedule__time { font-size: 0.9375rem; text-align: right; white-space: nowrap; }
+  .schedule__row--accent .schedule__day, .schedule__row--accent .schedule__what { color: var(--blue); }
+
+  @media (min-width: 900px) {
+    .schedule__row { grid-template-columns: 5rem minmax(0, 1fr) 10rem 12rem; }
+    .schedule__where { color: var(--grey); display: block; font-size: 0.9375rem; }
+  }
+</style>
