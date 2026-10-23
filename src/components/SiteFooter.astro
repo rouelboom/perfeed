@@ -33,13 +33,13 @@ const contacts = site.contacts;
   .up-footer a:hover { text-decoration-color: currentColor; }
   .up-footer a:focus-visible { outline: 2px solid #8fb2c1; outline-offset: 3px; }
   .up-footer ul { list-style: none; margin: 0; padding: 0; }
-  .up-footer p { margin: 0; }
+  .up-footer__closing, .up-footer__cols p { margin: 0; }
   .up-footer__closing { font-size: clamp(1.5rem, 3.4vw, 3rem); font-weight: 500; letter-spacing: -0.025em; line-height: 1.08; max-width: 22ch; text-wrap: balance; }
   .up-footer__cols { display: grid; gap: 2rem var(--up-gap, 12px); grid-template-columns: 1fr 1fr; margin-top: clamp(4rem, 10vw, 8rem); }
   .up-footer__cols > :first-child { grid-column: 1 / -1; }
   .up-footer__cols p, .up-footer__cols ul { display: grid; gap: 0.3rem; align-content: start; }
   .up-footer__muted, .up-footer__fine { color: #9aa3a7; }
-  .up-footer__fine { display: flex; flex-wrap: wrap; font-size: 0.8125rem; gap: 1rem; justify-content: space-between; margin-top: 3rem; }
+  .up-footer__fine { display: flex; flex-wrap: wrap; font-size: 0.8125rem; gap: 1rem; justify-content: space-between; margin: 3rem 0 0; }
 
   @media (min-width: 600px) { .up-footer { --up-gutter: 32px; } }
   @media (min-width: 900px) {

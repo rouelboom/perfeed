@@ -50,6 +50,9 @@ const ogImage = new URL('/og-image.png', Astro.site);
 </html>
 
 <style>
+  /* Ссылка «К содержанию» из perfeed.css должна быть над общей шапкой. */
+  .skip-link { z-index: 40; }
+
   .archive-note {
     background: #8fb2c1;
     color: #111414;
