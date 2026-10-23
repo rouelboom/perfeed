@@ -254,6 +254,7 @@ export const events: readonly SiteEvent[] = [
     dateLabel: '01.11',
     time: '16:00–18:00',
     price: { base: 1500 },
+    registrationUrl: 'https://forms.yandex.ru/u/6adb9d125057b2465f18030d',
     description: 'возможность познакомиться с анастасией и попробовать практику до начала регулярной группы.',
   },
   {
@@ -265,6 +266,7 @@ export const events: readonly SiteEvent[] = [
     dateLabel: '22.11',
     time: '16:00–18:00',
     price: { base: 1500 },
+    registrationUrl: 'https://forms.yandex.ru/u/6adb9d125057b2465f18030d',
     description: 'отдельная встреча для тех, кто не может включиться в регулярную группу.',
   },
   {

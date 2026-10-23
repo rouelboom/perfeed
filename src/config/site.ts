@@ -10,6 +10,9 @@ export const site = {
     ['об авторе', '/#about'],
     ['контакты', '/#contact'],
   ],
-  /** Ссылки на Telegram, Instagram и почту появятся, когда их передаст автор практики. */
-  contacts: [] as readonly { label: string; href: string }[],
+  contacts: [
+    { label: 'instagram*', href: 'https://www.instagram.com/unlimited.position/' },
+    { label: 'telegram', href: 'https://t.me/dancepixieforyou' },
+  ],
+  instagramNote: '* Instagram принадлежит компании Meta, деятельность которой признана экстремистской и запрещена на территории РФ.',
 } as const;

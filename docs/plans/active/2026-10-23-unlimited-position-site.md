@@ -5,7 +5,7 @@
 - Repo: /Users/pavel/Dev/pets/perfeed
 - Branches: feature/unlimited-position, main
 - Created: 2026-10-23 20:30
-- Updated: 2026-10-23 23:40
+- Updated: 2026-10-23 23:50
 - Owner: Claude
 - Icon: layout-dashboard
 
@@ -118,7 +118,6 @@ Slug лаборатории: `zoloto-not-dance-2026` (подтверждён п�
 - [ ] 14. После стабильного релиза завести отдельный план на переименование `PERFEED_*`, каталогов, nginx-сайта и секретов и на переезд на собственный домен с 301.
 
 ## Открытые вопросы
-- Ссылки на Telegram и Instagram (для записи на open class и footer). **Блокирует релиз:** сейчас «записаться на открытый класс» ведёт к footer, где контактов ещё нет.
 - Оригиналы фото в высоком разрешении для полноэкранных кадров на desktop.
 - Место открытых классов 01.11 и 22.11 (в данных пока не указано; в прототипе стояла Болдина, 87).
 - Время встреч regular group по вторникам (на странице группы и в расписании — «время уточняется») (в прототипе «время уточняется»).
@@ -139,6 +138,7 @@ Slug лаборатории: `zoloto-not-dance-2026` (подтверждён п�
 - Модель событий: `src/data/events.ts`, один массив `events` с типом `SiteEvent`. Поле `page` отличает прошедшие события perfeed с собственной вёрсткой (`perfeed-laboratory`, `perfeed-jam`, контент в поле `perfeed`) от событий в шаблоне Unlimited Position (`page` не задан). Встречи регулярной группы — `sessions`, цены — `price: { base, student, deposit }`. Подписи статусов и типов — `eventStatusLabels` и `eventTypeLabels`. Хелперы: `currentEvents()`, `pastEvents()`, `getEvent(slug, page)`.
 - Изоляция архива: стили perfeed (`src/styles/perfeed.css`, бывший `global.css`) подключает только `PerfeedLayout` (бывший `BaseLayout`). Общие `SiteHeader` и `SiteFooter` задают цвета, шрифт и регистр сами и используют классы с префиксом `up-`, потому что на архивных страницах действуют глобальные правила и токены perfeed (`--paper`, `--ink`, `.brand`). Контент perfeed обёрнут в `.perfeed-document` (`position: relative`), чтобы абсолютная шапка события осталась под общей шапкой. Новые страницы Unlimited Position будут на отдельном `BaseLayout` без `perfeed.css`.
 - До шагов 6–7 на `/` временная страница со ссылкой на лабораторию.
+- Контакты (переданы пользователем 2026-10-23): проект — Instagram `unlimited.position`, Telegram `@dancepixieforyou` (footer, `site.contacts`); Анастасия — Telegram `@senokosovaa`, Instagram `no_movement_today` (блок об авторе, `home.ts`; взята чистая ссылка на профиль без служебных параметров). Запись на открытые классы — Яндекс Форма `https://forms.yandex.ru/u/6adb9d125057b2465f18030d`. У Instagram — сноска о Meta, как на странице perfeed.
 - Архив perfeed — вариант **A**: исходная страница без изменений дизайна, стили изолированы, шапка и footer общие. Шаблон B для архива не делаем.
 - Стек: Astro (продолжение текущего проекта), `astro:assets` вместо `next/image`. Next.js не используем.
 - Прошедшие и актуальные события живут в одном пространстве `/events/<slug>`, отдельный `/archive` не создаём (обоснование в «Карта URL»).
@@ -152,6 +152,8 @@ Slug лаборатории: `zoloto-not-dance-2026` (подтверждён п�
 - 2026-10-23 20:50 Шаг 1 в работе: опубликован прототип https://claude.ai/artifact/DJPb8iAb6HWzC8Ygay2TEK — главная в трёх направлениях (a editorial grid / b floor-blue / c shifting position), три hero, архив perfeed A (исходная сборка `dist/` в общей шапке) и B (шаблон Unlimited Position). Исходники прототипа во временном каталоге сессии, в репозиторий не входят. Ждём выбора пользователя.
 - 2026-10-23 21:05 Пользователь выбрал a-1 с голубым блоком «сейчас» из b, только русский язык и архив A. Прототип обновлён до версии 2 (переключатели вариантов убраны, тексты переведены). Шаг 1 завершён.
 - 2026-10-23 21:30 Создана ветка `feature/unlimited-position`. Шаг 2: написан `docs/design/unlimited-position.md` (принципы, цвет с контрастами, типографическая шкала, сетка 6/12, фото и их места, ссылки, шапка, анимация, wireframe 15 блоков desktop/mobile, анатомия блока события, архивные страницы, доступность).
+- 2026-10-23 23:50 Получены контакты и форма записи на открытые классы; добавлены в `site.ts`, `home.ts`, `events.ts`, footer и блок записи. Ответ FAQ «Как записаться?» и текст блока записи на открытый класс обновлены.
+- 2026-10-23 23:45 Ревью шага 10 в Codex (2 раунда, `.../step-10/`): R1 alt OG джема упоминал серебряную фольгу, которой нет на кадре — исправлено, коммит `762f94c`.
 - 2026-10-23 23:40 Шаг 10: `PerfeedLayout` — canonical, `og:url`, OG-изображение через проп (лаборатория — прежний `og-image.png`, джем — `public/og/challenge-jam-2026-08-15.jpg` 1200×630 из его фото). `robots.txt` и `sitemap.xml` — endpoints `src/pages/robots.txt.ts` и `src/pages/sitemap.xml.ts`, адреса берутся из `site`, домен в коде не появляется; `public/robots.txt` удалён. Страницы Unlimited Position получили title, description, canonical и OG ещё на шаге 5.
 - 2026-10-23 23:35 Ревью шага 9 в Codex (1 раунд, `.../step-9/`): замечаний нет.
 - 2026-10-23 23:30 Шаг 9: в `BaseLayout` добавлен слот `head`; на главной inline-скрипт в `<head>` переводит 16 старых якорей perfeed (разделы и id заголовков, без `top`, `content`, `mobile-menu`) на `/events/zoloto-not-dance-2026/#<якорь>` через `location.replace`.

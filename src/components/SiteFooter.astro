@@ -10,13 +10,14 @@ const contacts = site.contacts;
     <p class="up-footer__closing">{closing}</p>
     <div class="up-footer__cols">
       <p><span>unlimited position</span><span class="up-footer__muted">запредельная позиция</span><span class="up-footer__muted">{site.city}</span></p>
-      {contacts.length > 0 && <ul>{contacts.map(({ label, href }) => <li><a href={href}>{label}</a></li>)}</ul>}
+      <ul>{contacts.map(({ label, href }) => <li><a href={href}>{label}</a></li>)}</ul>
       <ul>
         <li><a href="/events/#past">прошедшие события</a></li>
         <li><a href="/#program">программа</a></li>
       </ul>
     </div>
     <p class="up-footer__fine"><span>© 2026 анастасия сенокосова</span><span>18+</span></p>
+    <p class="up-footer__note">{site.instagramNote}</p>
   </div>
 </footer>
 
@@ -39,7 +40,8 @@ const contacts = site.contacts;
   .up-footer__cols { display: grid; gap: 2rem var(--up-gap, 12px); grid-template-columns: 1fr 1fr; margin-top: clamp(4rem, 10vw, 8rem); }
   .up-footer__cols > :first-child { grid-column: 1 / -1; }
   .up-footer__cols p, .up-footer__cols ul { display: grid; gap: 0.3rem; align-content: start; }
-  .up-footer__muted, .up-footer__fine { color: #9aa3a7; }
+  .up-footer__muted, .up-footer__fine, .up-footer__note { color: #9aa3a7; }
+  .up-footer__note { font-size: 0.75rem; margin: 1rem 0 0; max-width: 62ch; }
   .up-footer__fine { display: flex; flex-wrap: wrap; font-size: 0.8125rem; gap: 1rem; justify-content: space-between; margin: 3rem 0 0; max-width: none; }
 
   @media (min-width: 600px) { .up-footer { --up-gutter: 32px; } }

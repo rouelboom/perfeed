@@ -17,12 +17,12 @@ const openClasses = events.filter(({ type, status }) => type === 'open_class' &&
       <a class="arrow-link" href={group.registrationUrl}>присоединиться к группе <span aria-hidden="true">→</span></a>
     </div>
   )}
-  {openClasses.length > 0 && (
+  {openClasses[0]?.registrationUrl && (
     <div class="join__item">
       <p class="small muted">открытый класс · {openClasses.map(({ dateLabel }) => dateLabel).join(' и ')}</p>
       <h3>{join.openClass.title}</h3>
       <p>{join.openClass.text}</p>
-      <a class="arrow-link" href="#contact">записаться на открытый класс <span aria-hidden="true">→</span></a>
+      <a class="arrow-link" href={openClasses[0].registrationUrl}>записаться на открытый класс <span aria-hidden="true">→</span></a>
     </div>
   )}
 </section>

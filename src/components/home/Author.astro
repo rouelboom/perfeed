@@ -8,7 +8,10 @@ import { author } from '../../data/home';
   <div class="wrap grid author">
     <Image class="author__photo" src={portrait} alt="Анастасия Сенокосова" widths={[400, 640, 853]} sizes="(min-width: 900px) 30vw, 60vw" />
     <h2 class="author__name" id="about-title">{author.name}</h2>
-    <div class="author__bio">{author.bio.map((paragraph) => <p>{paragraph}</p>)}</div>
+    <div class="author__bio">
+      {author.bio.map((paragraph) => <p>{paragraph}</p>)}
+      <ul class="author__contacts">{author.contacts.map(({ label, href }) => <li><a href={href}>{label}</a></li>)}</ul>
+    </div>
   </div>
 </section>
 
@@ -17,6 +20,7 @@ import { author } from '../../data/home';
   .author__photo { grid-column: 1 / 5; width: 100%; }
   .author__name { font-size: clamp(2.2rem, 6vw, 5.5rem); letter-spacing: -0.045em; line-height: 0.92; }
   .author__bio { display: grid; gap: 1rem; }
+  .author__contacts { display: grid; gap: 0.3rem; margin-top: 0.5rem; }
 
   @media (min-width: 900px) {
     .author__photo { grid-column: 1 / 5; grid-row: 1 / 3; }
