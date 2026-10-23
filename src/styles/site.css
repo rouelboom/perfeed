@@ -1,0 +1,66 @@
+/* Токены и базовые правила unlimited position. Значения — docs/design/unlimited-position.md. Архивные страницы perfeed этот файл не подключают. */
+:root {
+  --paper: #ffffff;
+  --ink: #111414;
+  --grey: #6b7276;
+  --rule: #dde3e6;
+  --blue: #4d7889;
+  --floor: #8fb2c1;
+  --on-blue: #ffffff;
+  --on-blue-muted: rgb(255 255 255 / 0.74);
+
+  --sans: 'Golos Text', 'Helvetica Neue', Arial, sans-serif;
+  --gutter: 16px;
+  --gap: 12px;
+  --section: clamp(5rem, 14vw, 11rem);
+
+  color-scheme: light;
+}
+
+@media (min-width: 600px) { :root { --gutter: 32px; --gap: 20px; } }
+@media (min-width: 1100px) { :root { --gutter: 48px; --gap: 24px; } }
+
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 4rem; }
+body { background: var(--paper); color: var(--ink); font: 400 1.0625rem/1.5 var(--sans); margin: 0; -webkit-font-smoothing: antialiased; }
+img { display: block; height: auto; max-width: 100%; }
+a { color: inherit; text-decoration-thickness: 1px; text-underline-offset: 0.22em; }
+a:hover { text-decoration-color: var(--blue); }
+:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; }
+h1, h2, h3, p, dl, dd, ol, ul, figure { margin: 0; }
+ol, ul { list-style: none; padding: 0; }
+h1, h2, h3 { font-weight: 500; text-wrap: balance; }
+p { max-width: 62ch; }
+
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+.skip-link { background: var(--ink); color: var(--paper); left: 1rem; padding: 0.6rem 1rem; position: fixed; top: -4rem; z-index: 40; }
+.skip-link:focus { top: 1rem; }
+
+/* Сетка: 6 колонок на телефоне, 12 от 900px. */
+.wrap { padding-inline: var(--gutter); }
+.grid { column-gap: var(--gap); display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); }
+.grid > * { grid-column: 1 / -1; min-width: 0; }
+@media (min-width: 900px) { .grid { grid-template-columns: repeat(12, minmax(0, 1fr)); } }
+
+.muted { color: var(--grey); }
+.small { font-size: 0.9375rem; }
+.arrow-link { align-items: baseline; display: inline-flex; font-weight: 500; gap: 0.5em; text-decoration: underline; text-decoration-color: var(--blue); text-decoration-thickness: 1.5px; }
+.arrow-link:hover { color: var(--blue); }
+
+/* Раздел: линия, заголовок слева (липкий на desktop), содержание справа. */
+.section { border-top: 1px solid var(--rule); margin-top: var(--section); padding-top: 1.25rem; }
+.section__title { font-size: clamp(1.75rem, 3.6vw, 3rem); letter-spacing: -0.035em; line-height: 0.95; margin-bottom: clamp(2rem, 5vw, 4rem); }
+.section__body { display: grid; gap: 1rem; }
+@media (min-width: 900px) {
+  .section__title { align-self: start; grid-column: 1 / 4; position: sticky; top: 4.5rem; }
+  .section__body { grid-column: 4 / 13; }
+}
+
+.band { background: var(--blue); color: var(--on-blue); }
+.band .muted { color: var(--on-blue-muted); }
+.band .arrow-link { text-decoration-color: var(--on-blue); }
+.band .arrow-link:hover { color: var(--on-blue); }
+.band :focus-visible { outline-color: var(--on-blue); }
+
+.visually-hidden { clip: rect(0 0 0 0); clip-path: inset(50%); height: 1px; overflow: hidden; position: absolute; white-space: nowrap; width: 1px; }
