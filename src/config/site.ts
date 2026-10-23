@@ -1,0 +1,7 @@
+export const site = {
+  name: 'unlimited position / запредельная позиция',
+  title: 'Unlimited Position / Запредельная позиция — современный танец в Калуге',
+  description:
+    'Практика современного танца Анастасии Сенокосовой в Калуге: contemporary dance, импровизация, регулярные группы, открытые классы, показы и события.',
+  city: 'калуга',
+} as const;

@@ -1,8 +1,8 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { archivedEvents } from '../../data/archived-events';
+import { eventStatusLabels, pastEvents } from '../../data/events';
 
-const events = [...archivedEvents].sort((first, second) => second.date.localeCompare(first.date));
+const events = pastEvents();
 ---
 
 <BaseLayout title="Архив мероприятий — Perfeed" description="Прошедшие события лаборатории современного танца и перформанса Perfeed.">
@@ -24,11 +24,11 @@ const events = [...archivedEvents].sort((first, second) => second.date.localeCom
         {events.map((event) => (
           <li>
             <a href={`/events/${event.slug}/`}>
-              <time datetime={event.date}>{event.dateLabel}</time>
+              <time datetime={event.startDate}>{event.dateLabel}</time>
               <div>
-                <p>{event.status}</p>
+                <p>{eventStatusLabels[event.status]}</p>
                 <h3>{event.title}</h3>
-                <span>{event.summary}</span>
+                <span>{event.description}</span>
               </div>
               <strong>Подробнее <span aria-hidden="true">↗</span></strong>
             </a>

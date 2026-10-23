@@ -1,7 +1,10 @@
 ---
 import { Image } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { event } from '../data/event';
+import { getEvent } from '../data/events';
+
+const laboratory = getEvent('zoloto-not-dance-2026', 'perfeed-laboratory');
+const event = { ...laboratory.perfeed, title: laboratory.title, description: laboratory.description, dates: laboratory.dateLabel };
 
 const nav = [
   ['О лаборатории', '#laboratory'],
