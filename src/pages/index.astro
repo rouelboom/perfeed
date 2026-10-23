@@ -16,6 +16,14 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
 <BaseLayout>
+  <script is:inline slot="head">
+    // До переезда здесь была страница лаборатории perfeed, и ссылки на её разделы (/#schedule и т. п.) остались в соцсетях.
+    (() => {
+      const anchors = ['laboratory', 'schedule', 'hosts', 'partners', 'hero-title', 'question-title', 'audience-title', 'laboratory-title', 'process-title', 'outcomes-title', 'format-title', 'schedule-title', 'showcase-title', 'hosts-title', 'partners-title', 'contacts-title'];
+      const anchor = decodeURIComponent(location.hash.slice(1));
+      if (anchors.includes(anchor)) location.replace(`/events/zoloto-not-dance-2026/#${anchor}`);
+    })();
+  </script>
   <Hero />
   <Statement />
   <Program />
