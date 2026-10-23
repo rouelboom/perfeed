@@ -1,5 +1,6 @@
 ---
 import { currentEvents } from '../../data/events';
+import { join } from '../../data/home';
 
 const events = currentEvents();
 const group = events.find(({ type, status }) => type === 'regular_group' && status === 'open');
@@ -11,16 +12,16 @@ const openClasses = events.filter(({ type, status }) => type === 'open_class' &&
   {group?.registrationUrl && (
     <div class="join__item">
       <p class="small muted">{group.title} · {group.dateLabel}</p>
-      <h3>присоединиться к группе</h3>
-      {group.price?.deposit && <p>запись — через короткую форму. предоплата {group.price.deposit.toLocaleString('ru-RU')} ₽ закрепляет место в группе.</p>}
+      <h3>{join.group.title}</h3>
+      {group.price?.deposit && <p>{join.group.text.replace('{deposit}', `${group.price.deposit.toLocaleString('ru-RU')} ₽`)}</p>}
       <a class="arrow-link" href={group.registrationUrl}>присоединиться к группе <span aria-hidden="true">→</span></a>
     </div>
   )}
   {openClasses.length > 0 && (
     <div class="join__item">
       <p class="small muted">открытый класс · {openClasses.map(({ dateLabel }) => dateLabel).join(' и ')}</p>
-      <h3>записаться на открытый класс</h3>
-      <p>напишите в telegram или instagram, какую дату выбираете.</p>
+      <h3>{join.openClass.title}</h3>
+      <p>{join.openClass.text}</p>
       <a class="arrow-link" href="#contact">записаться на открытый класс <span aria-hidden="true">→</span></a>
     </div>
   )}
