@@ -4,8 +4,12 @@ import { practice } from '../../data/home';
 <section class="section" id="practice" aria-labelledby="practice-title">
   <div class="wrap grid">
     <h2 class="section__title" id="practice-title">{practice.title}</h2>
-    <div class="section__body">
-      {practice.text.map((paragraph) => <p>{paragraph}</p>)}
+    <div class="section__body practice__body">
+      {practice.parts.map(({ title, text }) => <div class="practice__part stack"><h3>{title}</h3>{text.map((paragraph) => <p>{paragraph}</p>)}</div>)}
     </div>
   </div>
 </section>
+<style>
+  .practice__body { gap: 2.5rem; }
+  .practice__part h3 { font-size: 1.25rem; font-weight: 500; letter-spacing: -0.02em; }
+</style>
