@@ -1,0 +1,62 @@
+---
+import { Image } from 'astro:assets';
+
+interface Props {
+  items: { src: ImageMetadata; alt: string }[];
+  label: string;
+  /** Сколько слайдов видно на десктопе; на мобильном всегда один. */
+  columns?: 1 | 3;
+  aspect?: string;
+  sizes: string;
+}
+const { items, label, columns = 1, aspect = '3 / 2', sizes } = Astro.props;
+---
+<div class:list={['carousel', { 'carousel--three': columns === 3 }]} role="region" aria-roledescription="карусель" aria-label={label} style={`--carousel-aspect: ${aspect}`}>
+  <ul class="carousel__track" tabindex="0">{items.map(({ src, alt }) => <li><Image src={src} alt={alt} widths={[480, 720, 1000, 1280]} sizes={sizes} loading="lazy" /></li>)}</ul>
+  <div class="carousel__controls">
+    <p class="small muted" aria-live="polite"><span data-current>1</span> / {items.length}</p>
+    <div class="carousel__buttons">
+      <button class="carousel__button" type="button" data-step="-1" aria-label="назад" disabled>←</button>
+      <button class="carousel__button" type="button" data-step="1" aria-label="вперёд">→</button>
+    </div>
+  </div>
+</div>
+<style>
+  .carousel { display: grid; gap: 0.75rem; }
+  .carousel__track { display: grid; gap: var(--gap); grid-auto-columns: 100%; grid-auto-flow: column; list-style: none; margin: 0; overflow-x: auto; overscroll-behavior-x: contain; padding: 0; scroll-snap-type: x mandatory; scrollbar-width: none; }
+  .carousel__track::-webkit-scrollbar { display: none; }
+  .carousel__track li { scroll-snap-align: start; }
+  .carousel__track img { aspect-ratio: var(--carousel-aspect); display: block; height: auto; object-fit: cover; width: 100%; }
+  .carousel__controls { align-items: center; display: flex; justify-content: space-between; }
+  .carousel__buttons { display: flex; gap: 0.5rem; }
+  .carousel__button { align-items: center; background: transparent; border: 1px solid var(--ink); color: var(--ink); cursor: pointer; display: inline-flex; font: inherit; height: 44px; justify-content: center; transition: background-color 0.18s ease, color 0.18s ease; width: 44px; }
+  .carousel__button:hover:not(:disabled) { background: var(--ink); color: var(--paper); }
+  .carousel__button:disabled { border-color: var(--rule); color: var(--rule); cursor: default; }
+  @media (prefers-reduced-motion: reduce) { .carousel__button { transition: none; } }
+  @media (min-width: 900px) { .carousel--three .carousel__track { grid-auto-columns: calc((100% - 2 * var(--gap)) / 3); } }
+</style>
+<script>
+  for (const carousel of document.querySelectorAll<HTMLElement>('.carousel')) {
+    const track = carousel.querySelector<HTMLElement>('.carousel__track')!;
+    const current = carousel.querySelector<HTMLElement>('[data-current]')!;
+    const [prev, next] = carousel.querySelectorAll<HTMLButtonElement>('.carousel__button');
+    const gap = () => parseFloat(getComputedStyle(track).columnGap);
+    const slideWidth = () => (track.firstElementChild as HTMLElement).offsetWidth + gap();
+    const update = () => {
+      const first = Math.round(track.scrollLeft / slideWidth()) + 1;
+      const last = Math.min(first + Math.round((track.clientWidth + gap()) / slideWidth()) - 1, track.children.length);
+      current.textContent = first === last ? String(first) : `${first}–${last}`;
+      prev.disabled = track.scrollLeft <= 1;
+      next.disabled = track.scrollLeft + track.clientWidth >= track.scrollWidth - 1;
+    };
+    for (const button of [prev, next]) {
+      button.addEventListener('click', () => {
+        const smooth = !matchMedia('(prefers-reduced-motion: reduce)').matches;
+        track.scrollBy({ left: Number(button.dataset.step) * (track.clientWidth + gap()), behavior: smooth ? 'smooth' : 'auto' });
+      });
+    }
+    track.addEventListener('scroll', update, { passive: true });
+    addEventListener('resize', update);
+    update();
+  }
+</script>
