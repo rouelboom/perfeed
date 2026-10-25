@@ -7,7 +7,7 @@ const dated = current.filter(({ startDate }) => startDate);
 const planned = current.filter(({ startDate }) => !startDate);
 const past = pastEvents();
 ---
-<BaseLayout title="события и архив — unlimited position" description="Просмотры, обсуждения и лаборатории. Ближайшие события и архив художественных проектов Анастасии Сенокосовой в Калуге.">
+<BaseLayout title="события и архив — unlimited position" description="Просмотры, обсуждения и лаборатории. Ближайшие события и архив художественных проектов Насти Сенокосовой в Калуге.">
   <div class="wrap page-heading"><h1 class="page-heading__title">события и архив</h1><p>Встречи вокруг современного танца: знакомиться с работами художников, пробовать разные форматы и обсуждать увиденное.</p><a class="arrow-link" href="/#classes">ближайшие занятия и запись →</a></div>
   {dated.length > 0 && <section class="section" aria-labelledby="upcoming-title"><div class="wrap grid"><h2 class="section__title" id="upcoming-title">ближайшие события</h2><div class="section__body"><EventList items={dated} descriptions /></div></div></section>}
   {planned.length > 0 && <section class="section" aria-labelledby="planned-title"><div class="wrap grid"><h2 class="section__title" id="planned-title">планируемые встречи</h2><div class="section__body"><EventList items={planned} descriptions /></div></div></section>}

@@ -19,7 +19,7 @@ import { site } from '../config/site';
   <Approach />
   <Statement />
   <section class="section" aria-labelledby="projects-title"><div class="wrap grid"><h2 class="section__title" id="projects-title">события и проекты</h2><div class="section__body"><EventList items={pastEvents().filter((event) => event.page)} /><a class="arrow-link" href="/events/">все события и архив →</a></div></div></section>
-  <section class="section about-page__contact" aria-labelledby="contact-title"><div class="wrap grid"><h2 class="section__title" id="contact-title">для связи</h2><div class="section__body"><p>По вопросам занятий, проектов и сотрудничества можно написать Анастасии.</p>{site.authorContacts.map(({ label, href }) => <a class="arrow-link" href={href}>{label} ↗</a>)}</div></div></section>
+  <section class="section about-page__contact" aria-labelledby="contact-title"><div class="wrap grid"><h2 class="section__title" id="contact-title">для связи</h2><div class="section__body"><p>По вопросам занятий, проектов и сотрудничества можно написать Насте.</p>{site.authorContacts.map(({ label, href }) => <a class="arrow-link" href={href}>{label} ↗</a>)}</div></div></section>
 </BaseLayout>
 <style>
   .about-page { align-items: start; padding-top: clamp(2.5rem, 6vw, 5rem); row-gap: 2rem; }
