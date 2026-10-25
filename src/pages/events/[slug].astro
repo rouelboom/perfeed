@@ -2,7 +2,7 @@
 import EventFacts from '../../components/EventFacts.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { eventTypeLabels, events, isClass, type SiteEvent } from '../../data/events';
-import { author, practice, work } from '../../data/home';
+import { practice, work } from '../../data/home';
 import { site } from '../../config/site';
 import { effectiveStatus } from '../../lib/event-status';
 
@@ -38,7 +38,6 @@ const format = (date: string) => new Date(date).toLocaleDateString('ru-RU', { da
     {isClass(event) && <div class="event-page__details">
       <section class="stack" aria-labelledby="class-work-title"><h2 id="class-work-title">{work.title}</h2>{work.text.map((paragraph) => <p>{paragraph}</p>)}</section>
       <section class="stack" aria-labelledby="class-audience-title"><h2 id="class-audience-title">{practice.audienceTitle}</h2>{practice.audience.map((text) => <p>{text}</p>)}</section>
-      <section class="stack" aria-labelledby="class-author-title"><h2 id="class-author-title">ведёт {author.name}</h2><p>{author.bio[0]}</p><a class="arrow-link" href="/#approach">как Настя ведёт занятия →</a><a class="arrow-link" href="/about/">образование и профессиональный опыт →</a><a class="arrow-link" href={site.authorContacts[0].href}>задать вопрос Насте ↗</a></section>
       {status === 'open' && event.registrationUrl && <a class="button" href={event.registrationUrl}>записаться {event.type === 'regular_group' ? 'в группу' : 'на открытый класс'} ↗</a>}
     </div>}
   </article>
