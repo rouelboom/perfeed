@@ -70,7 +70,7 @@ interface EventCommon {
   gallery?: readonly { image: ImageMetadata; alt: string }[];
 }
 
-/** Событие, страница которого сверстана шаблоном Unlimited Position. */
+/** Событие, страница которого сверстана шаблоном unlimited position. */
 interface StandardEvent extends EventCommon {
   page?: undefined;
 }
