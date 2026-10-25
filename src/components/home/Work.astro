@@ -1,18 +1,35 @@
 ---
 import { Image } from 'astro:assets';
 import wall from '../../assets/unlimited-position/wall.jpg';
+import crowd from '../../../content/unlimited-position-photos/2026-10-23 20.12.03.jpg';
+import low from '../../../content/unlimited-position-photos/2026-10-23 20.12.00.jpg';
+import contact from '../../../content/unlimited-position-photos/2026-10-25 21.43.01.jpg';
+import game from '../../../content/unlimited-position-photos/2026-10-23 20.12.09.jpg';
 import { work } from '../../data/home';
+
+// Индекс — абзац work.text, после которого фото стоит в мобильной вёрстке.
+const inlinePhotos = new Map([
+  [1, { src: low, alt: 'Участники двигаются низко, опираясь на руки и стопы' }],
+  [2, { src: contact, alt: 'Несколько человек импровизируют на полу в контакте друг с другом' }],
+  [3, { src: game, alt: 'Участница смеётся, сложив пальцы кольцами у глаз' }],
+]);
 ---
 <section class="section" id="work" aria-labelledby="work-title">
   <div class="wrap grid">
     <div class="work__aside">
       <h2 class="section__title" id="work-title">{work.title}</h2>
+      <figure class="work__mobile-photo work__mobile-photo--lead">
+        <Image src={crowd} alt="Группа участников движется по залу низко у пола" widths={[480, 720, 1000]} sizes="100vw" />
+      </figure>
       <figure class="work__photo">
         <Image src={wall} alt="Участница опирается на стену зала" widths={[480, 720, 1000]} sizes="(min-width: 900px) 32vw, 100vw" />
       </figure>
     </div>
     <div class="section__body">
-      {work.text.map((paragraph) => <p>{paragraph}</p>)}
+      {work.text.map((paragraph, index) => {
+        const photo = inlinePhotos.get(index);
+        return <><p>{paragraph}</p>{photo && <figure class="work__mobile-photo"><Image src={photo.src} alt={photo.alt} widths={[480, 720, 1000]} sizes="100vw" /></figure>}</>;
+      })}
       <a class="arrow-link" href="#classes">посмотреть ближайшие занятия <span aria-hidden="true">↑</span></a>
     </div>
   </div>
@@ -21,9 +38,14 @@ import { work } from '../../data/home';
   .work__aside { display: contents; }
   .work__photo { display: none; }
   .work__photo img { width: 100%; }
+  .work__aside .section__title, .work__mobile-photo { grid-column: 1 / -1; }
+  .work__mobile-photo { margin-block: 0.5rem; }
+  .work__mobile-photo--lead { margin: 0 0 1.75rem; }
+  .work__mobile-photo img { aspect-ratio: 3 / 2; object-fit: cover; width: 100%; }
   @media (min-width: 900px) {
     .work__aside { align-self: start; display: block; grid-column: 1 / 4; grid-row: 1; }
     .work__aside .section__title { position: static; }
+    .work__mobile-photo { display: none; }
     .work__photo { display: grid; gap: 0.5rem; margin-top: 2rem; }
     .work__photo img { aspect-ratio: 4 / 5; object-fit: cover; }
   }
