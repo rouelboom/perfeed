@@ -6,12 +6,6 @@ import { practice } from '../../data/home';
     <h2 class="section__title" id="practice-title">{practice.title}</h2>
     <div class="section__body">
       {practice.text.map((paragraph) => <p>{paragraph}</p>)}
-      <div class="practice__audience stack" id="for">
-        <h3>{practice.audienceTitle}</h3>
-        {practice.audience.map((paragraph) => <p>{paragraph}</p>)}
-      </div>
-      <a class="arrow-link" href="#work">что происходит на занятии <span aria-hidden="true">↓</span></a>
     </div>
   </div>
 </section>
-<style>.practice__audience { border-left: 2px solid var(--blue); margin-top: 1rem; padding-left: 1.25rem; }</style>
