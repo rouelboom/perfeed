@@ -8,11 +8,12 @@ interface Props {
   columns?: 1 | 3;
   aspect?: string;
   sizes: string;
+  quality?: number;
 }
-const { items, label, columns = 1, aspect = '3 / 2', sizes } = Astro.props;
+const { items, label, columns = 1, aspect = '3 / 2', sizes, quality } = Astro.props;
 ---
 <div class:list={['carousel', { 'carousel--three': columns === 3 }]} role="region" aria-roledescription="карусель" aria-label={label} style={`--carousel-aspect: ${aspect}`}>
-  <ul class="carousel__track" tabindex="0">{items.map(({ src, alt }) => <li><Image src={src} alt={alt} widths={[480, 720, 1000, 1280]} sizes={sizes} loading="lazy" /></li>)}</ul>
+  <ul class="carousel__track" tabindex="0">{items.map(({ src, alt }) => <li><Image src={src} alt={alt} widths={[480, 720, 1000, 1280]} sizes={sizes} quality={quality} loading="lazy" /></li>)}</ul>
   <div class="carousel__controls">
     <p class="small muted" aria-live="polite"><span data-current>1</span> / {items.length}</p>
     <div class="carousel__buttons">

@@ -24,7 +24,7 @@ const slides = Object.entries(import.meta.glob<{ default: ImageMetadata }>('../.
   <div class="wrap grid">
     <div class="practice__aside">
       <h2 class="section__title" id="practice-title">{practice.title}</h2>
-      <div class="practice__slides"><Carousel items={slides} label="unlimited position в фотографиях" aspect="1280 / 905" sizes="(min-width: 900px) 30vw, 100vw" /></div>
+      <div class="practice__slides"><Carousel items={slides} label="unlimited position в фотографиях" aspect="1280 / 905" sizes="(min-width: 900px) 30vw, 100vw" quality={95} /></div>
     </div>
     <div class="section__body practice__body">
       {practice.parts.map(({ title, text }) => <div class="practice__part stack"><h3>{title}</h3>{text.map((paragraph) => <p>{paragraph}</p>)}</div>)}
