@@ -5,9 +5,12 @@ import floorDuo from '../../assets/unlimited-position/floor-duo.jpg';
 import circle from '../../assets/unlimited-position/circle.jpg';
 import { gallery } from '../../data/home';
 import { testimonials } from '../../data/testimonials';
+// Имена файлов — время съёмки. Шаг золотого сечения по хронологии разводит соседние кадры одной серии подальше друг от друга.
 const morePhotos = Object.entries(import.meta.glob<{ default: ImageMetadata }>('../../../content/unlimited-position-photos/*.jpg', { eager: true }))
   .sort(([first], [second]) => first.localeCompare(second))
-  .map(([, module]) => module.default);
+  .map(([, module], index) => ({ src: module.default, order: (index * 0.618034) % 1 }))
+  .sort((first, second) => first.order - second.order)
+  .map(({ src }) => src);
 const photos = [
   { src: floorLaugh, alt: 'Участница лежит на полу и смеётся, опираясь на руку' },
   { src: floorDuo, alt: 'Две участницы двигаются на полу в паре' },
