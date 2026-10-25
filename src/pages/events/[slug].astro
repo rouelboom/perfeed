@@ -29,7 +29,7 @@ const format = (date: string) => new Date(date).toLocaleDateString('ru-RU', { da
       <EventFacts event={event} />
       {isClass(event) && <p class="small">опыт не требуется</p>}
       {event.price?.deposit && <p class="small">Предоплата закрепляет место в группе и входит в общую стоимость.</p>}
-      {status === 'open' && event.registrationUrl && <div class="stack"><a class="button" href={event.registrationUrl}>записаться <span aria-hidden="true">↗</span></a><p class="small muted">откроется форма записи</p></div>}
+      {status === 'open' && event.registrationUrl && <a class="button" href={event.registrationUrl}>записаться <span aria-hidden="true">↗</span></a>}
       {status === 'closed' && <p>запись закрыта</p>}
       {status === 'upcoming' && !event.registrationUrl && <a class="arrow-link" href={site.contacts.find(({ href }) => href.includes('t.me'))?.href}>следить за анонсами в Telegram ↗</a>}
       {event.sessions && <div class="stack"><h2>все встречи</h2><ol class="event-page__sessions">{event.sessions.map(({ date, time, note }) => <li><time datetime={date}>{format(date)}</time><span class="muted">{[time ?? 'время уточняется', note].filter(Boolean).join(' · ')}</span></li>)}</ol></div>}
