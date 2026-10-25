@@ -5,6 +5,9 @@ import floorDuo from '../../assets/unlimited-position/floor-duo.jpg';
 import circle from '../../assets/unlimited-position/circle.jpg';
 import { gallery } from '../../data/home';
 import { testimonials } from '../../data/testimonials';
+const morePhotos = Object.entries(import.meta.glob<{ default: ImageMetadata }>('../../../content/unlimited-position-photos/*.jpg', { eager: true }))
+  .sort(([first], [second]) => first.localeCompare(second))
+  .map(([, module]) => module.default);
 const photos = [
   { src: floorLaugh, alt: 'Участница лежит на полу и смеётся, опираясь на руку' },
   { src: floorDuo, alt: 'Две участницы двигаются на полу в паре' },
@@ -14,6 +17,16 @@ const photos = [
 <section class="section" id="in-class" aria-labelledby="in-class-title">
   <div class="wrap grid"><h2 class="section__title" id="in-class-title">{gallery.title}</h2></div>
   <div class="wrap gallery__photos">{photos.map(({ src, alt }) => <figure><Image src={src} alt={alt} widths={[480, 720, 1000]} sizes="(min-width: 900px) 32vw, 100vw" /></figure>)}</div>
+  {morePhotos.length > 0 && <div class="wrap gallery__more" role="region" aria-roledescription="карусель" aria-label="ещё фото с занятий">
+    <ul class="gallery__track" tabindex="0">{morePhotos.map((src, index) => <li><Image src={src} alt={`Фото с занятия ${index + 1} из ${morePhotos.length}`} widths={[480, 720, 1000]} sizes="(min-width: 900px) 32vw, 100vw" loading="lazy" /></li>)}</ul>
+    <div class="gallery__controls">
+      <p class="small muted gallery__counter" aria-live="polite"><span data-current>1</span> / {morePhotos.length}</p>
+      <div class="gallery__buttons">
+        <button class="gallery__button" type="button" data-step="-1" aria-label="предыдущие фото" disabled>←</button>
+        <button class="gallery__button" type="button" data-step="1" aria-label="следующие фото">→</button>
+      </div>
+    </div>
+  </div>}
   <div class="wrap grid gallery__reviews">
     <h3 class="gallery__reviews-title">{gallery.reviewsTitle}</h3>
     <div class="gallery__quotes">{testimonials.map(({ paragraphs, author }) => <figure class="gallery__quote"><blockquote>{paragraphs.map((paragraph) => <p>{paragraph}</p>)}</blockquote><figcaption class="small muted">{author}</figcaption></figure>)}</div>
@@ -23,10 +36,45 @@ const photos = [
   .gallery__photos { display: grid; gap: 1.5rem var(--gap); margin-top: 1.5rem; }
   .gallery__photos figure { display: grid; gap: 0.5rem; }
   .gallery__photos img { aspect-ratio: 3 / 2; object-fit: cover; width: 100%; }
+  .gallery__more { display: grid; gap: 0.75rem; margin-top: 1.5rem; }
+  .gallery__track { display: grid; gap: var(--gap); grid-auto-columns: 100%; grid-auto-flow: column; list-style: none; margin: 0; overflow-x: auto; overscroll-behavior-x: contain; padding: 0; scroll-snap-type: x mandatory; scrollbar-width: none; }
+  .gallery__track::-webkit-scrollbar { display: none; }
+  .gallery__track li { scroll-snap-align: start; }
+  .gallery__track img { aspect-ratio: 3 / 2; display: block; object-fit: cover; width: 100%; }
+  .gallery__controls { align-items: center; display: flex; justify-content: space-between; }
+  .gallery__buttons { display: flex; gap: 0.5rem; }
+  .gallery__button { align-items: center; background: transparent; border: 1px solid var(--ink); color: var(--ink); cursor: pointer; display: inline-flex; font: inherit; height: 44px; justify-content: center; transition: background-color 0.18s ease, color 0.18s ease; width: 44px; }
+  .gallery__button:hover:not(:disabled) { background: var(--ink); color: var(--paper); }
+  .gallery__button:disabled { border-color: var(--rule); color: var(--rule); cursor: default; }
+  @media (prefers-reduced-motion: reduce) { .gallery__button { transition: none; } }
   .gallery__reviews { margin-top: 2.5rem; row-gap: 1.5rem; }
   .gallery__quotes { align-items: start; display: grid; gap: 2rem; }
   .gallery__quote { border-left: 2px solid var(--blue); display: grid; gap: 0.75rem; padding-left: 1.25rem; }
   .gallery__quote blockquote { display: grid; font-size: 1.0625rem; gap: 1rem; line-height: 1.55; margin: 0; }
   .gallery__quote p { white-space: pre-line; }
-  @media (min-width: 900px) { .gallery__photos { grid-template-columns: repeat(3, minmax(0, 1fr)); } .gallery__reviews-title { grid-column: 1 / 4; } .gallery__quotes { grid-column: 5 / 13; grid-template-columns: repeat(2, minmax(0, 1fr)); } .gallery__quote:last-child { grid-column: 1 / -1; } }
+  @media (min-width: 900px) { .gallery__photos { grid-template-columns: repeat(3, minmax(0, 1fr)); } .gallery__track { grid-auto-columns: calc((100% - 2 * var(--gap)) / 3); } .gallery__reviews-title { grid-column: 1 / 4; } .gallery__quotes { grid-column: 5 / 13; grid-template-columns: repeat(2, minmax(0, 1fr)); } .gallery__quote:last-child { grid-column: 1 / -1; } }
 </style>
+<script>
+  for (const carousel of document.querySelectorAll<HTMLElement>('.gallery__more')) {
+    const track = carousel.querySelector<HTMLElement>('.gallery__track')!;
+    const current = carousel.querySelector<HTMLElement>('[data-current]')!;
+    const [prev, next] = carousel.querySelectorAll<HTMLButtonElement>('.gallery__button');
+    const slideWidth = () => (track.firstElementChild as HTMLElement).offsetWidth + parseFloat(getComputedStyle(track).columnGap);
+    const update = () => {
+      const first = Math.round(track.scrollLeft / slideWidth()) + 1;
+      const last = Math.min(first + Math.round((track.clientWidth + parseFloat(getComputedStyle(track).columnGap)) / slideWidth()) - 1, track.children.length);
+      current.textContent = first === last ? String(first) : `${first}–${last}`;
+      prev.disabled = track.scrollLeft <= 1;
+      next.disabled = track.scrollLeft + track.clientWidth >= track.scrollWidth - 1;
+    };
+    for (const button of [prev, next]) {
+      button.addEventListener('click', () => {
+        const smooth = !matchMedia('(prefers-reduced-motion: reduce)').matches;
+        track.scrollBy({ left: Number(button.dataset.step) * (track.clientWidth + parseFloat(getComputedStyle(track).columnGap)), behavior: smooth ? 'smooth' : 'auto' });
+      });
+    }
+    track.addEventListener('scroll', update, { passive: true });
+    addEventListener('resize', update);
+    update();
+  }
+</script>
