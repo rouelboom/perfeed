@@ -8,6 +8,7 @@ export const site = {
     ['занятия', '/#classes'],
     ['подход', '/#approach'],
     ['события', '/events/'],
+    ['блог', '/blog/'],
     ['обо мне', '/#about'],
   ],
   authorContacts: [

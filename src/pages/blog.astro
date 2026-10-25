@@ -1,0 +1,26 @@
+---
+import { Image } from 'astro:assets';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { posts } from '../data/blog';
+
+const fragments = (text: string) => text.split(/\*\*(.+?)\*\*/).map((part, index) => ({ part, bold: index % 2 === 1 }));
+---
+<BaseLayout title="блог — unlimited position" description="Заметки Насти Сенокосовой о современном танце, теле и практике unlimited position в Калуге.">
+  <div class="wrap page-heading"><h1 class="page-heading__title">блог</h1></div>
+  {posts.map(({ slug, title, image, text }) => (
+    <article class="section blog-post" id={slug} aria-labelledby={`${slug}-title`}>
+      <div class="wrap grid">
+        <h2 class="section__title" id={`${slug}-title`}>{title}</h2>
+        <div class="section__body">
+          <Image class="blog-post__image" src={image.src} alt={image.alt} widths={[image.src.width]} sizes={`${image.src.width}px`} />
+          {text.map((paragraph) => <p>{fragments(paragraph).map(({ part, bold }) => bold ? <strong>{part}</strong> : part)}</p>)}
+        </div>
+      </div>
+    </article>
+  ))}
+</BaseLayout>
+<style>
+  .blog-post:last-of-type { padding-bottom: var(--section); }
+  .blog-post__image { height: auto; margin-bottom: 0.5rem; max-width: 36rem; width: 100%; }
+  .blog-post strong { font-weight: 600; }
+</style>
