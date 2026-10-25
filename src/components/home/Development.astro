@@ -1,11 +1,21 @@
 ---
+import { Image } from 'astro:assets';
+import jump from '../../../content/unlimited-position-photos/author/2026-10-25 22.17.42.jpg';
 import { development } from '../../data/home';
 ---
 <section class="section" id="development" aria-labelledby="development-title">
   <div class="wrap grid">
     <h2 class="section__title" id="development-title">{development.title}</h2>
+    <figure class="development__photo">
+      <Image src={jump} alt="Настя в движении на одной ноге в танцевальном зале" widths={[480, 720, 1000]} sizes="100vw" />
+    </figure>
     <div class="section__body">
       {development.text.map((paragraph) => <p>{paragraph}</p>)}
     </div>
   </div>
 </section>
+<style>
+  .development__photo { margin-bottom: 1.75rem; }
+  .development__photo img { aspect-ratio: 4 / 5; object-fit: cover; width: 100%; }
+  @media (min-width: 900px) { .development__photo { display: none; } }
+</style>
