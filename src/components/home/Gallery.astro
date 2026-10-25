@@ -16,7 +16,7 @@ const photos = [
   <div class="wrap gallery__photos">{photos.map(({ src, alt, caption }) => <figure><Image src={src} alt={alt} widths={[480, 720, 1000]} sizes="(min-width: 900px) 32vw, 100vw" /><figcaption class="small muted">{caption}</figcaption></figure>)}</div>
   <div class="wrap grid gallery__reviews">
     <h3 class="gallery__reviews-title">{gallery.reviewsTitle}</h3>
-    <div class="gallery__quotes">{testimonials.map(({ text, author }) => <figure class="gallery__quote"><blockquote><p>«{text}»</p></blockquote><figcaption class="small muted">{author}</figcaption></figure>)}</div>
+    <div class="gallery__quotes">{testimonials.map(({ paragraphs, author }) => <figure class="gallery__quote"><blockquote>{paragraphs.map((paragraph) => <p>{paragraph}</p>)}</blockquote><figcaption class="small muted">{author}</figcaption></figure>)}</div>
   </div>
 </section>
 <style>
@@ -24,8 +24,9 @@ const photos = [
   .gallery__photos figure { display: grid; gap: 0.5rem; }
   .gallery__photos img { aspect-ratio: 3 / 2; object-fit: cover; width: 100%; }
   .gallery__reviews { margin-top: 2.5rem; row-gap: 1.5rem; }
-  .gallery__quotes { display: grid; gap: 1.5rem; }
+  .gallery__quotes { align-items: start; display: grid; gap: 2rem; }
   .gallery__quote { border-left: 2px solid var(--blue); display: grid; gap: 0.75rem; padding-left: 1.25rem; }
-  .gallery__quote blockquote { font-size: clamp(1.125rem, 1.8vw, 1.5rem); letter-spacing: -0.02em; line-height: 1.4; margin: 0; }
-  @media (min-width: 900px) { .gallery__photos { grid-template-columns: repeat(3, minmax(0, 1fr)); } .gallery__reviews-title { grid-column: 1 / 4; } .gallery__quotes { grid-column: 5 / 13; grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  .gallery__quote blockquote { display: grid; font-size: 1.0625rem; gap: 1rem; line-height: 1.55; margin: 0; }
+  .gallery__quote p { white-space: pre-line; }
+  @media (min-width: 900px) { .gallery__photos { grid-template-columns: repeat(3, minmax(0, 1fr)); } .gallery__reviews-title { grid-column: 1 / 4; } .gallery__quotes { grid-column: 5 / 13; grid-template-columns: repeat(2, minmax(0, 1fr)); } .gallery__quote:last-child { grid-column: 1 / -1; } }
 </style>

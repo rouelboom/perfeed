@@ -13,15 +13,12 @@ import { work } from '../../data/home';
       </figure>
     </div>
     <div class="section__body">
-      <p>{work.lead}</p>
-      <ol class="text-list work__steps">{work.steps.map(([title, text]) => <li class="text-list__item"><h3>{title}</h3><p>{text}</p></li>)}</ol>
-      <p>{work.closing}</p>
+      {work.text.map((paragraph) => <p>{paragraph}</p>)}
       <a class="arrow-link" href="#classes">посмотреть ближайшие занятия <span aria-hidden="true">↑</span></a>
     </div>
   </div>
 </section>
 <style>
-  .work__steps { margin-block: 0.5rem; }
   .work__aside { display: contents; }
   .work__photo { display: none; }
   .work__photo img { width: 100%; }
@@ -30,6 +27,5 @@ import { work } from '../../data/home';
     .work__aside .section__title { position: static; }
     .work__photo { display: grid; gap: 0.5rem; margin-top: 2rem; }
     .work__photo img { aspect-ratio: 4 / 5; object-fit: cover; }
-    .work__steps { gap: 2rem; }
   }
 </style>

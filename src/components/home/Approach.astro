@@ -5,15 +5,8 @@ import { approach } from '../../data/home';
   <div class="wrap grid">
     <h2 class="section__title" id="approach-title">{approach.title}</h2>
     <div class="section__body">
-      <p>{approach.lead}</p>
-      <ul class="text-list approach__principles">{approach.principles.map(([title, text]) => <li class="text-list__item"><h3>{title}</h3><p>{text}</p></li>)}</ul>
-      <p>{approach.closing}</p>
+      {approach.text.map((paragraph) => <p>{paragraph}</p>)}
       <a class="arrow-link" href="/#classes">выбрать ближайшее занятие <span aria-hidden="true">↑</span></a>
     </div>
   </div>
 </section>
-<style>
-  .approach__principles { gap: 0; }
-  .approach__principles li { border-bottom: 1px solid var(--rule); padding-block: 1.5rem; }
-  .approach__principles li:first-child { padding-top: 0.5rem; }
-</style>
