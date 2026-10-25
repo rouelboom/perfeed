@@ -7,13 +7,13 @@ import { site } from '../config/site';
 ---
 <BaseLayout title="анастасия сенокосова — unlimited position" description="Анастасия Сенокосова — танц-художница, хореограф и педагог. Образование, педагогическая и художественная практика, проекты и контакты.">
   <div class="wrap grid about-page">
-    <div class="about-page__intro stack"><p class="small muted">об анастасии</p><h1 class="page-heading__title">{author.name}</h1><p>{author.role}</p><p>{author.bio[0]}</p><a class="arrow-link" href="/#classes">ближайшие занятия →</a></div>
+    <div class="about-page__intro stack"><p class="small muted">обо мне</p><h1 class="page-heading__title">{author.name}</h1><p>{author.role}</p><p>{author.bio[0]}</p><a class="arrow-link" href="/#classes">ближайшие занятия →</a></div>
     <Image class="about-page__portrait" src={portrait} alt="Портрет Анастасии Сенокосовой" widths={[400, 640, 853]} sizes="(min-width: 900px) 30vw, 80vw" priority />
   </div>
   <section class="section" aria-labelledby="education-title"><div class="wrap grid"><h2 class="section__title" id="education-title">образование</h2><ul class="section__body text-list">{author.education.map(([title, text]) => <li class="text-list__item"><h3>{title}</h3><p>{text}</p></li>)}</ul></div></section>
   <section class="section" aria-labelledby="experience-title"><div class="wrap grid"><h2 class="section__title" id="experience-title">профессиональный опыт</h2><div class="section__body">{author.experience.map((text) => <p>{text}</p>)}</div></div></section>
   <section class="section" aria-labelledby="projects-title"><div class="wrap grid"><h2 class="section__title" id="projects-title">проекты</h2><ul class="section__body text-list about-page__projects">{author.projects.map((text) => <li class="text-list__item"><p>{text}</p></li>)}</ul></div></section>
-  <section class="section about-page__contact" aria-labelledby="contact-title"><div class="wrap grid"><h2 class="section__title" id="contact-title">для связи</h2><div class="section__body"><p>По вопросам занятий, проектов и сотрудничества можно написать Насте.</p>{site.authorContacts.map(({ label, href }) => <a class="arrow-link" href={href}>{label} ↗</a>)}</div></div></section>
+  <section class="section about-page__contact" aria-labelledby="contact-title"><div class="wrap grid"><h2 class="section__title" id="contact-title">для связи</h2><div class="section__body"><p>По вопросам занятий, проектов и сотрудничества можно написать мне.</p>{site.authorContacts.map(({ label, href }) => <a class="arrow-link" href={href}>{label} ↗</a>)}</div></div></section>
 </BaseLayout>
 <style>
   .about-page { align-items: start; padding-top: clamp(2.5rem, 6vw, 5rem); row-gap: 2rem; }

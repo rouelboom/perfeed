@@ -8,11 +8,11 @@ export const site = {
     ['занятия', '/#classes'],
     ['подход', '/#approach'],
     ['события', '/events/'],
-    ['о насте', '/#about'],
+    ['обо мне', '/#about'],
   ],
   authorContacts: [
-    { label: 'написать Насте в Telegram', href: 'https://t.me/senokosovaa' },
-    { label: 'Instagram* Насти', href: 'https://www.instagram.com/no_movement_today/' },
+    { label: 'написать мне в Telegram', href: 'https://t.me/senokosovaa' },
+    { label: 'мой Instagram*', href: 'https://www.instagram.com/no_movement_today/' },
   ],
   contacts: [
     { label: 'instagram*', href: 'https://www.instagram.com/unlimited.position/' },

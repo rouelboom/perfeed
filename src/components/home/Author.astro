@@ -10,7 +10,7 @@ import { site } from '../../config/site';
     <Image class="author__photo" src={portrait} alt="Анастасия Сенокосова" widths={[400, 640, 853]} sizes="(min-width: 900px) 30vw, 70vw" />
     <div class="author__bio">
       {author.bio.map((paragraph) => <p>{paragraph}</p>)}
-      <div class="author__links"><a class="arrow-link" href="#approach">как я веду занятия ↓</a><a class="arrow-link" href="/about/">подробнее о насте →</a><a class="arrow-link small" href={site.authorContacts[0].href}>{site.authorContacts[0].label} →</a></div>
+      <div class="author__links"><a class="arrow-link" href="#approach">как я веду занятия ↓</a><a class="arrow-link" href="/about/">подробнее обо мне →</a><a class="arrow-link small" href={site.authorContacts[0].href}>{site.authorContacts[0].label} →</a></div>
     </div>
   </div>
 </section>
