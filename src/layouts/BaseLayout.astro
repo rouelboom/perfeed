@@ -1,5 +1,6 @@
 ---
 import '../styles/site.css';
+import ScrollTop from '../components/ScrollTop.astro';
 import SiteFooter from '../components/SiteFooter.astro';
 import SiteHeader from '../components/SiteHeader.astro';
 import { site } from '../config/site';
@@ -53,5 +54,6 @@ const ogImage = new URL(image, Astro.site);
       <slot />
     </main>
     <SiteFooter />
+    <ScrollTop />
   </body>
 </html>
