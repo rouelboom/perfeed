@@ -12,12 +12,14 @@ import { site } from '../config/site';
   </div>
   <section class="section" aria-labelledby="education-title"><div class="wrap grid"><h2 class="section__title" id="education-title">образование</h2><ul class="section__body text-list">{author.education.map(([title, text]) => <li class="text-list__item"><h3>{title}</h3><p>{text}</p></li>)}</ul></div></section>
   <section class="section" aria-labelledby="experience-title"><div class="wrap grid"><h2 class="section__title" id="experience-title">профессиональный опыт</h2><div class="section__body">{author.experience.map((text) => <p>{text}</p>)}</div></div></section>
-  <section class="section" aria-labelledby="projects-title"><div class="wrap grid"><h2 class="section__title" id="projects-title">проекты</h2><ul class="section__body text-list">{author.projects.map((text) => <li class="text-list__item"><p>{text}</p></li>)}</ul></div></section>
+  <section class="section" aria-labelledby="projects-title"><div class="wrap grid"><h2 class="section__title" id="projects-title">проекты</h2><ul class="section__body text-list about-page__projects">{author.projects.map((text) => <li class="text-list__item"><p>{text}</p></li>)}</ul></div></section>
   <section class="section about-page__contact" aria-labelledby="contact-title"><div class="wrap grid"><h2 class="section__title" id="contact-title">для связи</h2><div class="section__body"><p>По вопросам занятий, проектов и сотрудничества можно написать Насте.</p>{site.authorContacts.map(({ label, href }) => <a class="arrow-link" href={href}>{label} ↗</a>)}</div></div></section>
 </BaseLayout>
 <style>
   .about-page { align-items: start; padding-top: clamp(2.5rem, 6vw, 5rem); row-gap: 2rem; }
   .about-page__portrait { grid-column: 1 / 6; max-height: 38rem; object-fit: cover; width: 100%; }
   .about-page__contact { padding-bottom: var(--section); }
+  .about-page__projects li { padding-left: 1.25rem; position: relative; }
+  .about-page__projects li::before { background: var(--blue); border-radius: 50%; content: ""; height: 0.375rem; left: 0; position: absolute; top: 0.6em; width: 0.375rem; }
   @media (min-width: 900px) { .about-page__intro { grid-column: 1 / 8; } .about-page__portrait { grid-column: 9 / 13; } }
 </style>
