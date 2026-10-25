@@ -17,7 +17,6 @@ const registrationOpen = effectiveStatus(event) === 'open' && event.registration
       <p class="class-card__date"><time datetime={event.startDate}>{date ?? 'дата пока не объявлена'}</time></p>
     </div>
     <EventFacts event={event} showPrice={false} showParticipants={false} />
-    <p class="small muted">опыт не требуется</p>
   </div>
   <div class="class-card__cost">
     {event.price && <div class="class-card__price">
