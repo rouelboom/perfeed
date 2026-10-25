@@ -1,6 +1,6 @@
 ---
 import { Image } from 'astro:assets';
-import heroImage from '../../assets/unlimited-position/floor-flash.jpg';
+import heroImage from '../../assets/unlimited-position/hero-portrait.jpg';
 import { site } from '../../config/site';
 import { hero } from '../../data/home';
 import { currentClasses } from '../../data/events';
@@ -20,8 +20,7 @@ const enrollmentMonth = group?.startDate && new Date(group.startDate).toLocaleDa
     <a class="button" href="#classes">{hero.action} <span aria-hidden="true">↓</span></a>
   </div>
   <figure class="hero__photo">
-    <Image src={heroImage} alt="Участница опирается ладонью о голубой пол, продолжая движение" widths={[480, 720, 1000, 1280]} sizes="(min-width: 1100px) 45vw, (min-width: 900px) 40vw, 100vw" priority />
-    <figcaption class="small muted">современный танец и импровизация</figcaption>
+    <Image src={heroImage} alt="Настя стоит на голубом полу, склонив голову и придерживая волосы рукой" widths={[480, 720, 1000, 1280]} sizes="(min-width: 1100px) 45vw, (min-width: 900px) 40vw, 100vw" priority />
   </figure>
 </section>
 
