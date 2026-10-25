@@ -27,7 +27,7 @@ const registrationOpen = effectiveStatus(event) === 'open' && event.registration
   </div>
   <div class="class-card__actions">
     {registrationOpen ?
-      <a class="button" href={event.registrationUrl} aria-label={`Записаться: ${event.title}, ${date}`}>{event.type === 'regular_group' ? 'записаться в группу' : `записаться на ${date}`} <span aria-hidden="true">↗</span></a>
+      <a class="button" href={event.registrationUrl} aria-label={`Записаться: ${event.title}, ${date}`}>{event.type === 'regular_group' ? 'записаться в группу' : `записаться на ${date}`} <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 13 13 3M3 3h10v10" /></svg></a>
     : <p class="small muted">{effectiveStatus(event) === 'closed' ? 'запись закрыта' : 'запись пока не открыта'}</p>}
   </div>
   <div class="class-card__more">

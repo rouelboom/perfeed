@@ -29,7 +29,7 @@ const format = (date: string) => new Date(date).toLocaleDateString('ru-RU', { da
       <EventFacts event={event} />
       {isClass(event) && <p class="small">опыт не требуется</p>}
       {event.price?.deposit && <p class="small">Предоплата закрепляет место в группе и входит в общую стоимость.</p>}
-      {status === 'open' && event.registrationUrl && <a class="button" href={event.registrationUrl}>записаться <span aria-hidden="true">↗</span></a>}
+      {status === 'open' && event.registrationUrl && <a class="button" href={event.registrationUrl}>записаться <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 13 13 3M3 3h10v10" /></svg></a>}
       {status === 'closed' && <p>запись закрыта</p>}
       {status === 'upcoming' && !event.registrationUrl && <a class="arrow-link" href={site.contacts.find(({ href }) => href.includes('t.me'))?.href}>следить за анонсами в Telegram ↗</a>}
       {event.sessions && <div class="stack"><h2>все встречи</h2><ol class="event-page__sessions">{event.sessions.map(({ date, time, note }) => <li><time datetime={date}>{format(date)}</time><span class="muted">{[time ?? 'время уточняется', note].filter(Boolean).join(' · ')}</span></li>)}</ol></div>}
@@ -37,7 +37,7 @@ const format = (date: string) => new Date(date).toLocaleDateString('ru-RU', { da
     </div>
     {isClass(event) && <div class="event-page__details">
       <section class="stack" aria-labelledby="class-audience-title"><h2 id="class-audience-title">{practice.audienceTitle}</h2>{practice.audience.map((text) => <p>{text}</p>)}</section>
-      {status === 'open' && event.registrationUrl && <a class="button" href={event.registrationUrl}>записаться {event.type === 'regular_group' ? 'в группу' : 'на открытый класс'} ↗</a>}
+      {status === 'open' && event.registrationUrl && <a class="button" href={event.registrationUrl}>записаться {event.type === 'regular_group' ? 'в группу' : 'на открытый класс'} <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 13 13 3M3 3h10v10" /></svg></a>}
     </div>}
   </article>
 </BaseLayout>
