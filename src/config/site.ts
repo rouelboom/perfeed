@@ -19,5 +19,6 @@ export const site = {
     { label: 'instagram*', href: 'https://www.instagram.com/unlimited.position/' },
     { label: 'telegram', href: 'https://t.me/dancepixieforyou' },
   ],
+  photoCredits: 'в оформлении сайта использовались фото Михаила Горячева, Виктора Катрича, Ольги Мазайло и фото из личного архива',
   instagramNote: '* Instagram принадлежит компании Meta, деятельность которой признана экстремистской и запрещена на территории РФ.',
 } as const;
