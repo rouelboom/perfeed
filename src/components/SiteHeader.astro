@@ -10,7 +10,7 @@ const [name, translation] = site.name.split(' / ');
     <nav class="up-header__nav" aria-label="Основная навигация">
       <ul>{site.nav.map(([label, href]) => <li><a href={href}>{label}</a></li>)}</ul>
     </nav>
-    <a class="up-header__join" href="/#classes">записаться <span aria-hidden="true">↗</span></a>
+    <a class="up-header__join" href="/#classes">записаться <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 13 13 3M3 3h10v10" /></svg></a>
     <details class="up-header__menu">
       <summary>меню</summary>
       <nav aria-label="Мобильная навигация">

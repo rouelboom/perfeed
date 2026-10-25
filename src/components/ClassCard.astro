@@ -27,10 +27,9 @@ const registrationOpen = effectiveStatus(event) === 'open' && event.registration
     {event.price?.deposit && <p class="small">Предоплата {rub(event.price.deposit)} закрепляет место в группе и входит в общую стоимость.</p>}
   </div>
   <div class="class-card__actions">
-    {registrationOpen ? <>
+    {registrationOpen ?
       <a class="button" href={event.registrationUrl} aria-label={`Записаться: ${event.title}, ${date}`}>{event.type === 'regular_group' ? 'записаться в группу' : `записаться на ${date}`} <span aria-hidden="true">↗</span></a>
-      <p class="small muted">откроется форма записи</p>
-    </> : <p class="small muted">{effectiveStatus(event) === 'closed' ? 'запись закрыта' : 'запись пока не открыта'}</p>}
+    : <p class="small muted">{effectiveStatus(event) === 'closed' ? 'запись закрыта' : 'запись пока не открыта'}</p>}
   </div>
   <div class="class-card__more">
     {event.sessions && <details class="disclosure">
