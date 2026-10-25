@@ -89,7 +89,7 @@ export const adults = {
 
 export const gallery = {
   title: 'на занятиях',
-  reviewsTitle: 'отзывы о моих занятиях',
+  reviewsTitle: 'отзывы о занятиях',
 };
 
 export const statement = {
