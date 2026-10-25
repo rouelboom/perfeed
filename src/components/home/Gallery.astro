@@ -1,21 +1,26 @@
 ---
 import { Image } from 'astro:assets';
-import floorLaugh from '../../assets/unlimited-position/floor-laugh.jpg';
-import floorDuo from '../../assets/unlimited-position/floor-duo.jpg';
+import duo from '../../../content/unlimited-position-photos/2026-10-23 20.10.14.jpg';
+import alone from '../../../content/unlimited-position-photos/2026-10-23 20.13.34.jpg';
 import circle from '../../assets/unlimited-position/circle.jpg';
 import { gallery } from '../../data/home';
 import { testimonials } from '../../data/testimonials';
-// Имена файлов — время съёмки. Шаг золотого сечения по хронологии разводит соседние кадры одной серии подальше друг от друга.
-const morePhotos = Object.entries(import.meta.glob<{ default: ImageMetadata }>('../../../content/unlimited-position-photos/*.jpg', { eager: true }))
-  .sort(([first], [second]) => first.localeCompare(second))
-  .map(([, module], index) => ({ src: module.default, order: (index * 0.618034) % 1 }))
-  .sort((first, second) => first.order - second.order)
-  .map(({ src }) => src);
 const photos = [
-  { src: floorLaugh, alt: 'Участница лежит на полу и смеётся, опираясь на руку' },
-  { src: floorDuo, alt: 'Две участницы двигаются на полу в паре' },
+  { src: duo, alt: 'Двое танцуют в паре, вытянув руки в одну сторону' },
+  { src: alone, alt: 'Танцующий низко склонился к полу у стены, опираясь на руки' },
   { src: circle, alt: 'Участники сидят кругом на голубом полу зала' },
 ];
+const firstPhotos = ['2026-10-23 20.10.26.jpg', '2026-10-23 20.13.29.jpg', '2026-10-23 20.11.55.jpg'];
+const carouselPhotos = Object.entries(import.meta.glob<{ default: ImageMetadata }>('../../../content/unlimited-position-photos/*.jpg', { eager: true }))
+  .map(([path, module]) => ({ name: path.split('/').pop()!, src: module.default }))
+  .filter(({ src }) => !photos.some((photo) => photo.src.src === src.src));
+// Имена файлов — время съёмки. Шаг золотого сечения по хронологии разводит соседние кадры одной серии подальше друг от друга.
+const shuffled = carouselPhotos
+  .filter(({ name }) => !firstPhotos.includes(name))
+  .sort((first, second) => first.name.localeCompare(second.name))
+  .map((photo, index) => ({ ...photo, order: (index * 0.618034) % 1 }))
+  .sort((first, second) => first.order - second.order);
+const morePhotos = [...firstPhotos.flatMap((name) => carouselPhotos.filter((photo) => photo.name === name)), ...shuffled].map(({ src }) => src);
 ---
 <section class="section" id="in-class" aria-labelledby="in-class-title">
   <div class="wrap grid"><h2 class="section__title" id="in-class-title">{gallery.title}</h2></div>
