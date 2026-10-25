@@ -1,10 +1,8 @@
 ---
 import { Image } from 'astro:assets';
 import portrait from '../../content/photos/actor2.jpg';
-import EventList from '../components/EventList.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { author } from '../data/home';
-import { pastEvents } from '../data/events';
 import { site } from '../config/site';
 ---
 <BaseLayout title="анастасия сенокосова — unlimited position" description="Анастасия Сенокосова — танц-художница, хореограф и педагог. Образование, педагогическая и художественная практика, проекты и контакты.">
@@ -14,7 +12,7 @@ import { site } from '../config/site';
   </div>
   <section class="section" aria-labelledby="education-title"><div class="wrap grid"><h2 class="section__title" id="education-title">образование</h2><ul class="section__body text-list">{author.education.map(([title, text]) => <li class="text-list__item"><h3>{title}</h3><p>{text}</p></li>)}</ul></div></section>
   <section class="section" aria-labelledby="experience-title"><div class="wrap grid"><h2 class="section__title" id="experience-title">профессиональный опыт</h2><div class="section__body">{author.experience.map((text) => <p>{text}</p>)}</div></div></section>
-  <section class="section" aria-labelledby="projects-title"><div class="wrap grid"><h2 class="section__title" id="projects-title">события и проекты</h2><div class="section__body"><EventList items={pastEvents().filter((event) => event.page)} /><a class="arrow-link" href="/events/">все события и архив →</a></div></div></section>
+  <section class="section" aria-labelledby="projects-title"><div class="wrap grid"><h2 class="section__title" id="projects-title">проекты</h2><ul class="section__body text-list">{author.projects.map((text) => <li class="text-list__item"><p>{text}</p></li>)}</ul></div></section>
   <section class="section about-page__contact" aria-labelledby="contact-title"><div class="wrap grid"><h2 class="section__title" id="contact-title">для связи</h2><div class="section__body"><p>По вопросам занятий, проектов и сотрудничества можно написать Насте.</p>{site.authorContacts.map(({ label, href }) => <a class="arrow-link" href={href}>{label} ↗</a>)}</div></div></section>
 </BaseLayout>
 <style>
