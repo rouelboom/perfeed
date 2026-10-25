@@ -1,4 +1,6 @@
 import type { ImageMetadata } from 'astro';
+import { effectiveStatus, kalugaDate, type EventStatus } from '../lib/event-status';
+export type { EventStatus } from '../lib/event-status';
 import actor1 from '../../content/photos/actor1.jpg';
 import actor2 from '../../content/photos/actor2.jpg';
 import actor3 from '../../content/photos/actor3.jpg';
@@ -22,9 +24,6 @@ import foilPortrait from '../assets/images/showcase-selective-color.png';
 import hero from '../assets/images/hero.jpg';
 
 export type EventType = 'regular_group' | 'open_class' | 'screening' | 'performance' | 'laboratory' | 'talk' | 'jam';
-
-/** upcoming — анонс без записи, open — идёт запись, closed — запись закрыта, past — событие прошло. */
-export type EventStatus = 'upcoming' | 'open' | 'closed' | 'past';
 
 export const eventTypeLabels: Record<EventType, string> = {
   regular_group: 'регулярная группа',
@@ -66,6 +65,7 @@ interface EventCommon {
   sessions?: readonly EventSession[];
   description: string;
   registrationUrl?: string;
+  nextIntakeLabel?: string;
   report?: readonly string[];
   gallery?: readonly { image: ImageMetadata; alt: string }[];
 }
@@ -242,7 +242,8 @@ export const events: readonly SiteEvent[] = [
       { date: '2026-11-24' },
       { date: '2026-11-28', time: '17:00–19:00', note: 'последняя встреча' },
     ],
-    description: 'последовательная практика: четыре недели одним составом.',
+    description: 'Последовательная работа одним составом. Мы возвращаемся к знакомым принципам, постепенно усложняем задачи и можем глубже работать с техникой, импровизацией, взаимодействием и композицией — тем, как движения складываются в танец.',
+    nextIntakeLabel: 'Следующий набор после ноября планируется в январе.',
     registrationUrl: 'https://forms.yandex.ru/u/6ad9d6d44a052ddb4dc23271/',
   },
   {
@@ -253,9 +254,11 @@ export const events: readonly SiteEvent[] = [
     startDate: '2026-11-01',
     dateLabel: '01.11',
     time: '16:00–18:00',
+    location: regularGroupLocation,
+    age: '18+',
     price: { base: 1500 },
     registrationUrl: 'https://forms.yandex.ru/u/6adb9d125057b2465f18030d',
-    description: 'возможность познакомиться с анастасией и попробовать практику до начала регулярной группы.',
+    description: 'Одна встреча, на которой можно познакомиться с Анастасией, попробовать её подход к технике и импровизации и понять, подходит ли вам такой способ работы.',
   },
   {
     slug: 'open-class-2026-11-22',
@@ -265,16 +268,18 @@ export const events: readonly SiteEvent[] = [
     startDate: '2026-11-22',
     dateLabel: '22.11',
     time: '16:00–18:00',
+    location: regularGroupLocation,
+    age: '18+',
     price: { base: 1500 },
     registrationUrl: 'https://forms.yandex.ru/u/6adb9d125057b2465f18030d',
-    description: 'отдельная встреча для тех, кто не может включиться в регулярную группу.',
+    description: 'Самостоятельная встреча для знакомства с практикой или продолжения работы в разовом формате. Через двигательные задачи будем работать с техникой современного танца и импровизацией.',
   },
   {
     slug: 'screenings',
     title: 'просмотры и разговоры',
     type: 'screening',
     status: 'upcoming',
-    description: 'смотрим танцевальные спектакли и перформансы, затем обсуждаем их. даты появятся здесь.',
+    description: 'Будем смотреть танцевальные спектакли и перформансы, затем обсуждать увиденное. Дата ближайшей встречи пока не объявлена.',
   },
   {
     slug: 'zoloto-not-dance-2026',
@@ -328,10 +333,14 @@ const byStartDate = (first: SiteEvent, second: SiteEvent) =>
   (first.startDate ?? '9999').localeCompare(second.startDate ?? '9999');
 
 /** Актуальная программа: всё, что ещё не прошло; события без даты — в конце. */
-export const currentEvents = () => events.filter(({ status }) => status !== 'past').sort(byStartDate);
+export const currentEvents = (today = kalugaDate()) => events.filter((event) => effectiveStatus(event, today) !== 'past').sort(byStartDate);
 
 /** Прошедшие события, новые сверху. */
-export const pastEvents = () => events.filter(({ status }) => status === 'past').sort((first, second) => byStartDate(second, first));
+export const pastEvents = (today = kalugaDate()) => events.filter((event) => effectiveStatus(event, today) === 'past').sort((first, second) => byStartDate(second, first));
+
+export const isClass = (event: SiteEvent) => event.type === 'regular_group' || event.type === 'open_class';
+
+export const currentClasses = () => currentEvents().filter(isClass);
 
 export function getEvent<P extends NonNullable<SiteEvent['page']>>(slug: string, page: P) {
   const event = events.find((item): item is Extract<SiteEvent, { page: P }> => item.slug === slug && item.page === page);

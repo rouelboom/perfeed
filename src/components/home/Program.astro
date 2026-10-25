@@ -1,29 +1,31 @@
 ---
-import { currentEvents, pastEvents } from '../../data/events';
+import { currentClasses } from '../../data/events';
 import { program } from '../../data/home';
-import EventRow from '../EventRow.astro';
-
-const events = currentEvents();
-const [latestPast] = pastEvents();
+import { site } from '../../config/site';
+import ClassCard from '../ClassCard.astro';
+const events = currentClasses();
+const firstDate = events.find(({ startDate }) => startDate)?.startDate;
+const month = firstDate && new Date(firstDate).toLocaleDateString('ru-RU', { month: 'long', year: 'numeric', timeZone: 'UTC' });
 ---
 
-<section class="program band" id="program" aria-labelledby="program-title">
+<section class="section program" id="classes" aria-labelledby="classes-title">
+  <span id="program" class="visually-hidden" aria-hidden="true"></span>
+  <span id="calendar" class="visually-hidden" aria-hidden="true"></span>
   <div class="wrap">
-    <h2 class="program__title" id="program-title">{program.title}</h2>
-    <ol class="program__list">{events.map((event) => <li><EventRow event={event} /></li>)}</ol>
-    {latestPast && (
-      <p class="program__past small">
-        <span class="muted">прошедшее событие: {latestPast.title}, {latestPast.dateLabel}</span>
-        <a class="arrow-link" href="/events/#past">все прошедшие события <span aria-hidden="true">→</span></a>
-      </p>
-    )}
+    <div class="program__intro">
+      <div><h2 class="section__title" id="classes-title">{program.title}</h2>{month && <p class="small muted">{month}</p>}</div>
+      <p>{program.text}</p>
+    </div>
+    {events.length ? <ol class="program__cards">{events.map((event) => <li><ClassCard event={event} /></li>)}</ol> : <div class="stack"><p>{program.empty}</p><a class="arrow-link" href={site.contacts.find(({ href }) => href.includes('t.me'))?.href}>анонсы в Telegram →</a></div>}
   </div>
 </section>
 
 <style>
-  .program { margin-top: var(--section); padding-block: clamp(3rem, 7vw, 6rem); }
-  .program__title { font-size: clamp(2rem, 5.2vw, 4.5rem); letter-spacing: -0.035em; line-height: 0.95; margin-bottom: clamp(2rem, 5vw, 4rem); }
-  .program__list { border-top: 1px solid currentColor; }
-  .program__list > li { border-bottom: 1px solid rgb(255 255 255 / 0.35); }
-  .program__past { display: flex; flex-wrap: wrap; gap: 0.4rem 2rem; justify-content: space-between; margin-top: 2rem; }
+  .program__intro { display: grid; gap: 1rem; margin-bottom: 2rem; }
+  .program__intro .section__title { margin-bottom: 0.5rem; position: static; }
+  .program__cards { display: grid; gap: 2rem; }
+  @media (min-width: 900px) {
+    .program__intro { align-items: start; gap: var(--gap); grid-template-columns: 1fr 1fr; }
+    .program__cards { column-gap: 2rem; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  }
 </style>

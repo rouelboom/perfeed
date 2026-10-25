@@ -1,27 +1,21 @@
 ---
-import { Image } from 'astro:assets';
-import circle from '../../assets/unlimited-position/circle.jpg';
+import { currentEvents, isClass, pastEvents } from '../../data/events';
 import { context } from '../../data/home';
+import { site } from '../../config/site';
+import EventList from '../EventList.astro';
+const upcoming = currentEvents().filter((event) => !isClass(event));
+const past = pastEvents().slice(0, 2);
 ---
-
 <section class="section" id="context" aria-labelledby="context-title">
   <div class="wrap grid">
     <h2 class="section__title" id="context-title">{context.title}</h2>
-    <div class="section__body context">
-      <div>
-        <p class="context__text">{context.text}</p>
-        <ul class="context__formats">{context.formats.map((item) => <li>{item}</li>)}</ul>
-      </div>
-      <Image src={circle} alt="Участники сидят кругом на полу зала" widths={[480, 720, 960]} sizes="(min-width: 900px) 35vw, 100vw" />
+    <div class="section__body">
+      <p>{context.text}</p>
+      {upcoming.length > 0 && <EventList items={upcoming.slice(0, 1)} descriptions />}
+      <a class="arrow-link" href={site.contacts.find(({ href }) => href.includes('t.me'))?.href}>следить за анонсами в Telegram ↗</a>
+      {past.length > 0 && <div class="context__past stack"><h3>прошедшие события</h3><EventList items={past} /></div>}
+      <a class="arrow-link" href="/events/">все события →</a>
     </div>
   </div>
 </section>
-
-<style>
-  .context { gap: 3rem; }
-  .context__text { font-size: clamp(1.2rem, 2vw, 1.6rem); letter-spacing: -0.01em; line-height: 1.3; max-width: 34ch; }
-  .context__formats { display: flex; flex-wrap: wrap; font-size: clamp(1.4rem, 3vw, 2.4rem); gap: 0.25rem 0.9rem; letter-spacing: -0.02em; line-height: 1.15; margin-top: 2.5rem; }
-  .context__formats li:not(:last-child)::after { color: var(--blue); content: '/'; margin-left: 0.9rem; }
-
-  @media (min-width: 900px) { .context { grid-template-columns: 5fr 4fr; } }
-</style>
+<style>.context__past { margin-top: 0.5rem; }</style>

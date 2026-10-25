@@ -1,35 +1,35 @@
 ---
 import { Image } from 'astro:assets';
-import contact from '../../assets/unlimited-position/contact.jpg';
-import floorDuo from '../../assets/unlimited-position/floor-duo.jpg';
-import hands from '../../assets/unlimited-position/hands.jpg';
+import wall from '../../assets/unlimited-position/wall.jpg';
 import { work } from '../../data/home';
-
-const photos = [
-  { src: floorDuo, alt: 'Две участницы работают на полу в паре' },
-  { src: contact, alt: 'Участница поднимает руку, опираясь на партнёра' },
-  { src: hands, alt: 'Ладони и стопы участников на голубом полу' },
-];
 ---
-
 <section class="section" id="work" aria-labelledby="work-title">
   <div class="wrap grid">
-    <h2 class="section__title" id="work-title">{work.title}</h2>
-    <div class="section__body">{work.text.map((paragraph) => <p>{paragraph}</p>)}</div>
-  </div>
-  <div class="wrap work__strip">
-    {photos.map(({ src, alt }) => <Image src={src} alt={alt} widths={[480, 720]} sizes="(min-width: 600px) 31vw, 46vw" />)}
+    <div class="work__aside">
+      <h2 class="section__title" id="work-title">{work.title}</h2>
+      <figure class="work__photo">
+        <Image src={wall} alt="Участница опирается на стену зала" widths={[480, 720, 1000]} sizes="(min-width: 900px) 32vw, 100vw" />
+        <figcaption class="small muted">самостоятельная работа</figcaption>
+      </figure>
+    </div>
+    <div class="section__body">
+      <p>{work.lead}</p>
+      <ol class="text-list work__steps">{work.steps.map(([title, text]) => <li class="text-list__item"><h3>{title}</h3><p>{text}</p></li>)}</ol>
+      <p>{work.closing}</p>
+      <a class="arrow-link" href="#classes">посмотреть ближайшие занятия <span aria-hidden="true">↑</span></a>
+    </div>
   </div>
 </section>
-
 <style>
-  .work__strip { display: grid; gap: var(--gap); grid-template-columns: repeat(2, minmax(0, 1fr)); margin-top: clamp(2.5rem, 6vw, 4.5rem); }
-  .work__strip img { aspect-ratio: 4 / 5; object-fit: cover; width: 100%; }
-  .work__strip img:nth-child(2) { margin-top: 3rem; }
-  .work__strip img:nth-child(3) { display: none; }
-
-  @media (min-width: 600px) {
-    .work__strip { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-    .work__strip img:nth-child(3) { display: block; }
+  .work__steps { margin-block: 0.5rem; }
+  .work__aside { display: contents; }
+  .work__photo { display: none; }
+  .work__photo img { width: 100%; }
+  @media (min-width: 900px) {
+    .work__aside { align-self: start; display: block; grid-column: 1 / 4; grid-row: 1; }
+    .work__aside .section__title { position: static; }
+    .work__photo { display: grid; gap: 0.5rem; margin-top: 2rem; }
+    .work__photo img { aspect-ratio: 4 / 5; object-fit: cover; }
+    .work__steps { gap: 2rem; }
   }
 </style>

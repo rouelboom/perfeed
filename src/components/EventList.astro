@@ -1,0 +1,22 @@
+---
+import { eventTypeLabels, type SiteEvent } from '../data/events';
+import { effectiveStatus } from '../lib/event-status';
+interface Props { items: readonly SiteEvent[]; descriptions?: boolean }
+const { items, descriptions = false } = Astro.props;
+---
+<ol class="event-list">
+  {items.map((event) => <li class="event-list__item">
+    <p class="event-list__date small muted">{event.startDate ? <time datetime={event.startDate}>{event.dateLabel ?? new Date(event.startDate).toLocaleDateString('ru-RU', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' })}</time> : 'дата пока не объявлена'}</p>
+    <div class="event-list__body"><h3 class="event-list__title"><a href={`/events/${event.slug}/`}>{event.title}</a></h3><p class="small muted">{eventTypeLabels[event.type]}</p>{descriptions && <p>{event.description}</p>}</div>
+    {effectiveStatus(event) === 'open' && event.registrationUrl && <a class="arrow-link small" href={event.registrationUrl} aria-label={`Записаться: ${event.title}`}>записаться ↗</a>}
+  </li>)}
+</ol>
+<style>
+  .event-list { border-top: 1px solid var(--ink); }
+  .event-list__item { border-bottom: 1px solid var(--rule); display: grid; gap: 0.5rem 1.5rem; padding-block: 1.25rem; }
+  .event-list__body { display: grid; gap: 0.5rem; }
+  .event-list__title { text-transform: lowercase; }
+  .event-list__title a { text-decoration: none; }
+  .event-list__title a:hover { text-decoration: underline; }
+  @media (min-width: 1100px) { .event-list__item { grid-template-columns: 11rem minmax(0, 1fr); } .event-list__item .arrow-link { grid-column: 2; justify-self: start; } }
+</style>

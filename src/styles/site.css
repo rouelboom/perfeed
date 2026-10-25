@@ -12,7 +12,7 @@
   --sans: 'Golos Text', 'Helvetica Neue', Arial, sans-serif;
   --gutter: 16px;
   --gap: 12px;
-  --section: clamp(5rem, 14vw, 11rem);
+  --section: clamp(3.5rem, 7vw, 6.5rem);
   /* На очень широких экранах содержимое не растягивается шире этого; фоны блоков остаются во всю ширину. */
   --max: 1450px;
 
@@ -23,8 +23,8 @@
 @media (min-width: 1100px) { :root { --gutter: 48px; --gap: 24px; } }
 
 *, *::before, *::after { box-sizing: border-box; }
-html { scroll-behavior: smooth; scroll-padding-top: 4rem; }
-body { background: var(--paper); color: var(--ink); font: 400 1.0625rem/1.5 var(--sans); margin: 0; -webkit-font-smoothing: antialiased; }
+html { scroll-behavior: smooth; scroll-padding-top: 6rem; }
+body { background: var(--paper); color: var(--ink); font: 400 1.0625rem/1.55 var(--sans); margin: 0; -webkit-font-smoothing: antialiased; }
 img { display: block; height: auto; max-width: 100%; }
 a { color: inherit; text-decoration-thickness: 1px; text-underline-offset: 0.22em; }
 a:hover { text-decoration-color: var(--blue); }
@@ -32,6 +32,7 @@ a:hover { text-decoration-color: var(--blue); }
 h1, h2, h3, p, dl, dd, ol, ul, figure { margin: 0; }
 ol, ul { list-style: none; padding: 0; }
 h1, h2, h3 { font-weight: 500; text-wrap: balance; }
+h3 { font-size: 1.25rem; letter-spacing: -0.02em; line-height: 1.2; }
 p { max-width: 62ch; }
 
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
@@ -47,17 +48,32 @@ p { max-width: 62ch; }
 
 .muted { color: var(--grey); }
 .small { font-size: 0.9375rem; }
-.arrow-link { align-items: baseline; display: inline-flex; font-weight: 500; gap: 0.5em; text-decoration: underline; text-decoration-color: var(--blue); text-decoration-thickness: 1.5px; }
+.arrow-link { align-items: center; display: inline-flex; font-weight: 500; gap: 0.5em; min-height: 44px; text-decoration: underline; text-decoration-color: var(--blue); text-decoration-thickness: 1.5px; }
 .arrow-link:hover { color: var(--blue); }
+.button { align-items: center; background: transparent; border: 1px solid var(--ink); color: var(--ink); display: inline-flex; font-size: 1rem; font-weight: 500; gap: 1rem; justify-content: space-between; min-height: 48px; padding: 0.65rem 1rem; text-decoration: none; transition: background-color 0.18s ease, color 0.18s ease; }
+.button:hover { background: var(--ink); color: var(--paper); }
+.stack { display: grid; gap: 1rem; }
+.text-list { display: grid; gap: 1.75rem; }
+.text-list__item { display: grid; gap: 0.6rem; }
+.disclosure { border-block: 1px solid var(--rule); }
+.disclosure summary { align-items: center; cursor: pointer; display: flex; font-size: 1rem; font-weight: 500; gap: 1rem; justify-content: space-between; list-style: none; min-height: 48px; padding-block: 0.8rem; }
+.disclosure summary::-webkit-details-marker { display: none; }
+.disclosure summary::after { color: var(--blue); content: '+'; font-size: 1.4rem; }
+.disclosure[open] summary::after { content: '−'; }
+.disclosure__body { display: grid; gap: 1rem; padding-bottom: 1.25rem; }
+.page-heading { display: grid; gap: 1.5rem; padding-block: clamp(2.5rem, 6vw, 5rem) 0; }
+.page-heading__title { font-size: clamp(2.5rem, 6vw, 5rem); letter-spacing: -0.045em; line-height: 1.05; }
 
 /* Раздел: линия, заголовок слева (липкий на desktop), содержание справа. */
 .section { border-top: 1px solid var(--rule); margin-top: var(--section); padding-top: 1.25rem; }
-.section__title { font-size: clamp(1.75rem, 3.6vw, 3rem); letter-spacing: -0.035em; line-height: 0.95; margin-bottom: clamp(2rem, 5vw, 4rem); }
+.section__title { font-size: clamp(1.7rem, 2.7vw, 2.5rem); letter-spacing: -0.035em; line-height: 1.08; margin-bottom: 1.75rem; }
 .section__body { display: grid; gap: 1rem; }
 @media (min-width: 900px) {
-  .section__title { align-self: start; grid-column: 1 / 4; position: sticky; top: 4.5rem; }
-  .section__body { grid-column: 4 / 13; }
+  .section__title { align-self: start; grid-column: 1 / 4; position: sticky; top: 6rem; }
+  .section__body { grid-column: 5 / 13; }
 }
+
+@media (prefers-reduced-motion: reduce) { .button { transition: none; } }
 
 .band { background: var(--blue); color: var(--on-blue); }
 .band .muted { color: var(--on-blue); }

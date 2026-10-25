@@ -1,19 +1,19 @@
 ---
 import { site } from '../config/site';
-import { closing } from '../data/home';
 
 const contacts = site.contacts;
+const [name, translation] = site.name.split(' / ');
 ---
 
 <footer class="up-footer" id="contact">
   <div class="up-footer__inner">
-    <p class="up-footer__closing">{closing}</p>
     <div class="up-footer__cols">
-      <p><span>unlimited position</span><span class="up-footer__muted">запредельная позиция</span><span class="up-footer__muted">{site.city}</span></p>
+      <p><span>{name}</span><span class="up-footer__muted">/ {translation}</span><span class="up-footer__muted">практика современного танца и импровизации · {site.city}</span></p>
       <ul>{contacts.map(({ label, href }) => <li><a href={href}>{label}</a></li>)}</ul>
       <ul>
-        <li><a href="/events/#past">прошедшие события</a></li>
-        <li><a href="/#program">программа</a></li>
+        <li><a href="/#classes">занятия</a></li>
+        <li><a href="/about/">об анастасии</a></li>
+        <li><a href="/events/">события и архив</a></li>
       </ul>
     </div>
     <p class="up-footer__fine"><span>© 2026 анастасия сенокосова</span><span>18+</span></p>
@@ -28,21 +28,20 @@ const contacts = site.contacts;
     color: #f2f4f5;
     font: 400 0.9375rem/1.45 'Golos Text', 'Helvetica Neue', Arial, sans-serif;
     letter-spacing: 0;
-    padding: clamp(4rem, 10vw, 8rem) max(var(--up-gutter), (100% - 1450px) / 2) 2rem;
+    padding: clamp(2.5rem, 6vw, 4.5rem) max(var(--up-gutter), (100% - 1450px) / 2) 2rem;
     text-transform: none;
   }
   .up-footer a { color: inherit; text-decoration: underline; text-decoration-color: rgb(255 255 255 / 0.4); text-underline-offset: 0.22em; }
   .up-footer a:hover { text-decoration-color: currentColor; }
   .up-footer a:focus-visible { outline: 2px solid #8fb2c1; outline-offset: 3px; }
   .up-footer ul { list-style: none; margin: 0; padding: 0; }
-  .up-footer__closing, .up-footer__cols p { margin: 0; }
-  .up-footer__closing { font-size: clamp(1.5rem, 3.4vw, 3rem); font-weight: 500; letter-spacing: -0.025em; line-height: 1.08; max-width: 22ch; text-wrap: balance; }
-  .up-footer__cols { display: grid; gap: 2rem var(--up-gap, 12px); grid-template-columns: 1fr 1fr; margin-top: clamp(4rem, 10vw, 8rem); }
+  .up-footer__cols p { margin: 0; }
+  .up-footer__cols { display: grid; gap: 2rem var(--up-gap, 12px); grid-template-columns: 1fr 1fr; }
   .up-footer__cols > :first-child { grid-column: 1 / -1; }
   .up-footer__cols p, .up-footer__cols ul { display: grid; gap: 0.3rem; align-content: start; }
   .up-footer__muted, .up-footer__fine, .up-footer__note { color: #9aa3a7; }
-  .up-footer__note { font-size: 0.75rem; margin: 1rem 0 0; max-width: 62ch; }
-  .up-footer__fine { display: flex; flex-wrap: wrap; font-size: 0.8125rem; gap: 1rem; justify-content: space-between; margin: 3rem 0 0; max-width: none; }
+  .up-footer__note { font-size: 0.875rem; margin: 1rem 0 0; max-width: 62ch; }
+  .up-footer__fine { display: flex; flex-wrap: wrap; font-size: 0.875rem; gap: 1rem; justify-content: space-between; margin: 3rem 0 0; max-width: none; }
 
   @media (min-width: 600px) { .up-footer { --up-gutter: 32px; } }
   @media (min-width: 900px) {

@@ -1,43 +1,16 @@
 ---
-import Program from '../../components/home/Program.astro';
+import EventList from '../../components/EventList.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { eventTypeLabels, pastEvents } from '../../data/events';
-
+import { currentEvents, isClass, pastEvents } from '../../data/events';
+const current = currentEvents().filter((event) => !isClass(event));
+const dated = current.filter(({ startDate }) => startDate);
+const planned = current.filter(({ startDate }) => !startDate);
 const past = pastEvents();
 ---
-
-<BaseLayout title="события — unlimited position" description="Программа и прошедшие события практики современного танца unlimited position в Калуге.">
-  <h1 class="wrap events-title">события</h1>
-
-  <Program />
-
-  <section class="section" id="past" aria-labelledby="past-title">
-    <div class="wrap grid">
-      <h2 class="section__title" id="past-title">прошедшие события</h2>
-      <ol class="section__body past">
-        {past.map((event) => (
-          <li>
-            <a class="past__item" href={`/events/${event.slug}/`}>
-              <time datetime={event.startDate}>{event.dateLabel}</time>
-              <span class="past__title">{event.title}</span>
-              <span class="muted">{eventTypeLabels[event.type]}</span>
-            </a>
-          </li>
-        ))}
-      </ol>
-    </div>
-  </section>
+<BaseLayout title="события и архив — unlimited position" description="Просмотры, обсуждения и лаборатории. Ближайшие события и архив художественных проектов Анастасии Сенокосовой в Калуге.">
+  <div class="wrap page-heading"><h1 class="page-heading__title">события и архив</h1><p>Встречи вокруг современного танца: знакомиться с работами художников, пробовать разные форматы и обсуждать увиденное.</p><a class="arrow-link" href="/#classes">ближайшие занятия и запись →</a></div>
+  {dated.length > 0 && <section class="section" aria-labelledby="upcoming-title"><div class="wrap grid"><h2 class="section__title" id="upcoming-title">ближайшие события</h2><div class="section__body"><EventList items={dated} descriptions /></div></div></section>}
+  {planned.length > 0 && <section class="section" aria-labelledby="planned-title"><div class="wrap grid"><h2 class="section__title" id="planned-title">планируемые встречи</h2><div class="section__body"><EventList items={planned} descriptions /></div></div></section>}
+  <section class="section events__archive" id="past" aria-labelledby="past-title"><div class="wrap grid"><h2 class="section__title" id="past-title">прошедшие события</h2><div class="section__body">{past.length ? <EventList items={past} /> : <p>Здесь появится документация прошедших событий.</p>}</div></div></section>
 </BaseLayout>
-
-<style>
-  .events-title { font-size: clamp(3rem, 9vw, 8rem); letter-spacing: -0.045em; line-height: 0.9; padding-block: clamp(2rem, 6vw, 4rem); }
-  #past { padding-bottom: var(--section); }
-  .past { border-top: 1px solid var(--ink); gap: 0; }
-  .past li { border-bottom: 1px solid var(--rule); }
-  .past__item { display: grid; gap: 0.25rem 1.5rem; padding-block: 1.1rem; text-decoration: none; }
-  .past__item:hover .past__title { color: var(--blue); }
-  .past__item time { font-variant-numeric: tabular-nums; }
-  .past__title { font-size: 1.375rem; font-weight: 500; line-height: 1.15; }
-
-  @media (min-width: 900px) { .past__item { align-items: baseline; grid-template-columns: 14rem minmax(0, 1fr) auto; } }
-</style>
+<style>.events__archive { padding-bottom: var(--section); }</style>

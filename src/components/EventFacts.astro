@@ -3,21 +3,29 @@ import type { SiteEvent } from '../data/events';
 
 interface Props {
   event: SiteEvent;
+  showPrice?: boolean;
 }
 
-const { event } = Astro.props;
+const { event, showPrice = true } = Astro.props;
 const rub = (amount: number) => `${amount.toLocaleString('ru-RU')} ₽`;
 const weekdays = event.sessions
   ? [...new Set(event.sessions.map(({ date }) => new Date(date).toLocaleDateString('ru-RU', { weekday: 'long', timeZone: 'UTC' })))].join(' + ')
   : undefined;
+const times = new Map<string, Set<string>>();
+event.sessions?.forEach(({ date, time }) => {
+  const day = new Date(date).toLocaleDateString('ru-RU', { weekday: 'long', timeZone: 'UTC' });
+  if (!times.has(day)) times.set(day, new Set());
+  times.get(day)!.add(time ?? 'время уточняется');
+});
 
 const facts = [
   ['когда', weekdays],
   ['время', event.time],
+  ...[...times].map(([day, values]) => [day, [...values].join(' / ')]),
   ['где', event.location],
-  ['группа', [event.capacity && `до ${event.capacity} человек`, event.age].filter(Boolean).join(' · ') || undefined],
-  ['стоимость', event.price && [rub(event.price.base), event.price.student && `студенты — ${rub(event.price.student)}`].filter(Boolean).join(', ')],
-  ['предоплата', event.price?.deposit && rub(event.price.deposit)],
+  ['участники', [event.capacity && `до ${event.capacity} человек`, event.age].filter(Boolean).join(' · ') || undefined],
+  ['стоимость', showPrice && event.price && [rub(event.price.base), event.price.student && `студентам — ${rub(event.price.student)}`].filter(Boolean).join(', ')],
+  ['предоплата', showPrice && event.price?.deposit && `${rub(event.price.deposit)} · входит в общую стоимость`],
 ].filter((fact): fact is [string, string] => Boolean(fact[1]));
 ---
 
@@ -26,6 +34,6 @@ const facts = [
 )}
 
 <style>
-  .facts { display: grid; font-size: 0.9375rem; gap: 0.2rem 1rem; grid-template-columns: max-content 1fr; }
+  .facts { display: grid; font-size: 0.9375rem; gap: 0.35rem 0.75rem; grid-template-columns: max-content minmax(0, 1fr); }
   .facts dd { font-weight: 500; }
 </style>

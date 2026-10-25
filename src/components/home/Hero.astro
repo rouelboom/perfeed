@@ -2,33 +2,44 @@
 import { Image } from 'astro:assets';
 import heroImage from '../../assets/unlimited-position/floor-flash.jpg';
 import { site } from '../../config/site';
+import { hero } from '../../data/home';
+import { currentClasses } from '../../data/events';
+const [name, translation] = site.name.split(' / ');
+const group = currentClasses().find((event) => event.type === 'regular_group' && event.status === 'open' && event.registrationUrl && event.startDate);
+const enrollmentMonth = group?.startDate && new Date(group.startDate).toLocaleDateString('ru-RU', { month: 'long', timeZone: 'UTC' });
 ---
 
 <section class="hero wrap grid" aria-labelledby="site-title">
-  <h1 class="hero__title" id="site-title">unlimited position <span>/ запредельная позиция</span></h1>
-  <Image
-    class="hero__image"
-    src={heroImage}
-    alt="Танцовщица опирается ладонью о голубой пол, свет вспышки падает сбоку"
-    widths={[640, 960, 1280]}
-    sizes="(min-width: 900px) 58vw, 84vw"
-    priority
-  />
-  <div class="hero__side">
-    <p>практика современного танца<br /><span class="muted">{site.city}</span></p>
-    <p><a class="arrow-link" href="#program">актуальная программа <span aria-hidden="true">↓</span></a></p>
+  <h1 class="hero__name" id="site-title">{name} <span>/ {translation}</span></h1>
+  <div class="hero__copy">
+    <h2 class="hero__title">{hero.title}</h2>
+    {group && enrollmentMonth && <a class="hero__enrollment" href={`#class-${group.slug}`}><span>{hero.enrollment.replace('{month}', enrollmentMonth)}</span><span aria-hidden="true">↓</span></a>}
+    <p class="hero__lead">{hero.lead}</p>
+    <p class="hero__note">{hero.note}</p>
+    <p>{hero.text}</p>
+    <a class="button" href="#classes">{hero.action} <span aria-hidden="true">↓</span></a>
   </div>
+  <figure class="hero__photo">
+    <Image src={heroImage} alt="Участница опирается ладонью о голубой пол, продолжая движение" widths={[480, 720, 1000, 1280]} sizes="(min-width: 1100px) 45vw, (min-width: 900px) 40vw, 100vw" priority />
+    <figcaption class="small muted">современный танец и импровизация</figcaption>
+  </figure>
 </section>
 
 <style>
-  .hero { padding-top: clamp(2rem, 6vw, 4.5rem); row-gap: 2rem; }
-  .hero__title { font-size: clamp(3.1rem, 11.5vw, 10.5rem); letter-spacing: -0.045em; line-height: 0.86; }
-  .hero__title span { color: var(--grey); display: block; }
-  .hero__image { grid-column: 2 / -1; width: 100%; }
-  .hero__side { display: grid; font-size: 0.9375rem; gap: 1.5rem; }
-
+  .hero { padding-block: clamp(1.75rem, 4vw, 3.5rem) 0; row-gap: 1.75rem; }
+  .hero__name { font-size: clamp(2rem, 5.7vw, 5rem); letter-spacing: -0.05em; line-height: 1; }
+  .hero__name span { color: var(--grey); display: block; }
+  .hero__copy { align-content: start; display: grid; gap: 1rem; justify-items: start; }
+  .hero__title { font-size: clamp(1.75rem, 2.6vw, 2.5rem); letter-spacing: -0.035em; line-height: 1.1; max-width: 22ch; }
+  .hero__lead { font-weight: 500; }
+  .hero__note { font-size: 0.9375rem; font-weight: 500; }
+  .hero__enrollment { align-items: center; background: var(--floor); color: var(--ink); display: flex; font-size: 1rem; font-weight: 500; gap: 1rem; line-height: 1.35; min-height: 48px; padding: 0.85rem 1rem; text-decoration: none; width: 100%; }
+  .hero__enrollment:hover { text-decoration: underline; text-underline-offset: 0.2em; }
+  .hero__photo { align-self: start; display: grid; gap: 0.6rem; }
+  .hero__photo img { width: 100%; }
   @media (min-width: 900px) {
-    .hero__image { grid-column: 6 / 13; grid-row: 2; }
-    .hero__side { align-self: start; grid-column: 1 / 5; grid-row: 2; }
+    .hero { row-gap: 2.5rem; }
+    .hero__copy { grid-column: 1 / 7; }
+    .hero__photo { grid-column: 8 / 13; }
   }
 </style>

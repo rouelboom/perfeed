@@ -1,14 +1,16 @@
 ---
 import '../styles/fonts.css';
 import { site } from '../config/site';
+const [name, translation] = site.name.split(' / ');
 ---
 
 <header class="up-header" data-up-header>
   <div class="up-header__row">
-    <a class="up-header__brand" href="/">unlimited position <span>/ запредельная позиция</span></a>
+    <a class="up-header__brand" href="/">{name} <span>/ {translation}</span></a>
     <nav class="up-header__nav" aria-label="Основная навигация">
       <ul>{site.nav.map(([label, href]) => <li><a href={href}>{label}</a></li>)}</ul>
     </nav>
+    <a class="up-header__join" href="/#classes">записаться <span aria-hidden="true">↗</span></a>
     <details class="up-header__menu">
       <summary>меню</summary>
       <nav aria-label="Мобильная навигация">
@@ -39,27 +41,35 @@ import { site } from '../config/site';
     z-index: 30;
   }
   .up-header.is-hidden { transform: translateY(-110%); }
+  .up-header.is-hidden:focus-within { transform: none; }
   .up-header a { color: inherit; text-decoration: none; }
   .up-header a:hover { color: var(--up-blue); }
   .up-header a:focus-visible, .up-header summary:focus-visible { outline: 2px solid var(--up-blue); outline-offset: 3px; }
   .up-header ul { list-style: none; margin: 0; padding: 0; }
-  .up-header__row { align-items: baseline; display: flex; gap: 1rem; justify-content: space-between; padding: 14px max(var(--up-gutter), (100% - 1450px) / 2); }
-  .up-header__brand { font-weight: 500; }
+  .up-header__row { align-items: center; display: flex; flex-wrap: wrap; gap: 0.25rem 1rem; justify-content: space-between; padding: 8px max(var(--up-gutter), (100% - 1450px) / 2); }
+  .up-header__brand { font-size: 0.875rem; font-weight: 500; margin-right: auto; padding-block: 0.3rem; width: 100%; }
   .up-header__brand span { color: var(--up-grey); font-weight: 400; }
+  .up-header .up-header__join { align-items: center; border: 1px solid var(--up-ink); display: inline-flex; font-weight: 500; gap: 1rem; min-height: 44px; padding: 0.4rem 0.75rem; transition: background-color 0.18s ease, color 0.18s ease; }
+  .up-header .up-header__join:hover { background: var(--up-ink); color: var(--up-paper); }
   .up-header__nav { display: none; }
-  .up-header__nav ul { display: flex; gap: 1.6rem; }
+  .up-header__nav ul { display: flex; gap: 1.2rem; }
+  .up-header__nav a { align-items: center; display: inline-flex; min-height: 44px; }
   .up-header__menu { position: relative; }
-  .up-header__menu summary { cursor: pointer; list-style: none; }
+  .up-header__menu summary { align-items: center; cursor: pointer; display: flex; list-style: none; min-height: 44px; }
   .up-header__menu summary::-webkit-details-marker { display: none; }
-  .up-header__menu ul { background: var(--up-paper); border: 1px solid var(--up-rule); display: grid; font-size: 1.375rem; gap: 0.65rem; min-width: 12rem; padding: 1rem 1.25rem 1.25rem; position: absolute; right: 0; top: 2.2rem; }
+  .up-header__menu ul { background: var(--up-paper); border: 1px solid var(--up-rule); display: grid; font-size: 1.25rem; gap: 0.25rem; min-width: 13rem; padding: 0.75rem 1.25rem; position: absolute; right: 0; top: 2.75rem; }
+  .up-header__menu a { display: block; padding-block: 0.6rem; }
 
   @media (min-width: 600px) { .up-header { --up-gutter: 32px; } }
-  @media (min-width: 900px) {
+  @media (min-width: 600px) {
+    .up-header__brand { font-size: 0.9375rem; max-width: 22rem; width: auto; }
+  }
+  @media (min-width: 1100px) {
     .up-header__nav { display: block; }
     .up-header__menu { display: none; }
   }
   @media (min-width: 1100px) { .up-header { --up-gutter: 48px; } }
-  @media (prefers-reduced-motion: reduce) { .up-header { transition: none; } }
+  @media (prefers-reduced-motion: reduce) { .up-header, .up-header .up-header__join { transition: none; } }
 </style>
 
 <script>
@@ -68,7 +78,7 @@ import { site } from '../config/site';
 
   window.addEventListener('scroll', () => {
     const y = window.scrollY;
-    header?.classList.toggle('is-hidden', y > lastY && y > 200);
+    header?.classList.toggle('is-hidden', y > lastY && y > 200 && !header.matches(':focus-within') && !header.querySelector('details[open]'));
     lastY = y;
   }, { passive: true });
 

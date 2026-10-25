@@ -1,55 +1,57 @@
 ---
 import EventFacts from '../../components/EventFacts.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { eventTypeLabels, events, type SiteEvent } from '../../data/events';
+import { eventTypeLabels, events, isClass, type SiteEvent } from '../../data/events';
+import { author, practice, work } from '../../data/home';
+import { site } from '../../config/site';
+import { effectiveStatus } from '../../lib/event-status';
 
 export function getStaticPaths() {
-  // События perfeed со своей вёрсткой лежат отдельными файлами рядом.
   return events.filter(({ page }) => !page).map((event) => ({ params: { slug: event.slug }, props: { event } }));
 }
-
-interface Props {
-  event: SiteEvent;
-}
-
+interface Props { event: SiteEvent }
 const { event } = Astro.props;
 const type = eventTypeLabels[event.type];
+const status = effectiveStatus(event);
 const format = (date: string) => new Date(date).toLocaleDateString('ru-RU', { day: 'numeric', month: 'long', weekday: 'short', timeZone: 'UTC' });
 ---
-
 <BaseLayout title={`${[event.title, event.dateLabel].filter(Boolean).join(' ')} — unlimited position`} description={event.description}>
   <article class="wrap grid event-page">
-    <p class="event-page__back small"><a href="/events/">← все события</a></p>
-    <p class="event-page__date">{event.dateLabel ?? 'скоро'}</p>
-    <h1 class="event-page__title">{event.title}{type !== event.title && <span>{type}</span>}</h1>
+    <a class="event-page__back arrow-link small" href={isClass(event) ? '/#classes' : '/events/'}>← {isClass(event) ? 'все занятия' : 'все события'}</a>
+    <div class="event-page__heading stack">
+      <p class="event-page__date">{event.dateLabel ?? 'дата пока не объявлена'}</p>
+      <h1 class="page-heading__title">{event.title}</h1>
+      {type !== event.title && <p class="small muted">{type}</p>}
+      {status === 'past' && <p class="event-page__status">прошедшее событие</p>}
+    </div>
     <div class="event-page__body">
       <p>{event.description}</p>
       <EventFacts event={event} />
-      {event.sessions && (
-        <ol class="event-page__sessions">
-          {event.sessions.map(({ date, time, note }) => (
-            <li><span>{format(date)}</span><span class="muted">{[time ?? 'время уточняется', note].filter(Boolean).join(' · ')}</span></li>
-          ))}
-        </ol>
-      )}
-      {event.status === 'open' && (
-        <p><a class="arrow-link" href={event.registrationUrl ?? '/#join'}>записаться <span aria-hidden="true">→</span></a></p>
-      )}
+      {isClass(event) && <p class="small">опыт не требуется</p>}
+      {event.price?.deposit && <p class="small">Предоплата закрепляет место в группе и входит в общую стоимость.</p>}
+      {status === 'open' && event.registrationUrl && <div class="stack"><a class="button" href={event.registrationUrl}>записаться <span aria-hidden="true">↗</span></a><p class="small muted">откроется форма записи</p></div>}
+      {status === 'closed' && <p>запись закрыта</p>}
+      {status === 'upcoming' && !event.registrationUrl && <a class="arrow-link" href={site.contacts.find(({ href }) => href.includes('t.me'))?.href}>следить за анонсами в Telegram ↗</a>}
+      {event.sessions && <div class="stack"><h2>все встречи</h2><ol class="event-page__sessions">{event.sessions.map(({ date, time, note }) => <li><time datetime={date}>{format(date)}</time><span class="muted">{[time ?? 'время уточняется', note].filter(Boolean).join(' · ')}</span></li>)}</ol></div>}
+      {status !== 'past' && event.nextIntakeLabel && <p class="small muted">{event.nextIntakeLabel}</p>}
     </div>
+    {isClass(event) && <div class="event-page__details">
+      <section class="stack" aria-labelledby="class-work-title"><h2 id="class-work-title">{work.title}</h2><p>{work.lead}</p><ol class="text-list">{work.steps.map(([title, text]) => <li class="text-list__item"><h3>{title}</h3><p>{text}</p></li>)}</ol></section>
+      <section class="stack" aria-labelledby="class-audience-title"><h2 id="class-audience-title">{practice.audienceTitle}</h2>{practice.audience.map((text) => <p>{text}</p>)}</section>
+      <section class="stack" aria-labelledby="class-author-title"><h2 id="class-author-title">ведёт {author.name}</h2><p>{author.bio[0]}</p><a class="arrow-link" href="/#approach">как Анастасия ведёт занятия →</a><a class="arrow-link" href="/about/">образование и профессиональный опыт →</a><a class="arrow-link" href={site.authorContacts[0].href}>задать вопрос Анастасии ↗</a></section>
+      {status === 'open' && event.registrationUrl && <a class="button" href={event.registrationUrl}>записаться {event.type === 'regular_group' ? 'в группу' : 'на открытый класс'} ↗</a>}
+    </div>}
   </article>
 </BaseLayout>
-
 <style>
-  .event-page { padding-block: clamp(2rem, 6vw, 4rem) var(--section); row-gap: 1.5rem; }
-  .event-page__date { font-size: clamp(3rem, 9vw, 8rem); font-variant-numeric: tabular-nums; font-weight: 500; letter-spacing: -0.045em; line-height: 0.9; }
-  .event-page__title { font-size: clamp(1.75rem, 3.6vw, 3rem); letter-spacing: -0.035em; line-height: 0.95; }
-  .event-page__title span { color: var(--grey); display: block; font-size: 1.125rem; font-weight: 400; letter-spacing: 0; margin-top: 0.5rem; }
-  .event-page__body { display: grid; gap: 1.75rem; margin-top: 1.5rem; }
+  .event-page { padding-block: clamp(2rem, 5vw, 4rem) var(--section); row-gap: 2rem; }
+  .event-page__date { font-size: clamp(1.5rem, 3vw, 2.5rem); font-variant-numeric: tabular-nums; font-weight: 500; letter-spacing: -0.03em; line-height: 1.1; }
+  .event-page__status { border-left: 2px solid var(--blue); padding-left: 0.75rem; }
+  .event-page__body { align-content: start; display: grid; gap: 1.5rem; }
+  .event-page__body h2, .event-page__details h2 { font-size: clamp(1.5rem, 2.5vw, 2rem); letter-spacing: -0.03em; line-height: 1.15; }
+  .event-page__body .button, .event-page__details .button { justify-self: start; }
   .event-page__sessions { border-top: 1px solid var(--ink); }
   .event-page__sessions li { border-bottom: 1px solid var(--rule); display: flex; flex-wrap: wrap; gap: 0.25rem 1.5rem; justify-content: space-between; padding-block: 0.75rem; }
-
-  @media (min-width: 900px) {
-    .event-page__title { grid-column: 1 / 7; }
-    .event-page__body { grid-column: 7 / 12; margin-top: 0; }
-  }
+  .event-page__details { border-top: 1px solid var(--rule); display: grid; gap: 3rem; padding-top: 2rem; }
+  @media (min-width: 900px) { .event-page__heading { grid-column: 1 / 6; } .event-page__body, .event-page__details { grid-column: 7 / 13; } }
 </style>

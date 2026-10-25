@@ -1,19 +1,12 @@
 ---
 import { statement } from '../../data/home';
 ---
-
-<section class="statement wrap grid" aria-label="о практике коротко">
-  <p class="statement__lead">{statement.lead}</p>
-  <div class="statement__text">{statement.text.map((paragraph) => <p>{paragraph}</p>)}</div>
+<section class="section" id="position" aria-labelledby="position-title">
+  <div class="wrap grid">
+    <h2 class="section__title" id="position-title">{statement.title}</h2>
+    <div class="section__body">
+      {statement.text.map((paragraph) => <p>{paragraph}</p>)}
+      <details class="disclosure"><summary>подробнее о художественной позиции</summary><div class="disclosure__body">{statement.details.map((paragraph) => <p>{paragraph}</p>)}</div></details>
+    </div>
+  </div>
 </section>
-
-<style>
-  .statement { padding-block: var(--section); row-gap: 2rem; }
-  .statement__lead { font-size: clamp(1.6rem, 3.6vw, 3.1rem); font-weight: 500; letter-spacing: -0.025em; line-height: 1.08; max-width: 20ch; text-wrap: balance; }
-  .statement__text { display: grid; gap: 1rem; grid-column: 2 / -1; }
-
-  @media (min-width: 900px) {
-    .statement__lead { grid-column: 4 / 12; }
-    .statement__text { grid-column: 7 / 12; }
-  }
-</style>

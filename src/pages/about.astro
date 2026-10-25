@@ -1,0 +1,29 @@
+---
+import { Image } from 'astro:assets';
+import portrait from '../../content/photos/actor2.jpg';
+import Approach from '../components/home/Approach.astro';
+import Statement from '../components/home/Statement.astro';
+import EventList from '../components/EventList.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { author } from '../data/home';
+import { pastEvents } from '../data/events';
+import { site } from '../config/site';
+---
+<BaseLayout title="анастасия сенокосова — unlimited position" description="Анастасия Сенокосова — танц-художница, хореограф и педагог. Образование, педагогическая и художественная практика, проекты и контакты.">
+  <div class="wrap grid about-page">
+    <div class="about-page__intro stack"><p class="small muted">об анастасии</p><h1 class="page-heading__title">{author.name}</h1><p>{author.role}</p><p>{author.bio[0]}</p><a class="arrow-link" href="/#classes">ближайшие занятия →</a></div>
+    <Image class="about-page__portrait" src={portrait} alt="Портрет Анастасии Сенокосовой" widths={[400, 640, 853]} sizes="(min-width: 900px) 30vw, 80vw" priority />
+  </div>
+  <section class="section" aria-labelledby="education-title"><div class="wrap grid"><h2 class="section__title" id="education-title">образование</h2><ul class="section__body text-list">{author.education.map(([title, text]) => <li class="text-list__item"><h3>{title}</h3><p>{text}</p></li>)}</ul></div></section>
+  <section class="section" aria-labelledby="experience-title"><div class="wrap grid"><h2 class="section__title" id="experience-title">профессиональный опыт</h2><div class="section__body">{author.experience.map((text) => <p>{text}</p>)}</div></div></section>
+  <Approach />
+  <Statement />
+  <section class="section" aria-labelledby="projects-title"><div class="wrap grid"><h2 class="section__title" id="projects-title">события и проекты</h2><div class="section__body"><EventList items={pastEvents().filter((event) => event.page)} /><a class="arrow-link" href="/events/">все события и архив →</a></div></div></section>
+  <section class="section about-page__contact" aria-labelledby="contact-title"><div class="wrap grid"><h2 class="section__title" id="contact-title">для связи</h2><div class="section__body"><p>По вопросам занятий, проектов и сотрудничества можно написать Анастасии.</p>{site.authorContacts.map(({ label, href }) => <a class="arrow-link" href={href}>{label} ↗</a>)}</div></div></section>
+</BaseLayout>
+<style>
+  .about-page { align-items: start; padding-top: clamp(2.5rem, 6vw, 5rem); row-gap: 2rem; }
+  .about-page__portrait { grid-column: 1 / 6; max-height: 38rem; object-fit: cover; width: 100%; }
+  .about-page__contact { padding-bottom: var(--section); }
+  @media (min-width: 900px) { .about-page__intro { grid-column: 1 / 8; } .about-page__portrait { grid-column: 9 / 13; } }
+</style>

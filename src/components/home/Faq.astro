@@ -1,5 +1,6 @@
 ---
 import { faq } from '../../data/home';
+import { site } from '../../config/site';
 ---
 
 <section class="section" id="faq" aria-labelledby="faq-title">
@@ -12,6 +13,7 @@ import { faq } from '../../data/home';
           <div class="faq__answer">{answer.map((paragraph) => <p>{paragraph}</p>)}</div>
         </details>
       ))}
+      <p class="faq__contact"><a class="arrow-link" href={site.authorContacts[0].href}>задать другой вопрос Анастасии →</a></p>
     </div>
   </div>
 </section>
@@ -25,6 +27,7 @@ import { faq } from '../../data/home';
   .faq summary::after { color: var(--blue); content: '+'; font-size: 1.4rem; font-weight: 400; line-height: 1; text-align: right; }
   .faq details[open] summary::after { content: '−'; }
   .faq__answer { color: #2c3133; display: grid; gap: 0.75rem; padding-bottom: 1.4rem; }
+  .faq__contact { margin-top: 1rem; }
 
-  @media (min-width: 900px) { .faq { grid-column: 4 / 11; } }
+  @media (min-width: 900px) { .faq { grid-column: 5 / 13; } }
 </style>
