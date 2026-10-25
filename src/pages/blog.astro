@@ -6,7 +6,7 @@ import { posts } from '../data/blog';
 const fragments = (text: string) => text.split(/\*\*(.+?)\*\*/).map((part, index) => ({ part, bold: index % 2 === 1 }));
 ---
 <BaseLayout title="блог — unlimited position" description="Заметки Насти Сенокосовой о современном танце, теле и практике unlimited position в Калуге.">
-  <div class="wrap page-heading"><h1 class="page-heading__title">блог</h1></div>
+  <div class="wrap page-heading blog-heading"><h1 class="page-heading__title">блог</h1><p>мои размышления о танце</p></div>
   {posts.map(({ slug, title, image, text }) => (
     <article class="section blog-post" id={slug} aria-labelledby={`${slug}-title`}>
       <div class="wrap grid">
@@ -20,6 +20,7 @@ const fragments = (text: string) => text.split(/\*\*(.+?)\*\*/).map((part, index
   ))}
 </BaseLayout>
 <style>
+  .blog-heading { gap: 0.25rem; }
   .blog-post:last-of-type { padding-bottom: var(--section); }
   .blog-post__image { height: auto; margin-bottom: 0.5rem; max-width: 36rem; width: 100%; }
   .blog-post strong { font-weight: 600; }
