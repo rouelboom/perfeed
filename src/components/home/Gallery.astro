@@ -6,14 +6,14 @@ import circle from '../../assets/unlimited-position/circle.jpg';
 import { gallery } from '../../data/home';
 import { testimonials } from '../../data/testimonials';
 const photos = [
-  { src: floorLaugh, alt: 'Участница лежит на полу и смеётся, опираясь на руку', caption: 'вес и опора' },
-  { src: floorDuo, alt: 'Две участницы двигаются на полу в паре', caption: 'задача в паре' },
-  { src: circle, alt: 'Участники сидят кругом на голубом полу зала', caption: 'разговор в группе' },
+  { src: floorLaugh, alt: 'Участница лежит на полу и смеётся, опираясь на руку' },
+  { src: floorDuo, alt: 'Две участницы двигаются на полу в паре' },
+  { src: circle, alt: 'Участники сидят кругом на голубом полу зала' },
 ];
 ---
 <section class="section" id="in-class" aria-labelledby="in-class-title">
   <div class="wrap grid"><h2 class="section__title" id="in-class-title">{gallery.title}</h2></div>
-  <div class="wrap gallery__photos">{photos.map(({ src, alt, caption }) => <figure><Image src={src} alt={alt} widths={[480, 720, 1000]} sizes="(min-width: 900px) 32vw, 100vw" /><figcaption class="small muted">{caption}</figcaption></figure>)}</div>
+  <div class="wrap gallery__photos">{photos.map(({ src, alt }) => <figure><Image src={src} alt={alt} widths={[480, 720, 1000]} sizes="(min-width: 900px) 32vw, 100vw" /></figure>)}</div>
   <div class="wrap grid gallery__reviews">
     <h3 class="gallery__reviews-title">{gallery.reviewsTitle}</h3>
     <div class="gallery__quotes">{testimonials.map(({ paragraphs, author }) => <figure class="gallery__quote"><blockquote>{paragraphs.map((paragraph) => <p>{paragraph}</p>)}</blockquote><figcaption class="small muted">{author}</figcaption></figure>)}</div>
