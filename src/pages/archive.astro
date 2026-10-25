@@ -1,0 +1,11 @@
+---
+import EventList from '../components/EventList.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { pastEvents } from '../data/events';
+const past = pastEvents();
+---
+<BaseLayout title="архив — unlimited position" description="Архив прошедших событий и художественных проектов Насти Сенокосовой в Калуге.">
+  <div class="wrap page-heading"><h1 class="page-heading__title">архив</h1><a class="arrow-link" href="/#classes">ближайшие занятия и запись →</a></div>
+  <section class="section archive__past" id="past" aria-labelledby="past-title"><div class="wrap grid"><h2 class="section__title" id="past-title">прошедшие события</h2><div class="section__body">{past.length ? <EventList items={past} /> : <p>Здесь появится документация прошедших событий.</p>}</div></div></section>
+</BaseLayout>
+<style>.archive__past { padding-bottom: var(--section); }</style>

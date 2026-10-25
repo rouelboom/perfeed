@@ -7,7 +7,7 @@ export const site = {
   nav: [
     ['занятия', '/#classes'],
     ['подход', '/#approach'],
-    ['события', '/events/'],
+    ['архив', '/archive/'],
     ['блог', '/blog/'],
     ['обо мне', '/#about'],
   ],

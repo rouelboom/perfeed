@@ -17,7 +17,7 @@ const format = (date: string) => new Date(date).toLocaleDateString('ru-RU', { da
 ---
 <BaseLayout title={`${[event.title, event.dateLabel].filter(Boolean).join(' ')} — unlimited position`} description={event.description}>
   <article class="wrap grid event-page">
-    <a class="event-page__back arrow-link small" href={isClass(event) ? '/#classes' : '/events/'}>← {isClass(event) ? 'все занятия' : 'все события'}</a>
+    <a class="event-page__back arrow-link small" href={isClass(event) ? '/#classes' : '/archive/'}>← {isClass(event) ? 'все занятия' : 'архив'}</a>
     <div class="event-page__heading stack">
       <p class="event-page__date">{event.dateLabel ?? 'дата пока не объявлена'}</p>
       <h1 class="page-heading__title">{event.title}</h1>
