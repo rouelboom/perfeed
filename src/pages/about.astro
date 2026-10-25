@@ -2,8 +2,22 @@
 import { Image } from 'astro:assets';
 import portrait from '../../content/photos/actor2.jpg';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import mountains from '../../content/unlimited-position-photos/author/2026-10-25 22.17.37.jpg';
+import jump from '../../content/unlimited-position-photos/author/2026-10-25 22.17.42.jpg';
+import wall from '../../content/unlimited-position-photos/author/2026-10-25 22.17.44.jpg';
+import jacket from '../../content/unlimited-position-photos/author/2026-10-25 22.17.56.jpg';
+import hair from '../../content/unlimited-position-photos/author/2026-10-25 22.17.58.jpg';
+import floor from '../../content/unlimited-position-photos/author/2026-10-25 22.17.51.jpg';
 import { author } from '../data/home';
 import { site } from '../config/site';
+const photos = [
+  { src: mountains, alt: 'Настя танцует в зале у большого окна с видом на горы' },
+  { src: jump, alt: 'Настя в движении на одной ноге в танцевальном зале' },
+  { src: wall, alt: 'Настя сидит на полу у белой кирпичной стены, подняв руку' },
+  { src: jacket, alt: 'Настя на корточках, закрыв лицо курткой, складывает пальцы треугольником' },
+  { src: hair, alt: 'Настя в движении, волосы закрывают лицо' },
+  { src: floor, alt: 'Настя стоит на голубом полу, прикрыв глаза рукой' },
+];
 ---
 <BaseLayout title="анастасия сенокосова — unlimited position" description="Анастасия Сенокосова — танц-художница, хореограф и педагог. Образование, педагогическая и художественная практика, проекты и контакты.">
   <div class="wrap grid about-page">
@@ -12,14 +26,17 @@ import { site } from '../config/site';
   </div>
   <section class="section" aria-labelledby="education-title"><div class="wrap grid"><h2 class="section__title" id="education-title">образование</h2><ul class="section__body text-list">{author.education.map(([title, text]) => <li class="text-list__item"><h3>{title}</h3><p>{text}</p></li>)}</ul></div></section>
   <section class="section" aria-labelledby="experience-title"><div class="wrap grid"><h2 class="section__title" id="experience-title">профессиональный опыт</h2><div class="section__body">{author.experience.map((text) => <p>{text}</p>)}</div></div></section>
+  <section class="section" aria-label="фото"><div class="wrap about-page__photos">{photos.map(({ src, alt }) => <Image class="about-page__photo" src={src} alt={alt} widths={[400, 640, 960]} sizes="(min-width: 900px) 31vw, 48vw" loading="lazy" />)}</div></section>
   <section class="section" aria-labelledby="projects-title"><div class="wrap grid"><h2 class="section__title" id="projects-title">проекты</h2><ul class="section__body text-list about-page__projects">{author.projects.map((text) => <li class="text-list__item"><p>{text}</p></li>)}</ul></div></section>
   <section class="section about-page__contact" aria-labelledby="contact-title"><div class="wrap grid"><h2 class="section__title" id="contact-title">для связи</h2><div class="section__body"><p>По вопросам занятий, проектов и сотрудничества можно написать мне.</p>{site.authorContacts.map(({ label, href }) => <a class="arrow-link" href={href}>{label} ↗</a>)}</div></div></section>
 </BaseLayout>
 <style>
   .about-page { align-items: start; padding-top: clamp(2.5rem, 6vw, 5rem); row-gap: 2rem; }
   .about-page__portrait { grid-column: 1 / 6; max-height: 38rem; object-fit: cover; width: 100%; }
+  .about-page__photos { column-count: 2; column-gap: var(--gap); }
+  .about-page__photo { break-inside: avoid; display: block; height: auto; margin-bottom: var(--gap); width: 100%; }
   .about-page__contact { padding-bottom: var(--section); }
   .about-page__projects li { padding-left: 1.25rem; position: relative; }
   .about-page__projects li::before { background: var(--blue); border-radius: 50%; content: ""; height: 0.375rem; left: 0; position: absolute; top: 0.6em; width: 0.375rem; }
-  @media (min-width: 900px) { .about-page__intro { grid-column: 1 / 8; } .about-page__portrait { grid-column: 9 / 13; } }
+  @media (min-width: 900px) { .about-page__photos { column-count: 3; } .about-page__intro { grid-column: 1 / 8; } .about-page__portrait { grid-column: 9 / 13; } }
 </style>
