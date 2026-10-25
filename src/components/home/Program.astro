@@ -16,7 +16,7 @@ const month = firstDate && new Date(firstDate).toLocaleDateString('ru-RU', { mon
       <div><h2 class="section__title" id="classes-title">{program.title}</h2>{month && <p class="small muted">{month}</p>}</div>
       <p>{program.text}</p>
     </div>
-    {events.length ? <ol class="program__cards">{events.map((event) => <li><ClassCard event={event} /></li>)}</ol> : <div class="stack"><p>{program.empty}</p><a class="arrow-link" href={site.contacts.find(({ href }) => href.includes('t.me'))?.href}>анонсы в Telegram →</a></div>}
+    {events.length ? <ol class="program__cards">{events.map((event) => <li class="program__card"><ClassCard event={event} /></li>)}</ol> : <div class="stack"><p>{program.empty}</p><a class="arrow-link" href={site.contacts.find(({ href }) => href.includes('t.me'))?.href}>анонсы в Telegram →</a></div>}
   </div>
 </section>
 
@@ -26,6 +26,7 @@ const month = firstDate && new Date(firstDate).toLocaleDateString('ru-RU', { mon
   .program__cards { display: grid; gap: 2rem; }
   @media (min-width: 900px) {
     .program__intro { align-items: start; gap: var(--gap); grid-template-columns: 1fr 1fr; }
-    .program__cards { column-gap: 2rem; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .program__cards { column-gap: 2rem; grid-template-columns: repeat(3, minmax(0, 1fr)); row-gap: 1rem; }
+    .program__card { display: grid; grid-row: span 4; grid-template-rows: subgrid; min-width: 0; }
   }
 </style>

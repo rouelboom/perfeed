@@ -4,9 +4,10 @@ import type { SiteEvent } from '../data/events';
 interface Props {
   event: SiteEvent;
   showPrice?: boolean;
+  showParticipants?: boolean;
 }
 
-const { event, showPrice = true } = Astro.props;
+const { event, showPrice = true, showParticipants = true } = Astro.props;
 const rub = (amount: number) => `${amount.toLocaleString('ru-RU')} ₽`;
 const weekdays = event.sessions
   ? [...new Set(event.sessions.map(({ date }) => new Date(date).toLocaleDateString('ru-RU', { weekday: 'long', timeZone: 'UTC' })))].join(' + ')
@@ -23,7 +24,7 @@ const facts = [
   ['время', event.time],
   ...[...times].map(([day, values]) => [day, [...values].join(' / ')]),
   ['где', event.location],
-  ['участники', [event.capacity && `до ${event.capacity} человек`, event.age].filter(Boolean).join(' · ') || undefined],
+  ['участники', showParticipants && ([event.capacity && `до ${event.capacity} человек`, event.age].filter(Boolean).join(' · ') || undefined)],
   ['стоимость', showPrice && event.price && [rub(event.price.base), event.price.student && `студентам — ${rub(event.price.student)}`].filter(Boolean).join(', ')],
   ['предоплата', showPrice && event.price?.deposit && `${rub(event.price.deposit)} · входит в общую стоимость`],
 ].filter((fact): fact is [string, string] => Boolean(fact[1]));
